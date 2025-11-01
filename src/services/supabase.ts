@@ -1,4 +1,6 @@
-import { createClient, SupabaseClient  } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-export const client: SupabaseClient = createClient(import.meta.env.VITE_DB_URL, import.meta.env.VITE_DB_KEY);
-console.log(client)
+export const client: SupabaseClient = createClient(
+    import.meta.env.VITE_DB_URL,
+    import.meta.env.VITE_DB_KEY
+);
