@@ -30,10 +30,10 @@ export default function SignIn() {
     };
 
     return (
-        <>
+        <div className="absolute top-0 bottom-0 left-0 right-0 content-center">
             <form
                 action=""
-                className="flex flex-col items-center justify-between mt-10 gap-5"
+                className="flex flex-col items-center justify-between gap-5"
                 onSubmit={handleSubmit}
             >
                 <input
@@ -69,6 +69,6 @@ export default function SignIn() {
                     Sign Up
                 </Link>
             </span>
-        </>
+        </div>
     );
 }

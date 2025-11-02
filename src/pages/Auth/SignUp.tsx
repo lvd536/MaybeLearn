@@ -34,7 +34,7 @@ export default function SignUp() {
     };
 
     return (
-        <>
+        <div className="absolute top-0 bottom-0 left-0 right-0 content-center">
             <form
                 action=""
                 className="flex flex-col items-center justify-between mt-10 gap-5"
@@ -83,6 +83,6 @@ export default function SignUp() {
                     Sign In
                 </Link>
             </span>
-        </>
+        </div>
     );
 }
