@@ -2,10 +2,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-button-background: #29214a;
-  --color-card: #998ccf;
-  --color-dark-bg: #120f24;
-  --color-light-bg: #faf7fc;
+    --color-button-background: #29214a;
+    --color-card: #998ccf;
+    --color-dark-bg: #120f24;
+    --color-light-bg: #faf7fc;
+    --color-catalog-card: #1c1736;
 }
 
 :root {
