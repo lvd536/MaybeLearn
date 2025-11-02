@@ -34,7 +34,7 @@ export default function SignUp() {
     };
 
     return (
-        <div className="absolute top-0 bottom-0 left-0 right-0 content-center">
+        <div className="absolute flex flex-col bottom-0 right-0 h-full w-full items-center justify-center -z-1">
             <form
                 action=""
                 className="flex flex-col items-center justify-between mt-10 gap-5"

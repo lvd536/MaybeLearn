@@ -1,32 +1,32 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/Logo";
 
 export default function NavBar() {
     return (
         <div className="mb-25">
             <div className="fixed top-0 left-0 px-10 flex items-center justify-between w-screen h-17 border-b border-b-white bg-dark-bg/95">
-                <Link to="/" className="flex items-center gap-4">
+                <NavLink to="/" className="flex items-center gap-4">
                     <Logo />
                     <span className="font-bold text-xl">MaybeLearn</span>
-                </Link>
+                </NavLink>
                 <div>
                     <ul className="flex items-center gap-9">
-                        <Link to="/catalog/courses">Courses</Link>
-                        <Link to="/catalog/tests">Tests</Link>
-                        <Link to="/rating">Rating</Link>
+                        <NavLink to="/catalog/courses">Courses</NavLink>
+                        <NavLink to="/catalog/tests">Tests</NavLink>
+                        <NavLink to="/rating">Rating</NavLink>
                         <div className="flex gap-2">
-                            <Link
+                            <NavLink
                                 to={"/login"}
                                 className="flex w-21 h-10 font-bold bg-indigo-500 rounded-xl items-center justify-center"
                             >
                                 Sign up
-                            </Link>
-                            <Link
+                            </NavLink>
+                            <NavLink
                                 to={"/register"}
                                 className="flex w-21 h-10 font-bold bg-indigo-500/50 rounded-xl items-center justify-center"
                             >
                                 Log in
-                            </Link>
+                            </NavLink>
                         </div>
                     </ul>
                 </div>

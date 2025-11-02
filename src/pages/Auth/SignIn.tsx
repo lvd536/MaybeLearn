@@ -30,7 +30,7 @@ export default function SignIn() {
     };
 
     return (
-        <div className="absolute top-0 bottom-0 left-0 right-0 content-center">
+        <div className="absolute flex flex-col bottom-0 right-0 h-full w-full items-center justify-center -z-1">
             <form
                 action=""
                 className="flex flex-col items-center justify-between gap-5"
