@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import HomeCode from "../../../assets/HomeCode.png";
 export default function Main() {
     return (
-        <div className="mt-25 flex items-center justify-between">
+        <div className="flex items-center justify-between">
             <img src={HomeCode} alt="" className="rounded-xl" />
             <div className="flex flex-col gap-6">
                 <span className="font-black text-5xl">
