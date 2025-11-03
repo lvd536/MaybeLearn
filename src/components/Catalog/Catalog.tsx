@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
-import CatalogCard from "../../assets/CatalogCard.png";
+import CatalogCard from "./CatalogCard";
+import type { ICourse } from "../../types";
 export default function Catalog({
     title,
     description,
     redirectTo,
+    items,
 }: {
     title: string;
     description: string;
     redirectTo: string;
+    items: ICourse[];
 }) {
     return (
         <div>
@@ -22,30 +24,17 @@ export default function Catalog({
                 placeholder={`Search ${title}`}
                 className="w-full rounded-sm bg-button-background mt-3 mb-10 p-2"
             />
-            <ul>
-                <li className="flex items-center justify-between bg-catalog-card rounded-sm p-4">
-                    <div className="flex flex-col items-baseline justify-between gap-15">
-                        <div className="flex flex-col justify-between gap-3">
-                            <span className="font-normal text-sm text-card">
-                                Beginner
-                            </span>
-                            <span className="font-bold text-base">
-                                Introduction to Python
-                            </span>
-                            <span className="font-normal text-sm text-card">
-                                Learn the basics of Python programming language
-                                with hands-on exercises.
-                            </span>
-                        </div>
-                        <Link
-                            to={`/catalog/${redirectTo}`}
-                            className="bg-button-background py-2 px-3 rounded-xl"
-                        >
-                            Start
-                        </Link>
-                    </div>
-                    <img src={CatalogCard} alt="" />
-                </li>
+            <ul className="flex flex-col gap-5">
+                {items.map((item) => (
+                    <CatalogCard
+                        level={item.data.level}
+                        title={item.data.title}
+                        description={item.data.description}
+                        id={item.id}
+                        redirectTo={redirectTo}
+                        key={item.id}
+                    />
+                ))}
             </ul>
         </div>
     );
