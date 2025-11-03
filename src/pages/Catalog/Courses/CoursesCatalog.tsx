@@ -5,6 +5,7 @@ export default function CoursesCatalog() {
         <Catalog
             title="Courses"
             description="Explore our courses and learning paths"
+            redirectTo="course"
         />
     );
 }

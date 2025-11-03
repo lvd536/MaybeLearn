@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
 import CatalogCard from "../../assets/CatalogCard.png";
 export default function Catalog({
     title,
     description,
+    redirectTo,
 }: {
     title: string;
     description: string;
+    redirectTo: string;
 }) {
     return (
         <div>
@@ -34,10 +37,12 @@ export default function Catalog({
                                 with hands-on exercises.
                             </span>
                         </div>
-
-                        <button className="bg-button-background py-2 px-3 rounded-xl">
+                        <Link
+                            to={`/catalog/${redirectTo}`}
+                            className="bg-button-background py-2 px-3 rounded-xl"
+                        >
                             Start
-                        </button>
+                        </Link>
                     </div>
                     <img src={CatalogCard} alt="" />
                 </li>

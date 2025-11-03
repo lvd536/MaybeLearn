@@ -5,6 +5,7 @@ export default function TestsCatalog() {
         <Catalog
             title="Tests"
             description="Explore our tests and earn points"
+            redirectTo="test"
         />
     );
 }
