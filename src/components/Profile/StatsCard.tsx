@@ -1,0 +1,14 @@
+export default function StatsCard({
+    name,
+    value,
+}: {
+    name: string;
+    value: number;
+}) {
+    return (
+        <li className="flex flex-col justify-between ring-1 ring-stats rounded-lg w-[301px] h-[106px] p-4">
+            <span className="font-bold text-2xl">{value}</span>
+            <span className="font-normal text-sm text-card">{name}</span>
+        </li>
+    );
+}
