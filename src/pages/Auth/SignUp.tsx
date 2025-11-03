@@ -2,7 +2,6 @@ import { useState } from "react";
 import type { IRegisterForm } from "../../types";
 import { client } from "../../services/supabase";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router";
 
 export default function SignUp() {
     const [formData, setFormData] = useState<IRegisterForm>({
@@ -10,7 +9,6 @@ export default function SignUp() {
         email: "",
         password: "",
     });
-    const navigate = useNavigate();
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -30,7 +28,7 @@ export default function SignUp() {
             },
         });
         alert("Confirm your email");
-        navigate("/profile");
+        window.location.reload();
     };
 
     return (

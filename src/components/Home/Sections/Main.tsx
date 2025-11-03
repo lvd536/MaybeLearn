@@ -21,7 +21,7 @@ export default function Main() {
                         Sign up
                     </Link>
                     <Link
-                        to={"/courses"}
+                        to={"/catalog/courses"}
                         className="flex font-bold w-35 h-10 bg-indigo-500/50 rounded-xl items-center justify-center"
                     >
                         Explore courses

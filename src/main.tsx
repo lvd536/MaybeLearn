@@ -7,7 +7,6 @@ import { SignUp, SignIn } from "./pages/Auth";
 import Profile from "./pages/Profile/Profile.tsx";
 import HomePage from "./pages/Home/HomePage.tsx";
 import NavBar from "./components/NavBar.tsx";
-import Footer from "./components/Footer.tsx";
 import CoursesCatalog from "./pages/Catalog/Courses/CoursesCatalog.tsx";
 import TestsCatalog from "./pages/Catalog/Tests/TestsCatalog.tsx";
 import TestPage from "./pages/Catalog/Tests/TestPage.tsx";
@@ -32,7 +31,6 @@ createRoot(document.getElementById("root")!).render(
                     <Route path={"/catalog/test"} element={<TestPage />} />
                     <Route path={"/catalog/course"} element={<CoursePage />} />
                 </Routes>
-                <Footer />
             </div>
         </BrowserRouter>
     </StrictMode>

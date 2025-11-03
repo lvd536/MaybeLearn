@@ -1,14 +1,13 @@
 import { useState } from "react";
 import type { ISignInForm } from "../../types";
 import { client } from "../../services/supabase";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SignIn() {
     const [formData, setFormData] = useState<ISignInForm>({
         email: "",
         password: "",
     });
-    const navigate = useNavigate();
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -24,8 +23,7 @@ export default function SignIn() {
                 password: formData.password,
             })
             .then(() => {
-                alert("Signed In");
-                navigate("/profile");
+                window.location.reload();
             });
     };
 
