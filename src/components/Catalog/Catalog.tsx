@@ -1,5 +1,5 @@
 import CatalogCard from "./CatalogCard";
-import type { ICourse } from "../../types";
+import type { ICourse, ITest } from "../../types";
 export default function Catalog({
     title,
     description,
@@ -9,7 +9,7 @@ export default function Catalog({
     title: string;
     description: string;
     redirectTo: string;
-    items: ICourse[];
+    items: ICourse[] | ITest[];
 }) {
     return (
         <div>

@@ -2,15 +2,15 @@ import Catalog from "../../../components/Catalog/Catalog";
 import { getCourses } from "../../../stores/useCoursesStore";
 
 export default function CoursesCatalog() {
-    const items = getCourses();
+    const courses = getCourses();
     return (
         <>
-            {items ? (
+            {courses ? (
                 <Catalog
                     title="Courses"
                     description="Explore our courses and learning paths"
                     redirectTo="course"
-                    items={items}
+                    items={courses}
                 />
             ) : (
                 <div>Loading...</div>

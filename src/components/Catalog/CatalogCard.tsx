@@ -20,7 +20,7 @@ export default function CatalogCard({level, title, description, id, redirectTo}:
                             to={`/catalog/${redirectTo}`}
                             className="bg-button-background py-2 px-3 rounded-xl"
                             onClick={() => {
-                                localStorage.setItem("catalogId", id.toString());
+                                localStorage.setItem(`${redirectTo}Id`, id.toString());
                             }}
                         >
                             Start

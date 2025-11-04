@@ -3,3 +3,4 @@ export {type default as IRegisterForm} from './IRegisterForm';
 export {type default as ISignInForm} from './ISignInForm';
 export {type default as ICourse} from './ICourse';
 export {type default as IModule} from './IModule';
+export {type default as ITest} from './ITest';

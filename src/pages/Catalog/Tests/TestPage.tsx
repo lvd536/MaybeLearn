@@ -1,43 +1,102 @@
+import { useRef, useState } from "react";
 import ModuleTitle from "../../../components/Catalog/ModuleTitle";
 import ParagraphTitle from "../../../components/Catalog/ParagraphTitle";
-import Text from "../../../components/Catalog/Text";
 import Description from "../../../components/Catalog/Tests/Description";
+import CodeNode from "../../../components/CodeNode";
+import { getTest } from "../../../stores/useTestsStore";
 
 export default function TestPage() {
-    const text = `Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order. 
-Example 1:
-Input: nums = [2,7,11,15], target = 9
-Output: [0,1]
-Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+    const [question, setQuestion] = useState<number>(0);
+    const [isCorrectAnswer, setIsCorrectAnswer] = useState<boolean>(false);
+    const answerButton = useRef(null);
+    const activeTestId = parseInt(localStorage.getItem("testId") ?? "1");
+    const currentItem = getTest(activeTestId);
 
-Example 2:
-Input: nums = [3,2,4], target = 6
-Output: [1,2]
-
-Example 3:
-Input: nums = [3,3], target = 6
-Output: [0,1]
-
-Constraints:
-2 <= nums.length <= 104
--109 <= nums[i] <= 109
--109 <= target <= 109
-Only one valid answer exists.
-    `;
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (isCorrectAnswer) console.log("correct!");
+    };
+    const handleClick = (isCorrect: boolean) => {
+        setIsCorrectAnswer(isCorrect);
+    };
     return (
-        <div className="flex justify-between">
-            <div className="flex flex-col gap-4">
-                <ModuleTitle>Two Sum</ModuleTitle>
-                <Description>
-                    Given an array of integers nums and an integer target,
-                    return indices of the two numbers such that they add up to
-                    target. You may assume that each input would have exactly
-                    one solution, and you may not use the same element twice.
-                    You can return the answer in any order.
-                </Description>
-                <ParagraphTitle>Description</ParagraphTitle>
-                <Text>{text}</Text>
-            </div>
-        </div>
+        <>
+            {currentItem && (
+                <div className="flex justify-between">
+                    <div className="flex flex-col gap-4">
+                        <ModuleTitle>{currentItem.data.title}</ModuleTitle>
+                        <Description>
+                            {currentItem.data.description}
+                        </Description>
+                        <ul className="flex gap-2">
+                            {currentItem.data.questions.map((q, index) => (
+                                <li
+                                    className={`flex font-medium w-10 h-10 ${
+                                        question === index
+                                            ? "bg-button-background/70"
+                                            : "bg-button-background"
+                                    } rounded-xl p-2 items-center justify-center`}
+                                    onClick={() => setQuestion(index)}
+                                >
+                                    {index + 1}
+                                </li>
+                            ))}
+                        </ul>
+                        <ParagraphTitle>Question {question + 1}</ParagraphTitle>
+                        <span>
+                            {currentItem.data.questions[question].question}
+                        </span>
+                        {currentItem.data.questions[question].isCode ? (
+                            <CodeNode
+                                code={currentItem.data.questions[0].task}
+                                language="javascript"
+                                showLineNumbers={true}
+                                startingLineNumber={1}
+                            />
+                        ) : (
+                            <span>
+                                {currentItem.data.questions[question].task}
+                            </span>
+                        )}
+                        <form
+                            action=""
+                            className="flex flex-col"
+                            onSubmit={handleSubmit}
+                        >
+                            {currentItem.data.questions[question].answers.map(
+                                (answer, index) => (
+                                    <div
+                                        className="question flex gap-2"
+                                        key={index}
+                                    >
+                                        <input
+                                            type="radio"
+                                            name={`number`}
+                                            id={`number`}
+                                            onClick={() =>
+                                                handleClick(answer.is_correct)
+                                            }
+                                        />
+                                        <label
+                                            htmlFor={`number`}
+                                            className="flex"
+                                        >
+                                            {answer.answer}
+                                        </label>
+                                    </div>
+                                )
+                            )}
+                            <button
+                                type="submit"
+                                className="bg-button-background rounded-xs p-2 mt-5"
+                                ref={answerButton}
+                            >
+                                Answer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
