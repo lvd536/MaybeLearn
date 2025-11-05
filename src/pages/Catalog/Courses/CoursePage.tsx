@@ -15,13 +15,14 @@ export default function CoursePage() {
             {courseData ? (
                 <div className="flex justify-between gap-10">
                     <div className="flex flex-col w-1/6 gap-4">
-                        {courseData.data.modules.map((module) => (
+                        {courseData.data.modules.map((module, index) => (
                             <button
                                 className={`font-medium text-sm p-2 transition-all duration-600 rounded-xl ${
                                     activeModule === module.title &&
                                     "bg-button-background"
                                 }`}
                                 onClick={() => setActiveModule(module.title)}
+                                key={index}
                             >
                                 {module.title}
                             </button>
@@ -32,13 +33,13 @@ export default function CoursePage() {
                         <Text>{courseData.data.description}</Text>
                         {courseData.data.modules
                             .find((module) => module.title === activeModule)
-                            ?.lessons.map((lesson) => (
-                                <>
+                            ?.lessons.map((lesson, index) => (
+                                <div key={index}>
                                     <ParagraphTitle>
                                         {lesson.title}
                                     </ParagraphTitle>
                                     <Text>{lesson.content}</Text>
-                                </>
+                                </div>
                             ))}
                     </div>
                 </div>

@@ -27,7 +27,6 @@ const coursesStore = create<ITestsStore>((set, get) => ({
                 console.error("Error fetching tests:", error);
             } else {
                 set({ tests: data });
-                console.log(data);
                 return data;
             }
         } catch (err) {
