@@ -8,6 +8,8 @@ import type { IFormattedQuestion } from "../../../types";
 import RadioButton from "../../../components/Catalog/Tests/RadioButton";
 import NavItem from "../../../components/Catalog/Tests/NavItem";
 import { sendTestCompletionData } from "../../../utils/test";
+import Congrats from "../../../assets/Congrats.png";
+import { Link } from "react-router-dom";
 
 export default function TestPage() {
     const [question, setQuestion] = useState<number>(0);
@@ -65,7 +67,7 @@ export default function TestPage() {
 
     return (
         <>
-            {currentItem && questions.length > 0 && (
+            {currentItem && !isCompleted && questions.length > 0 && (
                 <div className="flex justify-between">
                     <div className="flex flex-col gap-4">
                         <ModuleTitle>{currentItem.data.title}</ModuleTitle>
@@ -122,6 +124,25 @@ export default function TestPage() {
                             </button>
                         </form>
                     </div>
+                </div>
+            )}
+            {currentItem && isCompleted && (
+                <div className="flex flex-col gap-5 justify-start items-center h-screen">
+                    <h1 className="text-2xl font-bold">Congratulations!</h1>
+                    <span className="text-xl font-medium">
+                        Test {currentItem.data.title} is completed
+                    </span>
+                    <img
+                        src={Congrats}
+                        alt="congratulations image"
+                        className="max-w-100"
+                    />
+                    <Link
+                        to={"/"}
+                        className="flex items-center justify-center text-xl font-medium rounded-xl bg-button-background py-2 px-10"
+                    >
+                        Home Page
+                    </Link>
                 </div>
             )}
         </>
