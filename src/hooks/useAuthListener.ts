@@ -42,6 +42,18 @@ export function useAuthListener() {
                 .eq("id", data.user.id)
                 .single();
             setProfile(profile ?? null);
+
+            const { data: lessons } = await client
+                .from("read_lessons")
+                .select("id")
+                .eq("user_id", profile.id);
+            setCourses(lessons?.length ?? 0);
+
+            const { data: tests } = await client
+                .from("completed_tests")
+                .select("id")
+                .eq("user_id", profile.id);
+            setTests(tests?.length ?? 0);
         }
     };
 

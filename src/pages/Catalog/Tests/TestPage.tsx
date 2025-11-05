@@ -7,12 +7,14 @@ import { getTest } from "../../../stores/useTestsStore";
 import type { IFormattedQuestion } from "../../../types";
 import RadioButton from "../../../components/Catalog/Tests/RadioButton";
 import NavItem from "../../../components/Catalog/Tests/NavItem";
+import { sendTestCompletionData } from "../../../utils/test";
+import { setProfilePoints } from "../../../utils/profile";
 
 export default function TestPage() {
     const [question, setQuestion] = useState<number>(0);
     const [isCorrectAnswer, setIsCorrectAnswer] = useState<boolean>(false);
     const [questions, setQuestions] = useState<IFormattedQuestion[]>([]);
-
+    const [isCompleted, setIsCompleted] = useState<boolean>(false);
     const activeTestId = parseInt(localStorage.getItem("testId") ?? "1");
     const currentItem = getTest(activeTestId);
 
@@ -30,6 +32,15 @@ export default function TestPage() {
         }
     }, [currentItem]);
 
+    useEffect(() => {
+        (async () => {
+            if (isCompleted) {
+                await sendTestCompletionData(currentItem?.id || 1);
+                setProfilePoints(currentItem?.data.points || 0);
+            }
+        })();
+    }, [isCompleted, currentItem?.id, currentItem?.data.points]);
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (isCorrectAnswer) {
@@ -41,6 +52,7 @@ export default function TestPage() {
             console.log(updatedQuestions);
 
             if (question === questions.length - 1) {
+                setIsCompleted(true);
                 alert("You have passed the test!");
             } else {
                 setQuestion((prev) => prev + 1);
