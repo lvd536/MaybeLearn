@@ -19,7 +19,9 @@ export default function CatalogCard({
     return (
         <li
             className={`flex items-center justify-between transition-bg duration-500 ${
-                !isCompleted ? "bg-catalog-card" : "bg-green-900/20"
+                !isCompleted
+                    ? "bg-catalog-card"
+                    : "bg-green-900/20 text-white/50"
             } rounded-sm p-4`}
         >
             <div className="flex flex-col items-baseline justify-between gap-15">
@@ -39,15 +41,24 @@ export default function CatalogCard({
                         {description}
                     </span>
                 </div>
-                <Link
-                    to={`/catalog/${redirectTo}`}
-                    className="bg-button-background py-2 px-3 rounded-xl"
-                    onClick={() => {
-                        localStorage.setItem(`${redirectTo}Id`, id.toString());
-                    }}
-                >
-                    Start
-                </Link>
+                {isCompleted ? (
+                    <span className="bg-button-background/70 py-2 px-3 rounded-xl cursor-not-allowed">
+                        Completed
+                    </span>
+                ) : (
+                    <Link
+                        to={`/catalog/${redirectTo}`}
+                        className="bg-button-background py-2 px-3 rounded-xl"
+                        onClick={() => {
+                            localStorage.setItem(
+                                `${redirectTo}Id`,
+                                id.toString()
+                            );
+                        }}
+                    >
+                        Start
+                    </Link>
+                )}
             </div>
             <img src={CatalogCardImage} alt="" />
         </li>
