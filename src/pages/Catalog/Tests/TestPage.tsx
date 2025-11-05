@@ -70,7 +70,8 @@ export default function TestPage() {
                                             setQuestion(index);
                                         }
                                     }}
-                                ></NavItem>
+                                    key={index}
+                                />
                             ))}
                         </ul>
                         <ParagraphTitle>Question {question + 1}</ParagraphTitle>
@@ -96,6 +97,7 @@ export default function TestPage() {
                                         answer={answer}
                                         index={index}
                                         handleClick={handleClick}
+                                        key={index}
                                     />
                                 )
                             )}
