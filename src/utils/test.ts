@@ -1,6 +1,7 @@
 import { client } from "../services/supabase";
+import { setProfilePoints } from "./profile";
 
-export async function sendTestCompletionData(testId: number) {
+export async function sendTestCompletionData(testId: number, points: number) {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
 
@@ -22,6 +23,8 @@ export async function sendTestCompletionData(testId: number) {
         .select()
         .single();
 
+    setProfilePoints(points);
+    
     if (error) {
         console.error("createOrUpdateProfile error", error);
         throw error;

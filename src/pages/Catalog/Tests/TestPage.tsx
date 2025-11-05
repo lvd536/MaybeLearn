@@ -8,7 +8,6 @@ import type { IFormattedQuestion } from "../../../types";
 import RadioButton from "../../../components/Catalog/Tests/RadioButton";
 import NavItem from "../../../components/Catalog/Tests/NavItem";
 import { sendTestCompletionData } from "../../../utils/test";
-import { setProfilePoints } from "../../../utils/profile";
 
 export default function TestPage() {
     const [question, setQuestion] = useState<number>(0);
@@ -35,8 +34,10 @@ export default function TestPage() {
     useEffect(() => {
         (async () => {
             if (isCompleted) {
-                await sendTestCompletionData(currentItem?.id || 1);
-                setProfilePoints(currentItem?.data.points || 0);
+                await sendTestCompletionData(
+                    currentItem?.id || 1,
+                    currentItem?.data.points || 0
+                );
             }
         })();
     }, [isCompleted, currentItem?.id, currentItem?.data.points]);
