@@ -1,7 +1,13 @@
 import ProfileImage from "../../assets/ProfileImage.png";
+import { client } from "../../services/supabase";
 import { useAuthStore } from "../../stores/useAuthStore";
+import Logout from "../../assets/Logout";
+import { Link } from "react-router-dom";
 export default function Header({ onClick }: { onClick: () => void }) {
     const profile = useAuthStore((state) => state.profile);
+    const logOutHandler = () => {
+        client.auth.signOut();
+    };
     return (
         <div className="flex items-center justify-between mb-10">
             <div className="flex gap-5">
@@ -22,12 +28,21 @@ export default function Header({ onClick }: { onClick: () => void }) {
                     </span>
                 </div>
             </div>
-            <button
-                className="flex items-center justify-center w-120 h-10 bg-button-background rounded-xl"
-                onClick={onClick}
-            >
-                Edit Profile
-            </button>
+            <div className="flex gap-5">
+                <button
+                    className="flex items-center justify-center w-60 h-10 bg-button-background rounded-xl"
+                    onClick={onClick}
+                >
+                    Edit Profile
+                </button>
+                <Link
+                    to={"/"}
+                    className="flex items-center justify-center h-10 p-2 bg-button-background rounded-xl hover:cursor-pointer"
+                    onClick={logOutHandler}
+                >
+                    <Logout />
+                </Link>
+            </div>
         </div>
     );
 }
