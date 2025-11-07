@@ -1,24 +1,27 @@
 import { client } from "../services/supabase";
 import { setProfilePoints } from "./profile";
 
-export async function sendTestCompletionData(testId: number, points: number) {
+export async function sendCourseCompletionData(
+    lesson_id: number,
+    points: number
+) {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
 
     const { data: existingData } = await client
-        .from("completed_tests")
+        .from("read_lessons")
         .select("*")
         .eq("user_id", userId)
-        .eq("test_id", testId)
+        .eq("lesson_id", lesson_id)
         .single();
 
     if (existingData) return existingData;
 
     const { data, error } = await client
-        .from("completed_tests")
+        .from("read_lessons")
         .insert({
             user_id: userId,
-            test_id: testId,
+            lesson_id: lesson_id,
         })
         .select()
         .single();
@@ -26,22 +29,22 @@ export async function sendTestCompletionData(testId: number, points: number) {
     setProfilePoints(points);
 
     if (error) {
-        console.error("sendTestCompletionData error", error);
+        console.error("sendCourseCompletionData error", error);
         throw error;
     }
     return data;
 }
 
-export async function getTestCompletionData() {
+export async function getCourseCompletionData() {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
 
     const { data, error } = await client
-        .from("completed_tests")
+        .from("read_lessons")
         .select("*")
         .eq("user_id", userId);
 
-    if (error) console.error("getTestCompletionData error", error);
+    if (error) console.error("getCourseCompletionData error", error);
 
     return data;
 }

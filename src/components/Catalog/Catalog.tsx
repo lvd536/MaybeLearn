@@ -2,6 +2,7 @@ import CatalogCard from "./CatalogCard";
 import type { ICompletedItem, ICourse, ITest } from "../../types";
 import { useEffect, useState } from "react";
 import { getTestCompletionData } from "../../utils/test";
+import { getCourseCompletionData } from "../../utils/course";
 export default function Catalog({
     title,
     description,
@@ -16,12 +17,20 @@ export default function Catalog({
     const [completedItems, setCompletedItems] = useState<ICompletedItem[]>([]);
     useEffect(() => {
         (async () => {
-            setCompletedItems((await getTestCompletionData()) || []);
+            const data =
+                redirectTo === "course"
+                    ? await getCourseCompletionData()
+                    : await getTestCompletionData();
+            setCompletedItems(data || []);
         })();
     }, []);
 
     const isCompletedCheck = (item: ICourse | ITest) => {
-        return completedItems.map((i) => i.test_id).includes(item.id);
+        const completedCheck =
+            redirectTo === "course"
+                ? completedItems.map((i) => i.lesson_id).includes(item.id)
+                : completedItems.map((i) => i.test_id).includes(item.id);
+        return completedCheck;
     };
 
     return (
