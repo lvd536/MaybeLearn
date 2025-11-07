@@ -1,11 +1,14 @@
 import Header from "../../components/Profile/Header";
-import Body from "../../components/Profile/Body";
+import Details from "../../components/Profile/Details";
+import { useState } from "react";
+import Edit from "../../components/Profile/Edit";
 
 export default function Profile() {
+    const [isEditPage, setIsEditPage] = useState<boolean>(false);
     return (
         <>
-            <Header />
-            <Body />
+            <Header onClick={() => setIsEditPage(!isEditPage)} />
+            {isEditPage ? <Edit /> : <Details />}
         </>
     );
 }

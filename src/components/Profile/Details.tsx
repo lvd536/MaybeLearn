@@ -1,7 +1,7 @@
 import { useAuthStore } from "../../stores/useAuthStore";
 import StatsCard from "./StatsCard";
 
-export default function Body() {
+export default function Details() {
     const completedTest = useAuthStore((state) => state.completedTests);
     const completedCourses = useAuthStore((state) => state.completedCourses);
     const points = useAuthStore((state) => state.profile?.points);

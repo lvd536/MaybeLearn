@@ -1,8 +1,9 @@
-export {type default as IProfileType} from './IProfileType';
-export {type default as IRegisterForm} from './IRegisterForm';
-export {type default as ISignInForm} from './ISignInForm';
-export {type default as ICourse} from './ICourse';
-export {type default as IModule} from './IModule';
-export {type default as ITest} from './ITest';
-export {type default as IFormattedQuestion} from './IFormattedQuestion';
-export {type default as ICompletedItem} from './ICompletedItem';
+export { type default as IProfileType } from "./IProfileType";
+export { type default as IRegisterForm } from "./IRegisterForm";
+export { type default as ISignInForm } from "./ISignInForm";
+export { type default as ICourse } from "./ICourse";
+export { type default as IModule } from "./IModule";
+export { type default as ITest } from "./ITest";
+export { type default as IFormattedQuestion } from "./IFormattedQuestion";
+export { type default as ICompletedItem } from "./ICompletedItem";
+export { type default as IEditForm } from "./IEditForm";
