@@ -52,14 +52,8 @@ export default function TestPage() {
             );
             setQuestions(updatedQuestions);
 
-            console.log(updatedQuestions);
-
-            if (question === questions.length - 1) {
-                setIsCompleted(true);
-                alert("You have passed the test!");
-            } else {
-                setQuestion((prev) => prev + 1);
-            }
+            if (question === questions.length - 1) setIsCompleted(true);
+            else setQuestion((prev) => prev + 1);
         }
     };
 
@@ -132,6 +126,7 @@ export default function TestPage() {
                     <span className="text-xl font-medium">
                         Test {currentItem.data.title} is completed
                     </span>
+                    <span>You earn {currentItem.data.points} points!</span>
                     <img
                         src={Congrats}
                         alt="congratulations image"

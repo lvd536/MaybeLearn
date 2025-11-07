@@ -17,7 +17,7 @@ export default function CoursePage() {
                     <div className="flex flex-col w-1/6 gap-4">
                         {courseData.data.modules.map((module, index) => (
                             <button
-                                className={`font-medium text-sm p-2 transition-all duration-600 rounded-xl ${
+                                className={`flex items-start font-medium text-sm p-2 transition-all duration-600 rounded-xl ${
                                     activeModule === module.title &&
                                     "bg-button-background"
                                 }`}
