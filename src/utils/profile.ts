@@ -43,13 +43,12 @@ export async function setProfilePoints(value: number) {
 export async function updateProfile(profile: IEditForm) {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
-    const avatar = await client
+    await client
         .from("profiles")
         .update({
             avatar_url: profile.avatar_url,
         })
         .eq("id", userId);
-    console.log(avatar);
     if (profile.display_name) {
         const user = await client.auth.getUser();
         if (!user) return;
@@ -58,21 +57,19 @@ export async function updateProfile(profile: IEditForm) {
                 username: profile.display_name,
             },
         });
-        const name = await client
+        await client
             .from("profiles")
             .update({
                 display_name: profile.display_name,
             })
             .eq("id", userId);
-        console.log(name);
     }
     if (profile.bio) {
-        const bio = await client
+        await client
             .from("profiles")
             .update({
                 bio: profile.bio,
             })
             .eq("id", userId);
-        console.log(bio);
     }
 }
