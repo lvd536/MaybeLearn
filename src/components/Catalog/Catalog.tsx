@@ -24,13 +24,13 @@ export default function Catalog({
                     : await getTestCompletionData();
             setCompletedItems(data || []);
         })();
-    }, []);
+    }, [redirectTo]);
 
     const isCompletedCheck = (item: ICourse | ITest) => {
         const completedCheck =
             redirectTo === "course"
-                ? completedItems.map((i) => i.lesson_id).includes(item.id)
-                : completedItems.map((i) => i.test_id).includes(item.id);
+                ? completedItems.find((i) => i.lesson_id === item.id)
+                : completedItems.find((i) => i.test_id === item.id);
         return completedCheck;
     };
 
