@@ -30,14 +30,14 @@ export default function Header({ onClick }: { onClick: () => void }) {
             </div>
             <div className="flex gap-5">
                 <button
-                    className="flex items-center justify-center w-60 h-10 bg-button-background rounded-xl"
+                    className="flex items-center justify-center w-60 h-10 bg-button-background rounded-sm"
                     onClick={onClick}
                 >
                     Edit Profile
                 </button>
                 <Link
                     to={"/"}
-                    className="flex items-center justify-center h-10 p-2 bg-button-background rounded-xl hover:cursor-pointer"
+                    className="flex items-center justify-center h-10 p-2 bg-button-background rounded-sm hover:cursor-pointer"
                     onClick={logOutHandler}
                 >
                     <Logout />

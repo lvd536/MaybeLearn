@@ -10,6 +10,7 @@ import HomePage from "./pages/Home/HomePage";
 import Profile from "./pages/Profile/Profile";
 import { fetchCourses } from "./stores/useCoursesStore";
 import { fetchTests } from "./stores/useTestsStore";
+import ResetPassword from "./pages/Auth/ResetPassword";
 function App() {
     useAuthListener();
     fetchCourses();
@@ -22,6 +23,7 @@ function App() {
                     <Route path={"/"} element={<HomePage />} />
                     <Route path={"/register"} element={<SignUp />} />
                     <Route path={"/login"} element={<SignIn />} />
+                    <Route path={"/resetPassword"} element={<ResetPassword />} />
                     <Route path={"/profile"} element={<Profile />} />
                     <Route path={"/home"} element={<HomePage />} />
                     <Route

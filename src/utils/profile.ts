@@ -73,3 +73,27 @@ export async function updateProfile(profile: IEditForm) {
             .eq("id", userId);
     }
 }
+
+export async function resetPassword(email?: string) {
+    if (email) {
+        const { data, error } = await client.auth.resetPasswordForEmail(email);
+        if (error) console.log("resetPassword error", error);
+        return data;
+    } else {
+        const userEmail = (await client.auth.getUser()).data.user?.email;
+        if (!userEmail) return null;
+        const { data, error } = await client.auth.resetPasswordForEmail(
+            userEmail
+        );
+        if (error) console.log("resetPassword error", error);
+        return data;
+    }
+}
+
+export async function setNewPassword(password: string) {
+    const { data, error } = await client.auth.updateUser({
+        password: password,
+    });
+    if (data) alert("Password updated successfully!");
+    if (error) alert("There was an error updating your password.");
+}

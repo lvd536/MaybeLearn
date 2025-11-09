@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { client } from "../services/supabase";
-import { createOrUpdateProfile } from "../utils/profile";
+import { createOrUpdateProfile, setNewPassword } from "../utils/profile";
 import { useAuthStore } from "../stores/useAuthStore";
 import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 
@@ -29,6 +29,16 @@ export function useAuthListener() {
 
         if (event === "SIGNED_OUT") {
             setProfile(null);
+        }
+
+        if (event == "PASSWORD_RECOVERY") {
+            const newPassword = prompt(
+                "What would you like your new password to be?"
+            );
+            if (newPassword) {
+                if (newPassword.length >= 8) setNewPassword(newPassword);
+                else alert("Min password length = 8");
+            } else alert("Password recovery failed. Please try again");
         }
     };
 

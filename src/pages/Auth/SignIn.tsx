@@ -54,6 +54,12 @@ export default function SignIn() {
                     onChange={handleChange}
                     value={formData.password}
                 />
+                <span className="flex gap-2 mt-5 justify-center">
+                    Forgot your password?
+                    <Link to="/resetPassword" className="text-indigo-500">
+                        Reset Password
+                    </Link>
+                </span>
                 <button
                     type="submit"
                     className="ring-1 ring-indigo-500 rounded-xs p-2"
@@ -62,7 +68,7 @@ export default function SignIn() {
                 </button>
             </form>
             <span className="flex gap-2 mt-5 justify-center">
-                Don't have an account?{" "}
+                Don't have an account?
                 <Link to="/register" className="text-indigo-500">
                     Sign Up
                 </Link>
