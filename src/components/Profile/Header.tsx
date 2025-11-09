@@ -13,6 +13,15 @@ export default function Header({ onClick }: HeaderProps) {
     const logOutHandler = () => {
         client.auth.signOut();
     };
+    const getNameColor = (type: "bg" | "text") => {
+        if (profile?.role === "moderator") {
+            return `${type}-yellow-400`;
+        } else if (profile?.role === "admin") {
+            return `${type}-red-500`;
+        } else {
+            return `${type}-green-400`;
+        }
+    };
     return (
         <>
             {profile && (
@@ -24,7 +33,17 @@ export default function Header({ onClick }: HeaderProps) {
                             alt="Profile Image"
                         ></img>
                         <div className="flex flex-col justify-center">
-                            <span className="font-bold text-2xl">
+                            <span
+                                className={`font-bold text-2xl ${getNameColor(
+                                    "text"
+                                )} text-shadow-lg ${
+                                    profile.role === "admin"
+                                        ? "text-shadow-red-500"
+                                        : profile.role === "moderator"
+                                        ? "text-shadow-yellow-400"
+                                        : "text-shadow-green-400"
+                                }`}
+                            >
                                 {profile.display_name}
                             </span>
                             <span className="font-normal text-base text-card">
@@ -32,6 +51,13 @@ export default function Header({ onClick }: HeaderProps) {
                             </span>
                             <span className="font-normal text-base text-card">
                                 {profile.bio}
+                            </span>
+                            <span
+                                className={`flex items-center justify-center font-medium text-sm ${getNameColor(
+                                    "bg"
+                                )} rounded-2xl p-0.5 mt-2`}
+                            >
+                                {profile.role}
                             </span>
                         </div>
                     </div>

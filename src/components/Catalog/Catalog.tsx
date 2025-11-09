@@ -70,10 +70,7 @@ export default function Catalog({
             <ul className="flex flex-col gap-5">
                 {filteredItems.map((item) => (
                     <CatalogCard
-                        level={item.data.level}
-                        title={item.data.title}
-                        description={item.data.description}
-                        id={item.id}
+                        item={item}
                         redirectTo={redirectTo}
                         key={item.id}
                         isCompleted={isCompletedCheck(item)}

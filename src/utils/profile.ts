@@ -98,3 +98,20 @@ export async function setNewPassword(password: string) {
     if (data) alert("Password updated successfully!");
     if (error) alert("There was an error updating your password.");
 }
+
+export async function getProfileCredits(id: number) {
+    const { data, error } = await client
+        .from("profiles")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle();
+    if (error) {
+        console.error("There was an error fetching the profile data:", error);
+        return null;
+    }
+    const profileCredits: { name: string; avatar: string } = {
+        name: data.display_name,
+        avatar: data.avatar_url,
+    };
+    return profileCredits;
+}
