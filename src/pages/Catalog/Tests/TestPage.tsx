@@ -9,7 +9,7 @@ import { getTest } from "../../../stores/useTestsStore";
 import type { IFormattedQuestion } from "../../../types";
 import { RadioButton, NavItem } from "../../../components/Catalog";
 import { sendTestCompletionData } from "../../../utils/test";
-import Congrats from "../../../assets/Congrats.png";
+import { Congrats } from "../../../assets/";
 import { Link } from "react-router-dom";
 
 export default function TestPage() {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import CatalogCardImage from "../../assets/CatalogCardImage.png";
+import { CatalogCardImage } from "../../assets/";
 
 type CatalogCardProps = {
     level: string;

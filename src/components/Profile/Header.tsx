@@ -1,7 +1,6 @@
-import ProfileImage from "../../assets/ProfileImage.png";
+import { ProfileImage, Logout } from "../../assets/";
 import { client } from "../../services/supabase";
 import { useAuthStore } from "../../stores/useAuthStore";
-import Logout from "../../assets/Logout";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 

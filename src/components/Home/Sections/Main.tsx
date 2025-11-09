@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import HomeCode from "../../../assets/HomeCode.png";
+import { HomeCode } from "../../../assets/";
 export default function Main() {
     return (
         <div className="flex items-center justify-between">

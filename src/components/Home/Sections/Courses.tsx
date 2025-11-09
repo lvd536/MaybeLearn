@@ -1,4 +1,4 @@
-import HomeCard from "../../../assets/HomeCard.png";
+import { HomeCard } from "../../../assets/";
 import Card from "../Card";
 export default function Courses() {
     return (

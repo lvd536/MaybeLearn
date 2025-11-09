@@ -5,9 +5,8 @@ import {
 } from "../../../components/Catalog/";
 import { useEffect, useState } from "react";
 import { getCourse } from "../../../stores/useCoursesStore";
-import Check from "../../../assets/Check";
+import { Check, Congrats } from "../../../assets/";
 import { Link } from "react-router-dom";
-import Congrats from "../../../assets/Congrats.png";
 import { sendCourseCompletionData } from "../../../utils/course";
 
 export default function CoursePage() {
