@@ -3,6 +3,7 @@ import type { ICompletedItem, ICourse, ITest } from "../../types";
 import { useEffect, useState } from "react";
 import { getTestCompletionData } from "../../utils/test";
 import { getCourseCompletionData } from "../../utils/course";
+import Search from "../../assets/Search";
 export default function Catalog({
     title,
     description,
@@ -39,13 +40,18 @@ export default function Catalog({
             <span className="font-normal text-base text-card mt-4">
                 {description}
             </span>
-            <input
-                type="search"
-                name={`${title}SearchBar`}
-                id={`${title}SearchBar`}
-                placeholder={`Search ${title}`}
-                className="w-full rounded-sm bg-button-background mt-3 mb-10 p-2"
-            />
+            <div className="flex gap-2 items-center justify-between">
+                <input
+                    type="search"
+                    name={`${title}SearchBar`}
+                    id={`${title}SearchBar`}
+                    placeholder={`Search ${title}`}
+                    className="rounded-sm bg-button-background mt-3 max-h-10 mb-10 p-2 w-full"
+                />
+                <button className="bg-button-background p-2 rounded-xs">
+                    <Search />
+                </button>
+            </div>
             <ul className="flex flex-col gap-5">
                 {items.map((item) => (
                     <CatalogCard
