@@ -29,8 +29,9 @@ export default function Catalog({
     const isCompletedCheck = (item: ICourse | ITest) => {
         const completedCheck =
             redirectTo === "course"
-                ? completedItems.find((i) => i.lesson_id === item.id)
-                : completedItems.find((i) => i.test_id === item.id);
+                ? completedItems.findIndex((i) => i.lesson_id === item.id) !==
+                  -1
+                : completedItems.findIndex((i) => i.test_id === item.id) !== -1;
         return completedCheck;
     };
 
