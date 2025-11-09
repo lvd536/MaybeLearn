@@ -1,6 +1,18 @@
 import type { IFormattedQuestion } from "../../../types";
 
-export default function NavItem({question, currentQuestion, index, OnClick}: {question: IFormattedQuestion, currentQuestion: number, index: number, OnClick: () => void}) {
+type NavItemProps = {
+    question: IFormattedQuestion;
+    currentQuestion: number;
+    index: number;
+    OnClick: () => void;
+};
+
+export default function NavItem({
+    question,
+    currentQuestion,
+    index,
+    OnClick,
+}: NavItemProps) {
     return (
         <li
             key={index}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { ISignInForm } from "../../types";
 import { client } from "../../services/supabase";
 import { Link } from "react-router-dom";
+import Input from "../../components/Auth/Input";
 
 export default function SignIn() {
     const [formData, setFormData] = useState<ISignInForm>({
@@ -16,7 +17,6 @@ export default function SignIn() {
     };
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
         client.auth
             .signInWithPassword({
                 email: formData.email,
@@ -34,22 +34,18 @@ export default function SignIn() {
                 className="flex flex-col items-center justify-between gap-5"
                 onSubmit={handleSubmit}
             >
-                <input
+                <Input
                     type="mail"
                     name="email"
                     placeholder="Enter your email"
-                    className="ring-1 ring-indigo-500 rounded-xs p-2"
-                    required
                     minLength={6}
                     onChange={handleChange}
                     value={formData.email}
                 />
-                <input
+                <Input
                     type="password"
                     name="password"
                     placeholder="Enter your password"
-                    className="ring-1 ring-indigo-500 rounded-xs p-2"
-                    required
                     minLength={8}
                     onChange={handleChange}
                     value={formData.password}

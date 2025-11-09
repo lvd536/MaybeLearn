@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 import CatalogCardImage from "../../assets/CatalogCardImage.png";
 
+type CatalogCardProps = {
+    level: string;
+    title: string;
+    description: string;
+    id: number;
+    isCompleted: boolean;
+    redirectTo: string;
+};
+
 export default function CatalogCard({
     level,
     title,
@@ -8,14 +17,7 @@ export default function CatalogCard({
     id,
     isCompleted,
     redirectTo,
-}: {
-    level: string;
-    title: string;
-    description: string;
-    id: number;
-    isCompleted: boolean;
-    redirectTo: string;
-}) {
+}: CatalogCardProps) {
     return (
         <li
             className={`flex items-center justify-between transition-bg duration-500 ${

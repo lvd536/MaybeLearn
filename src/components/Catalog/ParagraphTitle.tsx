@@ -1,4 +1,8 @@
-export default function ParagraphTitle({children}: {children: React.ReactNode }) {
+type ParagraphTitleProps = {
+  children: React.ReactNode;
+}
+
+export default function ParagraphTitle({children}: ParagraphTitleProps) {
   return (
     <h2 className="font-bold text-xl">{children}</h2>
   )

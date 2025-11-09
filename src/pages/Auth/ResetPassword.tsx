@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { resetPassword } from "../../utils/profile";
+import Input from "../../components/Auth/Input";
 
 export default function ResetPassword() {
     const [email, setEmail] = useState<string>("");
@@ -19,14 +20,13 @@ export default function ResetPassword() {
                 className="flex flex-col gap-10"
                 onSubmit={handleSubmit}
             >
-                <input
+                <Input
                     type="email"
                     name="email"
-                    id="email"
                     placeholder="Enter your email"
-                    className="ring-1 ring-indigo-500 rounded-xs p-2"
-                    required
+                    minLength={6}
                     onChange={handleChange}
+                    value={email}
                 />
                 <button
                     type="submit"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { IRegisterForm } from "../../types";
 import { client } from "../../services/supabase";
 import { Link } from "react-router-dom";
+import Input from "../../components/Auth/Input";
 
 export default function SignUp() {
     const [formData, setFormData] = useState<IRegisterForm>({
@@ -17,7 +18,6 @@ export default function SignUp() {
     };
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
         client.auth.signUp({
             email: formData.email,
             password: formData.password,
@@ -38,32 +38,26 @@ export default function SignUp() {
                 className="flex flex-col items-center justify-between mt-10 gap-5"
                 onSubmit={handleSubmit}
             >
-                <input
+                <Input
                     type="mail"
                     name="email"
                     placeholder="Enter your email"
-                    className="ring-1 ring-indigo-500 rounded-xs p-2"
-                    required
                     minLength={6}
                     onChange={handleChange}
                     value={formData.email}
                 />
-                <input
+                <Input
                     type="text"
                     name="username"
                     placeholder="Enter your username"
-                    className="ring-1 ring-indigo-500 rounded-xs p-2"
-                    required
                     minLength={6}
                     onChange={handleChange}
                     value={formData.username}
                 />
-                <input
+                <Input
                     type="password"
                     name="password"
                     placeholder="Enter your password"
-                    className="ring-1 ring-indigo-500 rounded-xs p-2"
-                    required
                     minLength={8}
                     onChange={handleChange}
                     value={formData.password}

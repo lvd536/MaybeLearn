@@ -3,17 +3,19 @@ import type { ICompletedItem, ICourse, ITest } from "../../types";
 import { useEffect, useState } from "react";
 import { getTestCompletionData } from "../../utils/test";
 import { getCourseCompletionData } from "../../utils/course";
+
+type Catalog = {
+    title: string;
+    description: string;
+    redirectTo: string;
+    items: ICourse[] | ITest[];
+};
 export default function Catalog({
     title,
     description,
     redirectTo,
     items,
-}: {
-    title: string;
-    description: string;
-    redirectTo: string;
-    items: ICourse[] | ITest[];
-}) {
+}: Catalog) {
     const [completedItems, setCompletedItems] = useState<ICompletedItem[]>([]);
     const [filteredItems, setFilteredItems] = useState<ICourse[] | ITest[]>([]);
 

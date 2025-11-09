@@ -4,7 +4,12 @@ import { useAuthStore } from "../../stores/useAuthStore";
 import Logout from "../../assets/Logout";
 import { Link } from "react-router-dom";
 import Button from "./Button";
-export default function Header({ onClick }: { onClick: () => void }) {
+
+type HeaderProps = {
+    onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+};
+
+export default function Header({ onClick }: HeaderProps) {
     const profile = useAuthStore((state) => state.profile);
     const logOutHandler = () => {
         client.auth.signOut();

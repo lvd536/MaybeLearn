@@ -1,11 +1,13 @@
+type Button = {
+    type: "submit" | "reset" | "button" | undefined;
+    children: React.ReactNode;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
 export default function Button({
     type,
     children,
     ...rest
-}: {
-    type: "submit" | "reset" | "button" | undefined;
-    children: React.ReactNode;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+}: Button) {
     return (
         <button
             type={type}

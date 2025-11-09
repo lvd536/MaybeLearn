@@ -1,12 +1,14 @@
+type RadioButtonProps = {
+    answer: { answer: string; is_correct: boolean };
+    index: number;
+    handleClick: (answer: boolean) => void;
+};
+
 export default function RadioButton({
     answer,
     index,
     handleClick,
-}: {
-    answer: { answer: string; is_correct: boolean };
-    index: number;
-    handleClick: (answer: boolean) => void;
-}) {
+}: RadioButtonProps) {
     return (
         <div className="question flex gap-2" key={index}>
             <input

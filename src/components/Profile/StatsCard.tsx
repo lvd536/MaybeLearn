@@ -1,10 +1,9 @@
-export default function StatsCard({
-    name,
-    value,
-}: {
+type StatsCardProps = {
     name: string;
     value: number;
-}) {
+};
+
+export default function StatsCard({ name, value }: StatsCardProps) {
     return (
         <li className="flex flex-col justify-between ring-1 ring-stats rounded-lg w-[301px] h-[106px] p-4">
             <span className="font-bold text-2xl">{value}</span>
