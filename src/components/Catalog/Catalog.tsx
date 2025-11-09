@@ -3,7 +3,6 @@ import type { ICompletedItem, ICourse, ITest } from "../../types";
 import { useEffect, useState } from "react";
 import { getTestCompletionData } from "../../utils/test";
 import { getCourseCompletionData } from "../../utils/course";
-import Search from "../../assets/Search";
 export default function Catalog({
     title,
     description,
@@ -16,6 +15,12 @@ export default function Catalog({
     items: ICourse[] | ITest[];
 }) {
     const [completedItems, setCompletedItems] = useState<ICompletedItem[]>([]);
+    const [filteredItems, setFilteredItems] = useState<ICourse[] | ITest[]>([]);
+
+    useEffect(() => {
+        setFilteredItems(items);
+    }, [items]);
+
     useEffect(() => {
         (async () => {
             const data =
@@ -35,26 +40,33 @@ export default function Catalog({
         return completedCheck;
     };
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.toLowerCase();
+        setFilteredItems(
+            items.filter((item) =>
+                item.data.title.toLowerCase().includes(value)
+            ) as ICourse[] | ITest[]
+        );
+    };
+
     return (
         <div>
             <h1 className="font-bold text-3xl">{title}</h1>
             <span className="font-normal text-base text-card mt-4">
                 {description}
             </span>
-            <div className="flex gap-2 items-center justify-between">
+            <div className="flex gap-2 my-5 items-center justify-between">
                 <input
                     type="search"
                     name={`${title}SearchBar`}
                     id={`${title}SearchBar`}
                     placeholder={`Search ${title}`}
-                    className="rounded-sm bg-button-background mt-3 max-h-10 mb-10 p-2 w-full"
+                    className="rounded-sm bg-button-background p-2 w-full h-10"
+                    onChange={handleChange}
                 />
-                <button className="bg-button-background p-2 rounded-xs">
-                    <Search />
-                </button>
             </div>
             <ul className="flex flex-col gap-5">
-                {items.map((item) => (
+                {filteredItems.map((item) => (
                     <CatalogCard
                         level={item.data.level}
                         title={item.data.title}
