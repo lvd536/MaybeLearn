@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import ModuleTitle from "../../../components/Catalog/ModuleTitle";
-import ParagraphTitle from "../../../components/Catalog/ParagraphTitle";
-import Description from "../../../components/Catalog/Tests/Description";
-import CodeNode from "../../../components/Other/CodeNode";
+import {
+    ModuleTitle,
+    ParagraphTitle,
+    Description,
+} from "../../../components/Catalog/";
+import { CodeNode } from "../../../components/Other/";
 import { getTest } from "../../../stores/useTestsStore";
 import type { IFormattedQuestion } from "../../../types";
-import RadioButton from "../../../components/Catalog/Tests/RadioButton";
-import NavItem from "../../../components/Catalog/Tests/NavItem";
+import { RadioButton, NavItem } from "../../../components/Catalog";
 import { sendTestCompletionData } from "../../../utils/test";
 import Congrats from "../../../assets/Congrats.png";
 import { Link } from "react-router-dom";

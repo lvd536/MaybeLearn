@@ -1,6 +1,4 @@
-import Courses from "../../components/Home/Sections/Courses";
-import Main from "../../components/Home/Sections/Main";
-import Tests from "../../components/Home/Sections/Tests";
+import { Courses, Tests, Main } from "../../components/Home/";
 
 export default function HomePage() {
     return (

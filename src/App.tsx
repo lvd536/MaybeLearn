@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NavBar from "./components/Other/NavBar";
+import { NavBar } from "./components/Other/";
 import { useAuthListener } from "./hooks/useAuthListener";
 import { SignUp, SignIn } from "./pages/Auth";
-import CoursePage from "./pages/Catalog/Courses/CoursePage";
-import CoursesCatalog from "./pages/Catalog/Courses/CoursesCatalog";
-import TestPage from "./pages/Catalog/Tests/TestPage";
-import TestsCatalog from "./pages/Catalog/Tests/TestsCatalog";
-import HomePage from "./pages/Home/HomePage";
-import Profile from "./pages/Profile/Profile";
+import {
+    CoursePage,
+    CoursesCatalog,
+    TestPage,
+    TestsCatalog,
+} from "./pages/Catalog/";
+import { HomePage } from "./pages/Home/";
+import { Profile } from "./pages/Profile/";
 import { fetchCourses } from "./stores/useCoursesStore";
 import { fetchTests } from "./stores/useTestsStore";
 import ResetPassword from "./pages/Auth/ResetPassword";

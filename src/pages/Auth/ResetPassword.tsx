@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { resetPassword } from "../../utils/profile";
-import Input from "../../components/Auth/Input";
+import { Input } from "../../components/Auth/";
 
 export default function ResetPassword() {
     const [email, setEmail] = useState<string>("");

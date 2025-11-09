@@ -1,4 +1,4 @@
-import Catalog from "../../../components/Catalog/Catalog";
+import { Catalog } from "../../../components/Catalog/";
 import { getCourses } from "../../../stores/useCoursesStore";
 
 export default function CoursesCatalog() {

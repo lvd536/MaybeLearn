@@ -1,4 +1,4 @@
-import Catalog from "../../../components/Catalog/Catalog";
+import { Catalog } from "../../../components/Catalog/";
 import { getTests } from "../../../stores/useTestsStore";
 
 export default function TestsCatalog() {

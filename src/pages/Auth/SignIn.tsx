@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { ISignInForm } from "../../types";
 import { client } from "../../services/supabase";
 import { Link } from "react-router-dom";
-import Input from "../../components/Auth/Input";
+import { Input } from "../../components/Auth/";
 
 export default function SignIn() {
     const [formData, setFormData] = useState<ISignInForm>({

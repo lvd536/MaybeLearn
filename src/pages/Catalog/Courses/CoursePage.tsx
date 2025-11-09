@@ -1,6 +1,8 @@
-import ModuleTitle from "../../../components/Catalog/ModuleTitle";
-import Text from "../../../components/Catalog/Text";
-import ParagraphTitle from "../../../components/Catalog/ParagraphTitle";
+import {
+    Text,
+    ParagraphTitle,
+    ModuleTitle,
+} from "../../../components/Catalog/";
 import { useEffect, useState } from "react";
 import { getCourse } from "../../../stores/useCoursesStore";
 import Check from "../../../assets/Check";
