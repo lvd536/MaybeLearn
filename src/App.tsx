@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/Other/NavBar";
 import { useAuthListener } from "./hooks/useAuthListener";
 import { SignUp, SignIn } from "./pages/Auth";
 import CoursePage from "./pages/Catalog/Courses/CoursePage";
@@ -23,7 +23,10 @@ function App() {
                     <Route path={"/"} element={<HomePage />} />
                     <Route path={"/register"} element={<SignUp />} />
                     <Route path={"/login"} element={<SignIn />} />
-                    <Route path={"/resetPassword"} element={<ResetPassword />} />
+                    <Route
+                        path={"/resetPassword"}
+                        element={<ResetPassword />}
+                    />
                     <Route path={"/profile"} element={<Profile />} />
                     <Route path={"/home"} element={<HomePage />} />
                     <Route

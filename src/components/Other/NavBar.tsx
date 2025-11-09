@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/Logo";
-import { useAuthStore } from "../stores/useAuthStore";
+import Logo from "../../assets/Logo";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 export default function NavBar() {
     const isUser = useAuthStore((state) => state.user) || null;

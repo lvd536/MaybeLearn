@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ModuleTitle from "../../../components/Catalog/ModuleTitle";
 import ParagraphTitle from "../../../components/Catalog/ParagraphTitle";
 import Description from "../../../components/Catalog/Tests/Description";
-import CodeNode from "../../../components/CodeNode";
+import CodeNode from "../../../components/Other/CodeNode";
 import { getTest } from "../../../stores/useTestsStore";
 import type { IFormattedQuestion } from "../../../types";
 import RadioButton from "../../../components/Catalog/Tests/RadioButton";

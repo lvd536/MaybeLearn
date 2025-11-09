@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { useState } from "react";
 import { resetPassword, updateProfile } from "../../utils/profile";
+import Button from "./Button";
 interface IEditForm {
     display_name: string;
     bio: string;
@@ -79,22 +80,19 @@ export default function Edit() {
                         value={formData.avatar_url}
                     />
                 </div>
-                <button
-                    className="bg-button-background p-2 rounded-sm w-50 mt-2"
+                <Button
+                    type="button"
                     onClick={handlePasswordChange}
                 >
                     Reset Password
-                </button>
+                </Button>
                 <div className="flex gap-5 items-center justify-between mt-10">
-                    <button
-                        type="submit"
-                        className="bg-button-background p-2 rounded-sm min-w-50"
-                    >
+                    <Button type="submit">
                         Save
-                    </button>
+                    </Button>
                     <Link
                         to={"/"}
-                        className=" flex items-center justify-center bg-button-background p-2 rounded-sm min-w-50"
+                        className=" flex items-center justify-center bg-button-background p-2 rounded-sm w-50"
                     >
                         Cancel
                     </Link>

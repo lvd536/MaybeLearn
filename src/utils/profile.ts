@@ -8,6 +8,7 @@ export async function createOrUpdateProfile(user: User) {
     const profile = {
         id: user.id,
         display_name: user.user_metadata?.username ?? null,
+        created_at: user.created_at,
     };
 
     const { data, error } = await client
