@@ -62,6 +62,13 @@ export default function Header({ onClick }: HeaderProps) {
                         </div>
                     </div>
                     <div className="flex gap-5">
+                        <Link
+                            to={"/admin"}
+                            className="flex items-center justify-center h-10 w-50 p-2 bg-button-background rounded-sm hover:cursor-pointer"
+                            onClick={logOutHandler}
+                        >
+                            Admin Panel
+                        </Link>
                         <Button type="button" onClick={onClick}>
                             Edit Profile
                         </Button>

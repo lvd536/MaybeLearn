@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavBar } from "./components/Other/";
 import { useAuthListener } from "./hooks/useAuthListener";
-import { SignUp, SignIn } from "./pages/Auth";
+import { SignUp, SignIn, ResetPassword } from "./pages/Auth";
 import {
     CoursePage,
     CoursesCatalog,
@@ -12,7 +12,7 @@ import { HomePage } from "./pages/Home/";
 import { Profile } from "./pages/Profile/";
 import { fetchCourses } from "./stores/useCoursesStore";
 import { fetchTests } from "./stores/useTestsStore";
-import ResetPassword from "./pages/Auth/ResetPassword";
+import { AdminPanel } from "./pages/AdminPanel/";
 function App() {
     useAuthListener();
     fetchCourses();
@@ -38,6 +38,7 @@ function App() {
                     <Route path={"/catalog/tests"} element={<TestsCatalog />} />
                     <Route path={"/catalog/test"} element={<TestPage />} />
                     <Route path={"/catalog/course"} element={<CoursePage />} />
+                    <Route path={"/catalog/course"} element={<AdminPanel />} />
                 </Routes>
             </div>
         </BrowserRouter>
