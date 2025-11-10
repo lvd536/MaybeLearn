@@ -41,9 +41,14 @@ export default function AdminPanel() {
                     <DevInfo />
                 </ul>
             </nav>
-            {currentPage === "info" && <Info />}
-            {currentPage === "course" && <CourseCreation />}
-            {currentPage === "test" && <TestCreation />}
+            <div className="flex flex-col gap-2 items-center justify-start bg-button-background w-full mx-20 min-h-150 rounded-sm p-2">
+                <span className="flex items-center justify-center bg-black/20 rounded-sm max-w-50 p-2">
+                    Admin Site: {currentPage}
+                </span>
+                {currentPage === "info" && <Info />}
+                {currentPage === "course" && <CourseCreation />}
+                {currentPage === "test" && <TestCreation />}
+            </div>
         </>
     );
 }
