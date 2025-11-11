@@ -23,7 +23,7 @@ const initialTemplate: ICourseData = {
 export default function CourseCreation() {
     const [coursesTemplate, setCoursesTemplate] =
         useState<ICourseData>(initialTemplate);
-    const [currentModule, setCurrentModule] = useState<number>(1);
+    const [currentModule, setCurrentModule] = useState<number>(0);
     function addModule() {
         setCoursesTemplate({
             ...coursesTemplate,
@@ -185,36 +185,42 @@ export default function CourseCreation() {
             </div>
             <form
                 action=""
-                className="flex flex-col gap-2"
+                className="flex flex-col gap-2 items-center justify-center bg-black/25 p-2 rounded-sm w-full"
                 onSubmit={handleSubmit}
             >
-                <input
-                    type="text"
-                    placeholder="Title"
-                    value={coursesTemplate.title}
-                    onChange={(e) => {
-                        setCourseInfo("title", e.target.value);
-                    }}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Level"
-                    value={coursesTemplate.level}
-                    onChange={(e) => {
-                        setCourseInfo("level", e.target.value);
-                    }}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Description"
-                    value={coursesTemplate.description}
-                    onChange={(e) => {
-                        setCourseInfo("description", e.target.value);
-                    }}
-                    required
-                />
+                <div className="flex flex-col gap-2 mb-5">
+                    <h1>Main Info</h1>
+                    <input
+                        type="text"
+                        placeholder="Title"
+                        value={coursesTemplate.title}
+                        onChange={(e) => {
+                            setCourseInfo("title", e.target.value);
+                        }}
+                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Level"
+                        value={coursesTemplate.level}
+                        onChange={(e) => {
+                            setCourseInfo("level", e.target.value);
+                        }}
+                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Description"
+                        value={coursesTemplate.description}
+                        onChange={(e) => {
+                            setCourseInfo("description", e.target.value);
+                        }}
+                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
+                        required
+                    />
+                </div>
                 {/* <input
                     type="text"
                     placeholder="Image URL"
@@ -224,68 +230,83 @@ export default function CourseCreation() {
                     }}
                     required
                 /> */}
-                {coursesTemplate.modules.map((module, moduleIndex) => (
-                    <div key={moduleIndex} className="flex flex-col">
-                        <h3 className="mt-2 mb-1">Module {moduleIndex + 1}</h3>
-                        <input
-                            type="text"
-                            placeholder="Module Title"
-                            value={coursesTemplate.modules[moduleIndex].title}
-                            onChange={(e) => {
-                                setModuleInfo(
-                                    moduleIndex,
-                                    "title",
-                                    e.target.value
-                                );
-                            }}
-                            required
-                        />
-                        {module.lessons.map((lesson, lessonIndex) => (
-                            <div key={lessonIndex} className="flex flex-col">
-                                <h3 className="mt-2 mb-1">
-                                    Lesson {lessonIndex + 1}
-                                </h3>
-                                <input
-                                    type="text"
-                                    placeholder="Lesson Title"
-                                    value={
-                                        coursesTemplate.modules[moduleIndex]
-                                            .lessons[lessonIndex].title
-                                    }
-                                    onChange={(e) => {
-                                        setLessonInfo(
-                                            moduleIndex,
-                                            lessonIndex,
-                                            "title",
-                                            e.target.value
-                                        );
-                                    }}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Lesson Content"
-                                    value={
-                                        coursesTemplate.modules[moduleIndex]
-                                            .lessons[lessonIndex].content
-                                    }
-                                    onChange={(e) => {
-                                        setLessonInfo(
-                                            moduleIndex,
-                                            lessonIndex,
-                                            "content",
-                                            e.target.value
-                                        );
-                                    }}
-                                    required
-                                />
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                <div className="grid grid-cols-2 gap-8 w-full">
+                    {coursesTemplate.modules.map((module, moduleIndex) => (
+                        <div
+                            key={moduleIndex}
+                            className="flex flex-col bg-button-background p-5 rounded-sm shadow-2xl shadow-button-background"
+                        >
+                            <h3 className="text-lg self-center mt-2 mb-1">
+                                Module {moduleIndex + 1}
+                            </h3>
+                            <input
+                                type="text"
+                                placeholder="Module Title"
+                                value={
+                                    coursesTemplate.modules[moduleIndex].title
+                                }
+                                onChange={(e) => {
+                                    setModuleInfo(
+                                        moduleIndex,
+                                        "title",
+                                        e.target.value
+                                    );
+                                }}
+                                className="ring-1 ring-indigo-500 p-2 rounded-sm"
+                                required
+                            />
+                            {module.lessons.map((lesson, lessonIndex) => (
+                                <div
+                                    key={lessonIndex}
+                                    className="flex flex-col gap-2"
+                                >
+                                    <h3 className="self-center mt-5">
+                                        Lesson {lessonIndex + 1}
+                                    </h3>
+                                    <input
+                                        type="text"
+                                        placeholder="Lesson Title"
+                                        value={
+                                            coursesTemplate.modules[moduleIndex]
+                                                .lessons[lessonIndex].title
+                                        }
+                                        onChange={(e) => {
+                                            setLessonInfo(
+                                                moduleIndex,
+                                                lessonIndex,
+                                                "title",
+                                                e.target.value
+                                            );
+                                        }}
+                                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Lesson Content"
+                                        value={
+                                            coursesTemplate.modules[moduleIndex]
+                                                .lessons[lessonIndex].content
+                                        }
+                                        onChange={(e) => {
+                                            setLessonInfo(
+                                                moduleIndex,
+                                                lessonIndex,
+                                                "content",
+                                                e.target.value
+                                            );
+                                        }}
+                                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
+                                        required
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
                 <button
                     type="submit"
-                    className="p-2 bg-black/40 rounded-sm mt-5"
+                    className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
                 >
                     Create course
                 </button>
