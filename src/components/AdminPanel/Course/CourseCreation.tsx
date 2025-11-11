@@ -1,19 +1,12 @@
 import { useState } from "react";
-import type { IModule } from "../../../types";
+import type { ICourseData } from "../../../types";
+import { addNewCourse } from "../../../utils/course";
 
-type CourseTemplate = {
-    title: string;
-    level: string;
-    description: string;
-    image: string;
-    modules: IModule[];
-};
-
-const initialTemplate: CourseTemplate = {
+const initialTemplate: ICourseData = {
     title: "",
     level: "",
     description: "",
-    image: "",
+    // image: "",
     modules: [
         {
             title: "",
@@ -29,7 +22,7 @@ const initialTemplate: CourseTemplate = {
 
 export default function CourseCreation() {
     const [coursesTemplate, setCoursesTemplate] =
-        useState<CourseTemplate>(initialTemplate);
+        useState<ICourseData>(initialTemplate);
     const [currentModule, setCurrentModule] = useState<number>(1);
     function addModule() {
         setCoursesTemplate({
@@ -132,6 +125,10 @@ export default function CourseCreation() {
             ),
         });
     }
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        addNewCourse(coursesTemplate);
+    }
     return (
         <>
             <div className="flex items-center justify-center gap-5 my-3">
@@ -150,7 +147,7 @@ export default function CourseCreation() {
                     </button>
                 </div>
                 <div className="flex flex-col gap-2 items-center">
-                    <span className="flex items-center justify-center bg-black/30 p-3 rounded-sm w-50">
+                    <span className="flex items-center justify-center bg-black/30 p-2 rounded-sm w-50">
                         Course Creation
                     </span>
                     <input
@@ -186,7 +183,11 @@ export default function CourseCreation() {
                     </button>
                 </div>
             </div>
-            <form action="" className="flex flex-col gap-2">
+            <form
+                action=""
+                className="flex flex-col gap-2"
+                onSubmit={handleSubmit}
+            >
                 <input
                     type="text"
                     placeholder="Title"
@@ -194,6 +195,7 @@ export default function CourseCreation() {
                     onChange={(e) => {
                         setCourseInfo("title", e.target.value);
                     }}
+                    required
                 />
                 <input
                     type="text"
@@ -202,6 +204,7 @@ export default function CourseCreation() {
                     onChange={(e) => {
                         setCourseInfo("level", e.target.value);
                     }}
+                    required
                 />
                 <input
                     type="text"
@@ -210,15 +213,17 @@ export default function CourseCreation() {
                     onChange={(e) => {
                         setCourseInfo("description", e.target.value);
                     }}
+                    required
                 />
-                <input
+                {/* <input
                     type="text"
                     placeholder="Image URL"
                     value={coursesTemplate.image}
                     onChange={(e) => {
                         setCourseInfo("image", e.target.value);
                     }}
-                />
+                    required
+                /> */}
                 {coursesTemplate.modules.map((module, moduleIndex) => (
                     <div key={moduleIndex} className="flex flex-col">
                         <h3 className="mt-2 mb-1">Module {moduleIndex + 1}</h3>
@@ -233,6 +238,7 @@ export default function CourseCreation() {
                                     e.target.value
                                 );
                             }}
+                            required
                         />
                         {module.lessons.map((lesson, lessonIndex) => (
                             <div key={lessonIndex} className="flex flex-col">
@@ -254,6 +260,7 @@ export default function CourseCreation() {
                                             e.target.value
                                         );
                                     }}
+                                    required
                                 />
                                 <input
                                     type="text"
@@ -270,11 +277,18 @@ export default function CourseCreation() {
                                             e.target.value
                                         );
                                     }}
+                                    required
                                 />
                             </div>
                         ))}
                     </div>
                 ))}
+                <button
+                    type="submit"
+                    className="p-2 bg-black/40 rounded-sm mt-5"
+                >
+                    Create course
+                </button>
             </form>
         </>
     );

@@ -1,4 +1,5 @@
 import { client } from "../services/supabase";
+import type { ICourseData } from "../types";
 import { setProfilePoints } from "./profile";
 
 export async function sendCourseCompletionData(
@@ -49,6 +50,21 @@ export async function getCourseCompletionData() {
     return data;
 }
 
-export async function addNewCourse() {
-    
+export async function addNewCourse(data: ICourseData) {
+    const userId = (await client.auth.getUser()).data.user?.id;
+    if (!userId) return null;
+
+    const { data: newCourse, error } = await client.from("lessons").insert({
+        author_id: userId,
+        data: data,
+        created_at: new Date().toISOString(),
+    });
+
+    if (error) {
+        console.error("addNewCourse error", error);
+    }
+
+    if (newCourse) {
+        console.log("addNewCourse success", newCourse);
+    }
 }

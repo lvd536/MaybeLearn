@@ -7,3 +7,4 @@ export { type default as ITest } from "./ITest";
 export { type default as IFormattedQuestion } from "./IFormattedQuestion";
 export { type default as ICompletedItem } from "./ICompletedItem";
 export { type default as IEditForm } from "./IEditForm";
+export { type default as ICourseData } from "./ICourseData";
