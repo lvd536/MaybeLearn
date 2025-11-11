@@ -65,7 +65,6 @@ export default function Header({ onClick }: HeaderProps) {
                         <Link
                             to={"/admin"}
                             className="flex items-center justify-center h-10 w-50 p-2 bg-button-background rounded-sm hover:cursor-pointer"
-                            onClick={logOutHandler}
                         >
                             Admin Panel
                         </Link>
