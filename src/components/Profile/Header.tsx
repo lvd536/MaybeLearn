@@ -13,14 +13,25 @@ export default function Header({ onClick }: HeaderProps) {
     const logOutHandler = () => {
         client.auth.signOut();
     };
-    const getNameColor = (type: "bg" | "text") => {
-        if (profile?.role === "moderator") {
-            return `${type}-yellow-400`;
-        } else if (profile?.role === "admin") {
-            return `${type}-red-500`;
-        } else {
-            return `${type}-green-400`;
-        }
+    const profileColors = {
+        text:
+            profile?.role === "moderator"
+                ? "text-yellow-400"
+                : profile?.role === "admin"
+                ? "text-red-500"
+                : "bg-green-400",
+        bg:
+            profile?.role === "moderator"
+                ? "text-yellow-400"
+                : profile?.role === "admin"
+                ? "bg-red-500"
+                : "bg-green-400",
+        textShadow:
+            profile?.role === "moderator"
+                ? "text-shadow-yellow-400"
+                : profile?.role === "admin"
+                ? "text-shadow-red-500"
+                : "text-shadow-green-400",
     };
     return (
         <>
@@ -34,15 +45,7 @@ export default function Header({ onClick }: HeaderProps) {
                         ></img>
                         <div className="flex flex-col justify-center">
                             <span
-                                className={`font-bold text-2xl ${getNameColor(
-                                    "text"
-                                )} text-shadow-lg ${
-                                    profile.role === "admin"
-                                        ? "text-shadow-red-500"
-                                        : profile.role === "moderator"
-                                        ? "text-shadow-yellow-400"
-                                        : "text-shadow-green-400"
-                                }`}
+                                className={`font-bold text-2xl ${profileColors.text} text-shadow-lg ${profileColors.textShadow}`}
                             >
                                 {profile.display_name}
                             </span>
@@ -53,9 +56,7 @@ export default function Header({ onClick }: HeaderProps) {
                                 {profile.bio}
                             </span>
                             <span
-                                className={`flex items-center justify-center font-medium text-sm ${getNameColor(
-                                    "bg"
-                                )} rounded-2xl p-0.5 mt-2`}
+                                className={`flex items-center justify-center font-medium text-sm ${profileColors.bg} rounded-2xl p-0.5 mt-2`}
                             >
                                 {profile.role}
                             </span>
