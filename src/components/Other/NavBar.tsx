@@ -6,7 +6,7 @@ export default function NavBar() {
     const isUser = useAuthStore((state) => state.user) || null;
     return (
         <div className="mb-25">
-            <div className="fixed top-0 left-0 px-10 flex items-center justify-between w-screen h-17 border-b border-b-white bg-dark-bg/95">
+            <div className="fixed top-0 left-0 px-10 flex items-center justify-between w-screen h-17 border-b border-b-white bg-dark-bg/95 z-100">
                 <NavLink to="/" className="flex items-center gap-4">
                     <Logo />
                     <span className="font-bold text-xl">MaybeLearn</span>
