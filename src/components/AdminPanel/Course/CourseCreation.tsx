@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ICourseData } from "../../../types";
-import { addNewCourse } from "../../../utils/course";
 import { Button, Input, LessonTitle, ModuleTitle } from "./";
+import { CourseFunctions } from "../../../utils/courseFunctions";
 
 const initialTemplate: ICourseData = {
     title: "",
@@ -25,117 +25,13 @@ export default function CourseCreation() {
     const [coursesTemplate, setCoursesTemplate] =
         useState<ICourseData>(initialTemplate);
     const [currentModule, setCurrentModule] = useState<number>(0);
-    function addModule() {
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: [
-                ...coursesTemplate.modules,
-                {
-                    title: "",
-                    lessons: [
-                        {
-                            title: "",
-                            content: "",
-                        },
-                    ],
-                },
-            ],
-        });
-    }
-    function removeModule() {
-        if (coursesTemplate.modules.length === 1) return;
-
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: coursesTemplate.modules.slice(
-                0,
-                coursesTemplate.modules.length - 1
-            ),
-        });
-    }
-    function setCourseInfo(name: string, value: string) {
-        setCoursesTemplate({
-            ...coursesTemplate,
-            [name]: value,
-        });
-    }
-    function setLessonInfo(
-        moduleIndex: number,
-        lessonIndex: number,
-        name: string,
-        value: string
-    ) {
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: coursesTemplate.modules.map((module, index) =>
-                index === moduleIndex
-                    ? {
-                          ...module,
-                          lessons: module.lessons.map((lesson, index) =>
-                              index === lessonIndex
-                                  ? { ...lesson, [name]: value }
-                                  : lesson
-                          ),
-                      }
-                    : module
-            ),
-        });
-    }
-    function setModuleInfo(moduleIndex: number, name: string, value: string) {
-        setCoursesTemplate((prevTemplate) => ({
-            ...prevTemplate,
-            modules: prevTemplate.modules.map((module, index) =>
-                index === moduleIndex ? { ...module, [name]: value } : module
-            ),
-        }));
-    }
-    function addLesson() {
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: coursesTemplate.modules.map((module, index) =>
-                index === currentModule
-                    ? {
-                          ...module,
-                          lessons: [
-                              ...module.lessons,
-                              {
-                                  title: "",
-                                  content: "",
-                              },
-                          ],
-                      }
-                    : module
-            ),
-        });
-    }
-    function removeLesson() {
-        if (coursesTemplate.modules[currentModule].lessons.length === 1) return;
-
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: coursesTemplate.modules.map((module, index) =>
-                index === currentModule
-                    ? {
-                          ...module,
-                          lessons: module.lessons.slice(
-                              0,
-                              module.lessons.length - 1
-                          ),
-                      }
-                    : module
-            ),
-        });
-    }
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        addNewCourse(coursesTemplate);
-    }
+    const courseFunctions = new CourseFunctions({coursesTemplate, setCoursesTemplate, currentModule, setCurrentModule})
     return (
         <>
             <div className="flex items-center justify-center gap-5 my-3">
                 <div className="flex flex-col gap-2 items-center">
-                    <Button onClick={removeModule}>Remove module -</Button>
-                    <Button onClick={removeLesson}>Remove lesson -</Button>
+                    <Button onClick={courseFunctions.removeModule}>Remove module -</Button>
+                    <Button onClick={courseFunctions.removeLesson}>Remove lesson -</Button>
                 </div>
                 <div className="flex flex-col gap-2 items-center">
                     <span className="flex items-center justify-center bg-black/30 p-2 rounded-sm w-50">
@@ -160,14 +56,14 @@ export default function CourseCreation() {
                     />
                 </div>
                 <div className="flex flex-col gap-2 items-center">
-                    <Button onClick={addModule}>Add module +</Button>
-                    <Button onClick={addLesson}>Add lesson +</Button>
+                    <Button onClick={courseFunctions.addModule}>Add module +</Button>
+                    <Button onClick={courseFunctions.addLesson}>Add lesson +</Button>
                 </div>
             </div>
             <form
                 action=""
                 className="flex flex-col gap-2 items-center justify-center bg-black/25 p-2 rounded-sm w-full"
-                onSubmit={handleSubmit}
+                onSubmit={courseFunctions.handleSubmit}
             >
                 <div className="flex flex-col gap-2 mb-5">
                     <h1>Main Info</h1>
@@ -175,21 +71,21 @@ export default function CourseCreation() {
                         placeholder="Title"
                         value={coursesTemplate.title}
                         onChange={(e) => {
-                            setCourseInfo("title", e.target.value);
+                            courseFunctions.setCourseInfo("title", e.target.value);
                         }}
                     />
                     <Input
                         placeholder="Level"
                         value={coursesTemplate.level}
                         onChange={(e) => {
-                            setCourseInfo("level", e.target.value);
+                            courseFunctions.setCourseInfo("level", e.target.value);
                         }}
                     />
                     <Input
                         placeholder="Description"
                         value={coursesTemplate.description}
                         onChange={(e) => {
-                            setCourseInfo("description", e.target.value);
+                            courseFunctions.setCourseInfo("description", e.target.value);
                         }}
                     />
                 </div>
@@ -215,7 +111,7 @@ export default function CourseCreation() {
                                     coursesTemplate.modules[moduleIndex].title
                                 }
                                 onChange={(e) => {
-                                    setModuleInfo(
+                                    courseFunctions.setModuleInfo(
                                         moduleIndex,
                                         "title",
                                         e.target.value
@@ -237,7 +133,7 @@ export default function CourseCreation() {
                                                 .lessons[lessonIndex].title
                                         }
                                         onChange={(e) => {
-                                            setLessonInfo(
+                                            courseFunctions.setLessonInfo(
                                                 moduleIndex,
                                                 lessonIndex,
                                                 "title",
@@ -252,7 +148,7 @@ export default function CourseCreation() {
                                                 .lessons[lessonIndex].content
                                         }
                                         onChange={(e) => {
-                                            setLessonInfo(
+                                            courseFunctions.setLessonInfo(
                                                 moduleIndex,
                                                 lessonIndex,
                                                 "content",
