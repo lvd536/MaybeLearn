@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { ICourseData } from "../../../types";
 import { addNewCourse } from "../../../utils/course";
+import { Button, Input, LessonTitle, ModuleTitle } from "./";
 
 const initialTemplate: ICourseData = {
     title: "",
@@ -133,18 +134,8 @@ export default function CourseCreation() {
         <>
             <div className="flex items-center justify-center gap-5 my-3">
                 <div className="flex flex-col gap-2 items-center">
-                    <button
-                        className="bg-black/30 p-2 rounded-sm w-50"
-                        onClick={removeModule}
-                    >
-                        Remove module -
-                    </button>
-                    <button
-                        className="bg-black/30 p-2 rounded-sm w-50"
-                        onClick={removeLesson}
-                    >
-                        Remove lesson -
-                    </button>
+                    <Button onClick={removeModule}>Remove module -</Button>
+                    <Button onClick={removeLesson}>Remove lesson -</Button>
                 </div>
                 <div className="flex flex-col gap-2 items-center">
                     <span className="flex items-center justify-center bg-black/30 p-2 rounded-sm w-50">
@@ -169,18 +160,8 @@ export default function CourseCreation() {
                     />
                 </div>
                 <div className="flex flex-col gap-2 items-center">
-                    <button
-                        className="bg-black/30 p-2 rounded-sm w-50"
-                        onClick={addModule}
-                    >
-                        Add module +
-                    </button>
-                    <button
-                        className="bg-black/30 p-2 rounded-sm w-50"
-                        onClick={addLesson}
-                    >
-                        Add lesson +
-                    </button>
+                    <Button onClick={addModule}>Add module +</Button>
+                    <Button onClick={addLesson}>Add lesson +</Button>
                 </div>
             </div>
             <form
@@ -190,35 +171,26 @@ export default function CourseCreation() {
             >
                 <div className="flex flex-col gap-2 mb-5">
                     <h1>Main Info</h1>
-                    <input
-                        type="text"
+                    <Input
                         placeholder="Title"
                         value={coursesTemplate.title}
                         onChange={(e) => {
                             setCourseInfo("title", e.target.value);
                         }}
-                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
-                        required
                     />
-                    <input
-                        type="text"
+                    <Input
                         placeholder="Level"
                         value={coursesTemplate.level}
                         onChange={(e) => {
                             setCourseInfo("level", e.target.value);
                         }}
-                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
-                        required
                     />
-                    <input
-                        type="text"
+                    <Input
                         placeholder="Description"
                         value={coursesTemplate.description}
                         onChange={(e) => {
                             setCourseInfo("description", e.target.value);
                         }}
-                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
-                        required
                     />
                 </div>
                 {/* <input
@@ -236,11 +208,8 @@ export default function CourseCreation() {
                             key={moduleIndex}
                             className="flex flex-col bg-button-background p-5 rounded-sm shadow-2xl shadow-button-background"
                         >
-                            <h3 className="text-lg self-center mt-2 mb-1">
-                                Module {moduleIndex + 1}
-                            </h3>
-                            <input
-                                type="text"
+                            <ModuleTitle>Module {moduleIndex + 1}</ModuleTitle>
+                            <Input
                                 placeholder="Module Title"
                                 value={
                                     coursesTemplate.modules[moduleIndex].title
@@ -252,19 +221,16 @@ export default function CourseCreation() {
                                         e.target.value
                                     );
                                 }}
-                                className="ring-1 ring-indigo-500 p-2 rounded-sm"
-                                required
                             />
                             {module.lessons.map((lesson, lessonIndex) => (
                                 <div
                                     key={lessonIndex}
                                     className="flex flex-col gap-2"
                                 >
-                                    <h3 className="self-center mt-5">
+                                    <LessonTitle>
                                         Lesson {lessonIndex + 1}
-                                    </h3>
-                                    <input
-                                        type="text"
+                                    </LessonTitle>
+                                    <Input
                                         placeholder="Lesson Title"
                                         value={
                                             coursesTemplate.modules[moduleIndex]
@@ -278,11 +244,8 @@ export default function CourseCreation() {
                                                 e.target.value
                                             );
                                         }}
-                                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
-                                        required
                                     />
-                                    <input
-                                        type="text"
+                                    <Input
                                         placeholder="Lesson Content"
                                         value={
                                             coursesTemplate.modules[moduleIndex]
@@ -296,8 +259,6 @@ export default function CourseCreation() {
                                                 e.target.value
                                             );
                                         }}
-                                        className="ring-1 ring-indigo-500 p-2 rounded-sm"
-                                        required
                                     />
                                 </div>
                             ))}
