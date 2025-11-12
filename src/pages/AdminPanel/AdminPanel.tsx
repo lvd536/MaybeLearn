@@ -6,16 +6,19 @@ import {
     NavItem,
     TestCreation,
 } from "../../components/AdminPanel";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 type Pages = "info" | "course" | "test";
 
 export default function AdminPanel() {
     const [currentPage, setCurrentPage] = useState<Pages>("info");
-
+    const profile = useAuthStore((state) => state.profile);
+    const navigate = useNavigate();
     const handleClick = (page: Pages) => {
         setCurrentPage(page);
     };
-
+    if (profile?.role !== "admin" || !profile) navigate("profile");
     return (
         <>
             <nav>
