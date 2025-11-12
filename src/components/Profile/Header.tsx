@@ -42,6 +42,7 @@ export default function Header({ onClick }: HeaderProps) {
                             className="w-25 h-25 rounded-full"
                             src={profile.avatar_url || ProfileImage}
                             alt="Profile Image"
+                            loading="lazy"
                         ></img>
                         <div className="flex flex-col justify-center">
                             <span

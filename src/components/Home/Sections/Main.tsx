@@ -3,7 +3,7 @@ import { HomeCode } from "../../../assets/";
 export default function Main() {
     return (
         <div className="flex items-center justify-between">
-            <img src={HomeCode} alt="" className="rounded-xl" />
+            <img src={HomeCode} alt="" className="rounded-xl" loading="lazy" />
             <div className="flex flex-col gap-6">
                 <span className="font-black text-5xl">
                     Level up your coding skills

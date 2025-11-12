@@ -84,7 +84,7 @@ export default function CatalogCard({
                     </Link>
                 )}
             </div>
-            <img src={CatalogCardImage} alt="" />
+            <img src={CatalogCardImage} alt="" loading="lazy" />
         </li>
     );
 }

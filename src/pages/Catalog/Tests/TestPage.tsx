@@ -132,6 +132,7 @@ export default function TestPage() {
                         src={Congrats}
                         alt="congratulations image"
                         className="max-w-100"
+                        loading="lazy"
                     />
                     <Link
                         to={"/"}
