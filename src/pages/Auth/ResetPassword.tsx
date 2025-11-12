@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { resetPassword } from "../../utils/profile";
 import { Input } from "../../components/Auth/";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 export default function ResetPassword() {
     const [email, setEmail] = useState<string>("");
@@ -12,6 +13,14 @@ export default function ResetPassword() {
         resetPassword(email);
         alert("Check your email! If email is correct you will see message");
     };
+    const profile = useAuthStore((state) => state.profile);
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (profile) {
+            navigate('/profile')
+        }
+    }, [profile, navigate])
+
     return (
         <div className="absolute flex flex-col bottom-0 right-0 h-full w-full items-center justify-center gap-15 -z-1">
             <h1 className="font-medium text-xl">Change your password</h1>

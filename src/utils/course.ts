@@ -1,4 +1,5 @@
 import { client } from "../services/supabase";
+import { fetchCourses } from "../stores/Catalog/useCoursesStore";
 import type { ICourseData } from "../types";
 import { setProfilePoints } from "./profile";
 
@@ -54,17 +55,15 @@ export async function addNewCourse(data: ICourseData) {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
 
-    const { data: newCourse, error } = await client.from("lessons").insert({
-        author_id: userId,
-        data: data,
-        created_at: new Date().toISOString(),
-    });
+    const result = await client
+        .from("lessons")
+        .insert({
+            author_id: userId,
+            data: data,
+            created_at: new Date().toISOString(),
+        })
+        .then(() => fetchCourses());
 
-    if (error) {
-        console.error("addNewCourse error", error);
-    }
-
-    if (newCourse) {
-        console.log("addNewCourse success", newCourse);
-    }
+    if (result) console.log("good");
+    else console.warn("setNewCourseError!");
 }

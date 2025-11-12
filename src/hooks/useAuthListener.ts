@@ -27,7 +27,12 @@ export function useAuthListener() {
             }, 0);
         }
 
-        if (event === "SIGNED_OUT") {
+        if (event === "SIGNED_OUT" || event === "TOKEN_REFRESHED") {
+            [window.localStorage, window.sessionStorage].forEach((storage) => {
+                Object.entries(storage).forEach(([key]) => {
+                    storage.removeItem(key);
+                });
+            });
             setProfile(null);
         }
 

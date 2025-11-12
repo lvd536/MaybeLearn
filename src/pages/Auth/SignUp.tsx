@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { IRegisterForm } from "../../types";
 import { client } from "../../services/supabase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components/Auth/";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 export default function SignUp() {
     const [formData, setFormData] = useState<IRegisterForm>({
@@ -30,7 +31,13 @@ export default function SignUp() {
         alert("Confirm your email");
         window.location.reload();
     };
-
+    const profile = useAuthStore((state) => state.profile);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (profile) {
+            navigate("/profile");
+        }
+    }, [profile, navigate]);
     return (
         <div className="absolute flex flex-col bottom-0 right-0 h-full w-full items-center justify-center -z-1">
             <form

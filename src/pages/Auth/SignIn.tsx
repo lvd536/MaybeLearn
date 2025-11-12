@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ISignInForm } from "../../types";
 import { client } from "../../services/supabase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components/Auth/";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 export default function SignIn() {
     const [formData, setFormData] = useState<ISignInForm>({
@@ -26,7 +27,13 @@ export default function SignIn() {
                 window.location.reload();
             });
     };
-
+    const profile = useAuthStore((state) => state.profile);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (profile) {
+            navigate("/profile");
+        }
+    }, [profile, navigate]);
     return (
         <div className="absolute flex flex-col bottom-0 right-0 h-full w-full items-center justify-center -z-1">
             <form
