@@ -7,11 +7,12 @@ export default function Courses() {
         <div>
             <h1 className="font-bold text-2xl mb-12">Popular Courses</h1>
             <ul className="flex gap-5">
-                {courses.map((c) => (
+                {courses.map((c, index) => (
                     <Card
                         title={c.data.title}
                         description={c.data.description}
                         image={HomeCard}
+                        key={index}
                     />
                 ))}
             </ul>
