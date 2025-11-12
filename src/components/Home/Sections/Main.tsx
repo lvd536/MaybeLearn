@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { HomeCode } from "../../../assets/";
+import { useAuthStore } from "../../../stores/useAuthStore";
 export default function Main() {
+    const profile = useAuthStore((state) => state.profile);
     return (
         <div className="flex items-center justify-between">
             <img src={HomeCode} alt="" className="rounded-xl" loading="lazy" />
@@ -14,12 +16,14 @@ export default function Main() {
                     build your portfolio.
                 </span>
                 <div className="flex gap-2">
-                    <Link
-                        to={"/login"}
-                        className="flex font-bold w-21 h-10 bg-indigo-500 rounded-xl items-center justify-center"
-                    >
-                        Sign up
-                    </Link>
+                    {!profile && (
+                        <Link
+                            to={"/login"}
+                            className="flex font-bold w-21 h-10 bg-indigo-500 rounded-xl items-center justify-center"
+                        >
+                            Sign up
+                        </Link>
+                    )}
                     <Link
                         to={"/catalog/courses"}
                         className="flex font-bold w-35 h-10 bg-indigo-500/50 rounded-xl items-center justify-center"
