@@ -73,6 +73,7 @@ const coursesStore = create<ITestsStore>((set, get) => ({
 }));
 
 export const getTests = () => coursesStore.getState().getTests();
+export const getTestsStable = () => coursesStore((s: ITestsStore) => s.tests);
 export const fetchTests = () => coursesStore.getState().fetchTests();
 export const addTest = (test: ITest) => coursesStore.getState().addTest(test);
 export const getTest = (id: number) => coursesStore.getState().getTest(id);

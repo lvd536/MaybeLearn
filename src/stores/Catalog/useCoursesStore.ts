@@ -75,6 +75,7 @@ const coursesStore = create<ICoursesStore>((set, get) => ({
 }));
 
 export const getCourses = () => coursesStore.getState().getCourses();
+export const getCoursesStable = () => coursesStore((s: ICoursesStore) => s.courses)
 export const fetchCourses = () => coursesStore.getState().fetchCourses();
 export const addCourse = (course: ICourse) =>
     coursesStore.getState().addCourse(course);

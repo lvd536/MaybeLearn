@@ -1,25 +1,19 @@
 import { HomeCard } from "../../../assets/";
+import { getTestsStable } from "../../../stores/Catalog/useTestsStore";
 import Card from "../Card";
 export default function Tests() {
+    const tests = getTestsStable().slice(0, 5);
     return (
         <div>
             <h1 className="font-bold text-2xl mb-12">Trending Tests</h1>
             <ul className="flex gap-5">
-                <Card
-                    title="Algorithm Practice"
-                    description="Solve coding problems and improve your algorithmic thinking"
-                    image={HomeCard}
-                />
-                <Card
-                    title="Algorithm Practice"
-                    description="Solve coding problems and improve your algorithmic thinking"
-                    image={HomeCard}
-                />
-                <Card
-                    title="Algorithm Practice"
-                    description="Solve coding problems and improve your algorithmic thinking"
-                    image={HomeCard}
-                />
+                {tests.map((t) => (
+                    <Card
+                        title={t.data.title}
+                        description={t.data.description}
+                        image={HomeCard}
+                    />
+                ))}
             </ul>
         </div>
     );
