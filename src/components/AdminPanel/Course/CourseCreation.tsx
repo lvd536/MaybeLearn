@@ -10,13 +10,10 @@ import {
     setCourseInfo,
     setLessonInfo,
     setModuleInfo,
-    setCurrentModule
-} from "../../../stores/Catalog/Creation/useCourseCreationStore copy";
+    setCurrentModule,
+} from "../../../stores/Catalog/Creation/useCourseCreationStore";
 
 export default function CourseCreation() {
-    // const [coursesTemplate, setCoursesTemplate] =
-    //     useState<ICourseData>(initialTemplate);
-    // const [currentModule, setCurrentModule] = useState<number>(0);
     const coursesTemplate = getCourseTemplate();
     const currentModule = getCurrentModule();
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
