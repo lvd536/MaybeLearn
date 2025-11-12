@@ -38,7 +38,15 @@ export default function CatalogCard({
         >
             <div className="flex flex-col items-baseline justify-between gap-15">
                 <div className="flex flex-col justify-between gap-3">
-                    <span className="font-normal text-sm text-card">
+                    <span
+                        className={`font-normal text-sm ${
+                            item.data.level === "Easy"
+                                ? "text-green-400/80"
+                                : item.data.level === "Middle"
+                                ? "text-amber-400/80"
+                                : "text-red-500/80"
+                        }`}
+                    >
                         {item.data.level}
                     </span>
                     <span className="flex gap-2 items-center font-bold text-base">

@@ -29,8 +29,10 @@ export const useAuthStore = create<State>((set) => ({
     user: null,
     completedTests: 0,
     completedCourses: 0,
-    setCompletedTests: (completedTests) => set({ completedTests: completedTests }),
-    setCompletedCourses: (completedCourses) => set({ completedCourses: completedCourses }),
+    setCompletedTests: (completedTests) =>
+        set({ completedTests: completedTests }),
+    setCompletedCourses: (completedCourses) =>
+        set({ completedCourses: completedCourses }),
     setUser: (user) => set({ user: user }),
     setProfile: (profile: IProfileType | null) => {
         set({
