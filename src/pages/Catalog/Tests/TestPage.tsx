@@ -5,7 +5,7 @@ import {
     Description,
 } from "../../../components/Catalog/";
 import { CodeNode } from "../../../components/Other/";
-import { getTest } from "../../../stores/useTestsStore";
+import { getTest } from "../../../stores/Catalog/useTestsStore";
 import type { IFormattedQuestion } from "../../../types";
 import { RadioButton, NavItem } from "../../../components/Catalog";
 import { sendTestCompletionData } from "../../../utils/test";

@@ -4,7 +4,7 @@ import {
     ModuleTitle,
 } from "../../../components/Catalog/";
 import { useEffect, useState } from "react";
-import { getCourse } from "../../../stores/useCoursesStore";
+import { getCourse } from "../../../stores/Catalog/useCoursesStore";
 import { Check, Congrats } from "../../../assets/";
 import { Link } from "react-router-dom";
 import { sendCourseCompletionData } from "../../../utils/course";

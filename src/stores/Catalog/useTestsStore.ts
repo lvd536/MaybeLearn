@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { client } from "../services/supabase";
-import type { ITest } from "../types";
+import { client } from "../../services/supabase";
+import type { ITest } from "../../types";
 
 interface ITestsStore {
     tests: ITest[];

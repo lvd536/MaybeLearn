@@ -10,8 +10,8 @@ import {
 } from "./pages/Catalog/";
 import { HomePage } from "./pages/Home/";
 import { Profile } from "./pages/Profile/";
-import { fetchCourses } from "./stores/useCoursesStore";
-import { fetchTests } from "./stores/useTestsStore";
+import { fetchCourses } from "./stores/Catalog/useCoursesStore";
+import { fetchTests } from "./stores/Catalog/useTestsStore";
 import { AdminPanel } from "./pages/AdminPanel/";
 function App() {
     useAuthListener();

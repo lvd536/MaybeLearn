@@ -1,5 +1,5 @@
 import { Catalog } from "../../../components/Catalog/";
-import { getTests } from "../../../stores/useTestsStore";
+import { getTests } from "../../../stores/Catalog/useTestsStore";
 
 export default function TestsCatalog() {
     const items = getTests();

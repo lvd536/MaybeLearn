@@ -1,131 +1,24 @@
-import { useState } from "react";
-import type { ICourseData } from "../../../types";
 import { addNewCourse } from "../../../utils/course";
 import { Button, Input, LessonTitle, ModuleTitle } from "./";
-
-const initialTemplate: ICourseData = {
-    title: "",
-    level: "",
-    description: "",
-    // image: "",
-    modules: [
-        {
-            title: "",
-            lessons: [
-                {
-                    title: "i",
-                    content: "",
-                },
-            ],
-        },
-    ],
-};
+import {
+    getCourseTemplate,
+    getCurrentModule,
+    addLesson,
+    addModule,
+    removeLesson,
+    removeModule,
+    setCourseInfo,
+    setLessonInfo,
+    setModuleInfo,
+    setCurrentModule
+} from "../../../stores/Catalog/Creation/useCourseCreationStore copy";
 
 export default function CourseCreation() {
-    const [coursesTemplate, setCoursesTemplate] =
-        useState<ICourseData>(initialTemplate);
-    const [currentModule, setCurrentModule] = useState<number>(0);
-    function addModule() {
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: [
-                ...coursesTemplate.modules,
-                {
-                    title: "",
-                    lessons: [
-                        {
-                            title: "",
-                            content: "",
-                        },
-                    ],
-                },
-            ],
-        });
-    }
-    function removeModule() {
-        if (coursesTemplate.modules.length === 1) return;
-
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: coursesTemplate.modules.slice(
-                0,
-                coursesTemplate.modules.length - 1
-            ),
-        });
-    }
-    function setCourseInfo(name: string, value: string) {
-        setCoursesTemplate({
-            ...coursesTemplate,
-            [name]: value,
-        });
-    }
-    function setLessonInfo(
-        moduleIndex: number,
-        lessonIndex: number,
-        name: string,
-        value: string
-    ) {
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: coursesTemplate.modules.map((module, index) =>
-                index === moduleIndex
-                    ? {
-                          ...module,
-                          lessons: module.lessons.map((lesson, index) =>
-                              index === lessonIndex
-                                  ? { ...lesson, [name]: value }
-                                  : lesson
-                          ),
-                      }
-                    : module
-            ),
-        });
-    }
-    function setModuleInfo(moduleIndex: number, name: string, value: string) {
-        setCoursesTemplate((prevTemplate) => ({
-            ...prevTemplate,
-            modules: prevTemplate.modules.map((module, index) =>
-                index === moduleIndex ? { ...module, [name]: value } : module
-            ),
-        }));
-    }
-    function addLesson() {
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: coursesTemplate.modules.map((module, index) =>
-                index === currentModule
-                    ? {
-                          ...module,
-                          lessons: [
-                              ...module.lessons,
-                              {
-                                  title: "",
-                                  content: "",
-                              },
-                          ],
-                      }
-                    : module
-            ),
-        });
-    }
-    function removeLesson() {
-        if (coursesTemplate.modules[currentModule].lessons.length === 1) return;
-
-        setCoursesTemplate({
-            ...coursesTemplate,
-            modules: coursesTemplate.modules.map((module, index) =>
-                index === currentModule
-                    ? {
-                          ...module,
-                          lessons: module.lessons.slice(
-                              0,
-                              module.lessons.length - 1
-                          ),
-                      }
-                    : module
-            ),
-        });
-    }
+    // const [coursesTemplate, setCoursesTemplate] =
+    //     useState<ICourseData>(initialTemplate);
+    // const [currentModule, setCurrentModule] = useState<number>(0);
+    const coursesTemplate = getCourseTemplate();
+    const currentModule = getCurrentModule();
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         addNewCourse(coursesTemplate);

@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { client } from "../services/supabase";
-import type { ICourse } from "../types";
+import { client } from "../../services/supabase";
+import type { ICourse } from "../../types";
 
 interface ICoursesStore {
     courses: ICourse[];

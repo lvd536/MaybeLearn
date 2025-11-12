@@ -1,5 +1,5 @@
 import { Catalog } from "../../../components/Catalog/";
-import { getCourses } from "../../../stores/useCoursesStore";
+import { getCourses } from "../../../stores/Catalog/useCoursesStore";
 
 export default function CoursesCatalog() {
     const courses = getCourses();
