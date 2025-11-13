@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { client } from "../../services/supabase";
-import type { ICourse } from "../../types";
+import type { ICourse, ICourseData } from "../../types";
 
 interface ICoursesStore {
     courses: ICourse[];
     getCourses: () => ICourse[];
+    getCourseById: (id: number) => ICourseData | undefined;
     fetchCourses: () => Promise<ICourse[] | undefined>;
     getCourse: (id: number) => ICourse | undefined;
     addCourse: (course: ICourse) => void;
@@ -14,6 +15,13 @@ interface ICoursesStore {
 
 const coursesStore = create<ICoursesStore>((set, get) => ({
     courses: [],
+
+    getCourseById: (id: number) => {
+        const course = get().courses.find(
+            (course: ICourse) => course.id === id
+        );
+        return course?.data;
+    },
 
     getCourses: () => {
         get().fetchCourses();
@@ -75,7 +83,10 @@ const coursesStore = create<ICoursesStore>((set, get) => ({
 }));
 
 export const getCourses = () => coursesStore.getState().getCourses();
-export const getCoursesStable = () => coursesStore((s: ICoursesStore) => s.courses)
+export const getCourseById = (id: number) =>
+    coursesStore.getState().getCourseById(id);
+export const getCoursesStable = () =>
+    coursesStore((s: ICoursesStore) => s.courses);
 export const fetchCourses = () => coursesStore.getState().fetchCourses();
 export const addCourse = (course: ICourse) =>
     coursesStore.getState().addCourse(course);

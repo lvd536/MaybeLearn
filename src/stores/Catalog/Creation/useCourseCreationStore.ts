@@ -2,6 +2,7 @@ import { create } from "zustand";
 import type { ICourseData } from "../../../types";
 
 interface ICourseCreationStore {
+    courseId: number;
     courseTemplate: ICourseData;
     setCourseTemplate: (data: ICourseData) => void;
     currentModule: number;
@@ -19,6 +20,7 @@ interface ICourseCreationStore {
     setModuleInfo: (moduleIndex: number, name: string, value: string) => void;
     addLesson: () => void;
     removeLesson: () => void;
+    setCourseId: (id: number) => void;
 }
 
 const initialTemplate: ICourseData = {
@@ -40,10 +42,11 @@ const initialTemplate: ICourseData = {
 };
 
 const courseCreationStore = create<ICourseCreationStore>((set, get) => ({
+    courseId: 0,
     courseTemplate: initialTemplate,
     currentModule: 0,
     setCourseTemplate: (data: ICourseData) => {
-        set({ courseTemplate: data });
+        set({ courseTemplate: data, courseId: 0 });
     },
     setCurrentModule: (number: number) => {
         set({ currentModule: number });
@@ -168,6 +171,11 @@ const courseCreationStore = create<ICourseCreationStore>((set, get) => ({
             },
         });
     },
+    setCourseId: (id: number) => {
+        set({
+            courseId: id,
+        });
+    },
 }));
 
 export const getCourseTemplate = () =>
@@ -176,6 +184,10 @@ export const getCurrentModule = () =>
     courseCreationStore((s: ICourseCreationStore) => s.currentModule);
 export const setCurrentModule = (number: number) =>
     courseCreationStore.getState().setCurrentModule(number);
+export const setCourseId = (id: number) =>
+    courseCreationStore.getState().setCourseId(id);
+export const getCourseId = () =>
+    courseCreationStore((s: ICourseCreationStore) => s.courseId);
 
 export const addModule = () => courseCreationStore.getState().addModule();
 export const removeModule = () => courseCreationStore.getState().removeModule();
@@ -195,5 +207,7 @@ export const setModuleInfo = (
     name: string,
     value: string
 ) => courseCreationStore.getState().setModuleInfo(moduleIndex, name, value);
+export const setCourseTemplate = (data: ICourseData) =>
+    courseCreationStore.getState().setCourseTemplate(data);
 export const addLesson = () => courseCreationStore.getState().addLesson();
 export const removeLesson = () => courseCreationStore.getState().removeLesson();

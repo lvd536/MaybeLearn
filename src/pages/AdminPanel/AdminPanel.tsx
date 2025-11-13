@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     CourseCreation,
     DevInfo,
@@ -8,17 +8,22 @@ import {
 } from "../../components/AdminPanel";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
+import { getCourseId } from "../../stores/Catalog/Creation/useCourseCreationStore";
 
 type Pages = "info" | "course" | "test";
 
 export default function AdminPanel() {
     const [currentPage, setCurrentPage] = useState<Pages>("info");
     const profile = useAuthStore((state) => state.profile);
+    const courseId = getCourseId();
     const navigate = useNavigate();
     const handleClick = (page: Pages) => {
         setCurrentPage(page);
     };
     if (profile?.role !== "admin" || !profile) navigate("profile");
+    useEffect(() => {
+        if (courseId !== 0) setCurrentPage("course");
+    }, []);
     return (
         <>
             <nav>

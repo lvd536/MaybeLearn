@@ -109,9 +109,10 @@ export async function getProfileCredits(id: number) {
         console.error("There was an error fetching the profile data:", error);
         return null;
     }
-    const profileCredits: { name: string; avatar: string } = {
+    const profileCredits: { name: string; avatar: string; role: string } = {
         name: data.display_name,
         avatar: data.avatar_url,
+        role: data.role,
     };
     return profileCredits;
 }

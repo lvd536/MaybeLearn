@@ -11,15 +11,25 @@ import {
     setLessonInfo,
     setModuleInfo,
     setCurrentModule,
+    getCourseId,
+    setCourseTemplate,
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
+import { getCourseById } from "../../../stores/Catalog/useCoursesStore";
+import { useEffect } from "react";
 
 export default function CourseCreation() {
     const coursesTemplate = getCourseTemplate();
     const currentModule = getCurrentModule();
+    const courseById = getCourseById(getCourseId());
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         addNewCourse(coursesTemplate);
     }
+    useEffect(() => {
+        if (courseById) {
+            setCourseTemplate(courseById);
+        }
+    }, [courseById]);
     return (
         <>
             <div className="flex items-center justify-center gap-5 my-3">

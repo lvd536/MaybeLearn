@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CatalogCardImage } from "../../assets/";
 import { useEffect, useState } from "react";
 import { getProfileCredits } from "../../utils/profile";
 import type { ICourse, ITest } from "../../types";
+import Pencil from "../../assets/Pencil";
+import { setCourseId } from "../../stores/Catalog/Creation/useCourseCreationStore";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 type CatalogCardProps = {
     item: ICourse | ITest;
@@ -18,7 +21,18 @@ export default function CatalogCard({
     const [userCredits, setUserCredits] = useState<{
         name: string;
         avatar: string;
+        role: string;
     } | null>();
+    const profile = useAuthStore((state) => state.profile);
+    const isAdmin = profile?.role === "admin" || profile?.role === "moderator";
+    const navigate = useNavigate();
+
+    const handleEdit = () => {
+        if (redirectTo === "course") {
+            setCourseId(item.id);
+            navigate("/admin");
+        }
+    };
 
     useEffect(() => {
         async function getUserProfileCredits() {
@@ -55,6 +69,11 @@ export default function CatalogCard({
                             <div className="text-[10px] font-normal rounded-xl bg-green-500 p-1">
                                 Completed
                             </div>
+                        )}
+                        {isAdmin && (
+                            <button onClick={handleEdit}>
+                                <Pencil />
+                            </button>
                         )}
                     </span>
                     <span className="font-normal text-sm text-card">
