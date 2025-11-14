@@ -29,9 +29,9 @@ export default function AdminPanel() {
         else setCurrentPage("info");
     }, []);
     return (
-        <>
+        <div className="flex">
             <nav>
-                <ul className="absolute left-5 flex flex-col gap-5">
+                <ul className="flex flex-col gap-5">
                     <NavItem
                         isActive={currentPage === "info"}
                         onClick={() => handleClick("info")}
@@ -61,6 +61,6 @@ export default function AdminPanel() {
                 {currentPage === "course" && <CourseCreation />}
                 {currentPage === "test" && <TestCreation />}
             </div>
-        </>
+        </div>
     );
 }

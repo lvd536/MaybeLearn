@@ -56,11 +56,11 @@ export default function TestCreation() {
         <>
             <div className="flex items-center justify-center gap-5 my-3">
                 <div className="flex flex-col gap-2 items-center">
-                    <Button onClick={removeQuestion}>Remove question -</Button>
+                    <Button onClick={removeQuestion}>Remove quest. -</Button>
                     <Button onClick={removeAnswer}>Remove answer -</Button>
                 </div>
                 <div className="flex flex-col gap-2 items-center">
-                    <span className="flex items-center justify-center bg-black/30 p-2 rounded-sm w-50">
+                    <span className="flex text-xs sm:text-base items-center justify-center bg-black/30 p-2 rounded-sm w-30 sm:w-50">
                         Course Creation
                     </span>
                     <input
@@ -68,7 +68,7 @@ export default function TestCreation() {
                         name="currentModule"
                         id="currentModule"
                         placeholder="moduleId"
-                        className="bg-black/30 p-2 rounded-sm w-50"
+                        className="bg-black/30 p-1 sm:p-2 rounded-sm w-30 sm:w-50"
                         value={currentQuestion}
                         onChange={(e) => {
                             if (
