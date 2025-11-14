@@ -4,7 +4,7 @@ import { useAuthStore } from "../../../stores/useAuthStore";
 export default function Main() {
     const profile = useAuthStore((state) => state.profile);
     return (
-        <div className="flex items-center justify-between">
+        <div className="flex items-center gap-6 justify-between">
             <img src={HomeCode} alt="" className="rounded-xl" loading="lazy" />
             <div className="flex flex-col gap-6">
                 <span className="font-black text-5xl">

@@ -181,7 +181,7 @@ export default function TestCreation() {
                                     }}
                                 />
                             </div>
-                            {question.answers.map((answer, answerIndex) => (
+                            {question.answers.map((_answer, answerIndex) => (
                                 <div
                                     key={answerIndex}
                                     className="flex flex-col gap-2"

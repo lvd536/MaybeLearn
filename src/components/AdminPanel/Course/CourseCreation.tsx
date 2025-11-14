@@ -144,7 +144,7 @@ export default function CourseCreation() {
                                     );
                                 }}
                             />
-                            {module.lessons.map((lesson, lessonIndex) => (
+                            {module.lessons.map((_, lessonIndex) => (
                                 <div
                                     key={lessonIndex}
                                     className="flex flex-col gap-2"
