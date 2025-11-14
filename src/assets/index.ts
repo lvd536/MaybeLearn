@@ -6,3 +6,5 @@ export { default as HomeCode } from "./HomeCode.png";
 export { default as Logo } from "./Logo";
 export { default as Logout } from "./Logout";
 export { default as ProfileImage } from "./ProfileImage.png";
+export { default as Burger } from "./Burger";
+export { default as Pencil } from "./Pencil";
