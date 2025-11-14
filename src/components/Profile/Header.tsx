@@ -43,8 +43,8 @@ export default function Header({ onClick }: HeaderProps) {
     return (
         <>
             {profile && (
-                <div className="flex items-center justify-between mb-10">
-                    <div className="flex gap-5">
+                <div className="md:flex items-center justify-between mb-10">
+                    <div className="flex gap-5 mb-5">
                         <img
                             className="w-25 h-25 rounded-full"
                             src={profile.avatar_url || ProfileImage}
@@ -70,18 +70,20 @@ export default function Header({ onClick }: HeaderProps) {
                             </span>
                         </div>
                     </div>
-                    <div className="flex gap-5">
-                        {profile.role === "admin" && (
-                            <Link
-                                to={"/admin"}
-                                className="flex items-center justify-center h-10 w-50 p-2 bg-button-background rounded-sm hover:cursor-pointer"
-                            >
-                                Admin Panel
-                            </Link>
-                        )}
-                        <Button type="button" onClick={onClick}>
-                            Edit Profile
-                        </Button>
+                    <div className="flex gap-5 justify-between">
+                        <div className="flex gap-3">
+                            {profile.role === "admin" && (
+                                <Link
+                                    to={"/admin"}
+                                    className="flex items-center justify-center h-10 w-50 p-2 bg-button-background rounded-sm hover:cursor-pointer"
+                                >
+                                    Admin Panel
+                                </Link>
+                            )}
+                            <Button type="button" onClick={onClick}>
+                                Edit Profile
+                            </Button>
+                        </div>
                         <Link
                             to={"/"}
                             className="flex items-center justify-center h-10 p-2 bg-button-background rounded-sm hover:cursor-pointer"
