@@ -2,11 +2,13 @@ import { HomeCard } from "../../../assets/";
 import { getCoursesStable } from "../../../stores/Catalog/useCoursesStore";
 import Card from "../Card";
 export default function Courses() {
-    const courses = getCoursesStable().slice(0, 5);
+    const courses = getCoursesStable().slice(0, 4);
     return (
-        <div>
-            <h1 className="font-bold text-2xl mb-12">Popular Courses</h1>
-            <ul className="flex gap-5">
+        <div className="flex flex-col gap-6">
+            <h1 className="hidden sm:inline font-bold text-2xl">
+                Popular Courses
+            </h1>
+            <ul className="hidden sm:flex flex-wrap gap-5">
                 {courses.map((c, index) => (
                     <Card
                         title={c.data.title}
