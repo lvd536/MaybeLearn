@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import { client } from "../../services/supabase";
-import type { ICourse, ICourseData } from "../../types";
+import type { ICourse } from "../../types";
 
 interface ICoursesStore {
     courses: ICourse[];
     getCourses: () => ICourse[];
-    getCourseById: (id: number) => ICourseData | undefined;
+    getCourseById: (id: number) => ICourse| undefined;
     fetchCourses: () => Promise<ICourse[] | undefined>;
     getCourse: (id: number) => ICourse | undefined;
     addCourse: (course: ICourse) => void;
@@ -20,7 +20,7 @@ const coursesStore = create<ICoursesStore>((set, get) => ({
         const course = get().courses.find(
             (course: ICourse) => course.id === id
         );
-        return course?.data;
+        return course;
     },
 
     getCourses: () => {

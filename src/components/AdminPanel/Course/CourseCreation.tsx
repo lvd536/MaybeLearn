@@ -1,4 +1,4 @@
-import { addNewCourse } from "../../../utils/course";
+import { addNewCourse, updateCourseById } from "../../../utils/course";
 import { Button, Input, LessonTitle, ModuleTitle } from "./";
 import {
     getCourseTemplate,
@@ -13,23 +13,45 @@ import {
     setCurrentModule,
     getCourseId,
     setCourseTemplate,
+    resetCourseTemplate,
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import { getCourseById } from "../../../stores/Catalog/useCoursesStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function CourseCreation() {
+    const [isEditState, setIsEditState] = useState<{
+        id: number | null;
+        isEdit: boolean;
+    }>({ id: null, isEdit: false });
     const coursesTemplate = getCourseTemplate();
     const currentModule = getCurrentModule();
-    const courseById = getCourseById(getCourseId());
+    const courseId = getCourseId();
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        addNewCourse(coursesTemplate);
+        if (isEditState && isEditState.id) {
+            updateCourseById(coursesTemplate, isEditState.id);
+        } else if (!isEditState) {
+            addNewCourse(coursesTemplate);
+        }
     }
     useEffect(() => {
-        if (courseById) {
-            setCourseTemplate(courseById);
+        if (courseId !== null) {
+            const course = getCourseById(courseId);
+            if (course) {
+                setCourseTemplate(course.data);
+                setIsEditState({
+                    id: courseId,
+                    isEdit: true,
+                });
+            }
+        } else {
+            resetCourseTemplate();
+            setIsEditState({
+                id: null,
+                isEdit: false,
+            });
         }
-    }, [courseById]);
+    }, []);
     return (
         <>
             <div className="flex items-center justify-center gap-5 my-3">
@@ -169,7 +191,7 @@ export default function CourseCreation() {
                     type="submit"
                     className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
                 >
-                    Create course
+                    {isEditState ? "Edit" : "Create"} course
                 </button>
             </form>
         </>

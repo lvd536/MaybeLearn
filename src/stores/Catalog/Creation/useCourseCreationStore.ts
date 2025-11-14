@@ -2,12 +2,13 @@ import { create } from "zustand";
 import type { ICourseData } from "../../../types";
 
 interface ICourseCreationStore {
-    courseId: number;
+    courseId: number | null;
     courseTemplate: ICourseData;
     setCourseTemplate: (data: ICourseData) => void;
     currentModule: number;
     setCurrentModule: (number: number) => void;
 
+    resetCourseTemplate: () => void;
     addModule: () => void;
     removeModule: () => void;
     setCourseInfo: (name: string, value: string) => void;
@@ -33,7 +34,7 @@ const initialTemplate: ICourseData = {
             title: "",
             lessons: [
                 {
-                    title: "i",
+                    title: "",
                     content: "",
                 },
             ],
@@ -45,8 +46,14 @@ const courseCreationStore = create<ICourseCreationStore>((set, get) => ({
     courseId: 0,
     courseTemplate: initialTemplate,
     currentModule: 0,
+    resetCourseTemplate: () => {
+        set({
+            courseTemplate: initialTemplate,
+            courseId: null,
+        });
+    },
     setCourseTemplate: (data: ICourseData) => {
-        set({ courseTemplate: data, courseId: 0 });
+        set({ courseTemplate: data, courseId: null });
     },
     setCurrentModule: (number: number) => {
         set({ currentModule: number });
@@ -211,3 +218,5 @@ export const setCourseTemplate = (data: ICourseData) =>
     courseCreationStore.getState().setCourseTemplate(data);
 export const addLesson = () => courseCreationStore.getState().addLesson();
 export const removeLesson = () => courseCreationStore.getState().removeLesson();
+export const resetCourseTemplate = () =>
+    courseCreationStore.getState().resetCourseTemplate();

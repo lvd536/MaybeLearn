@@ -51,6 +51,17 @@ export async function getCourseCompletionData() {
     return data;
 }
 
+export async function updateCourseById(data: ICourseData, courseId: number) {
+    const userId = (await client.auth.getUser()).data.user?.id;
+    if (!userId) return null;
+
+    await client
+        .from("lessons")
+        .update({ data: data })
+        .eq("id", courseId)
+        .then(() => fetchCourses());
+}
+
 export async function addNewCourse(data: ICourseData) {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
