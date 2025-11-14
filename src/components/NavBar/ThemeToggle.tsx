@@ -13,7 +13,7 @@ export default function ThemeToggle() {
     return (
         <>
             <div
-                className="flex bg-light-bg dark:bg-theme-toggle-dark relative items-center shadow-(--box-shadow-custom-1) justify-between rounded-full w-22.5 h-11.5 hover:ring-1 ring-indigo-500 transition-borders duration-500"
+                className="flex bg-light-bg dark:bg-theme-toggle-dark relative items-center shadow-(--box-shadow-custom-1) justify-between rounded-full w-19.5 h-9.5 hover:ring-1 ring-indigo-500 transition-borders duration-500"
                 onClick={() => handleClick()}
             >
                 <button className="w-11.5 h-11.5 flex items-center justify-center relative rounded-full z-1">
@@ -45,7 +45,7 @@ export default function ThemeToggle() {
                     </svg>
                 </button>
                 <div
-                    className={`flex absolute bg-white w-11.5 h-11.5 rounded-full -z-0 transition-all duration-400 ${
+                    className={`flex absolute bg-white w-9.5 h-9.5 rounded-full z-0 transition-all duration-400 ${
                         theme === "dark" ? "left-0" : "left-1/2"
                     }`}
                 ></div>

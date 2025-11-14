@@ -2,13 +2,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-button-background: #29214a;
-    --color-card: #998ccf;
-    --color-dark-bg: #120f24;
-    --color-light-bg: #faf7fc;
-    --color-catalog-card: #1c1736;
-    --color-stats: #3b2e6b;
-    --color-theme-toggle-dark: #1c1738;
+    --color-button-background: #5b508a; /* осветлённый #29214a */
+    --color-card: #c2b7e8; /* осветлённый #998ccf */
+    --color-dark-bg: #2b254b; /* осветлённый #120f24 (фон остаётся тёмно-фиолетовым, но светлее — это основа темы) */
+    --color-light-bg: #f0ebf7; /* осветлённая интерпретация фона — не белый, а очень светлый индиго */
+    --color-catalog-card: #42376d; /* осветлённый #1c1736 */
+    --color-stats: #6a5a9c; /* осветлённый #3b2e6b */
+    --color-theme-toggle-dark: #42376f; /* осветлённый #1c1738 */
 }
 
 :root {
@@ -20,6 +20,7 @@
     color: #ffffffde;
     /* background-color: #faf7fc; */
     background-color: var(--color-dark-bg);
+    transition: all 0.3s ease-in-out;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -29,4 +30,11 @@
 
 .dark {
     background-color: #120f24;
+    --color-button-background: #29214a;
+    --color-card: #998ccf;
+    --color-dark-bg: #120f24;
+    --color-light-bg: #faf7fc;
+    --color-catalog-card: #1c1736;
+    --color-stats: #3b2e6b;
+    --color-theme-toggle-dark: #1c1738;
 }
