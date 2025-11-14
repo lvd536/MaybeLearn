@@ -116,7 +116,12 @@ export default function CatalogCard({
                     </Link>
                 )}
             </div>
-            <img src={CatalogCardImage} alt="" loading="lazy" />
+            <img
+                src={CatalogCardImage}
+                alt=""
+                loading="lazy"
+                className="hidden sm:flex"
+            />
         </li>
     );
 }
