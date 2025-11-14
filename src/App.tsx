@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { NavBar } from "./components/Other/";
+import NavBar from "./components/NavBar/NavBar";
 import { useAuthListener } from "./hooks/useAuthListener";
 import { SignUp, SignIn, ResetPassword } from "./pages/Auth";
 import {
