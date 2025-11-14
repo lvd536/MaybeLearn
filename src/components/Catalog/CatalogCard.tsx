@@ -6,6 +6,7 @@ import type { ICourse, ITest } from "../../types";
 import Pencil from "../../assets/Pencil";
 import { setCourseId } from "../../stores/Catalog/Creation/useCourseCreationStore";
 import { useAuthStore } from "../../stores/useAuthStore";
+import { setTestId } from "../../stores/Catalog/Creation/useTestCreationStore";
 
 type CatalogCardProps = {
     item: ICourse | ITest;
@@ -30,6 +31,10 @@ export default function CatalogCard({
     const handleEdit = () => {
         if (redirectTo === "course") {
             setCourseId(item.id);
+            navigate("/admin");
+        }
+        if (redirectTo === "test") {
+            setTestId(item.id);
             navigate("/admin");
         }
     };

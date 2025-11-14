@@ -1,4 +1,6 @@
 import { client } from "../services/supabase";
+import { fetchTests } from "../stores/Catalog/useTestsStore";
+import type { ITestData } from "../types";
 import { setProfilePoints } from "./profile";
 
 export async function sendTestCompletionData(testId: number, points: number) {
@@ -44,4 +46,32 @@ export async function getTestCompletionData() {
     if (error) console.error("getTestCompletionData error", error);
 
     return data;
+}
+
+export async function updateTestById(data: ITestData, testId: number) {
+    const userId = (await client.auth.getUser()).data.user?.id;
+    if (!userId) return null;
+
+    await client
+        .from("tests")
+        .update({ data: data })
+        .eq("id", testId)
+        .then(() => fetchTests());
+}
+
+export async function addNewTest(data: ITestData) {
+    const userId = (await client.auth.getUser()).data.user?.id;
+    if (!userId) return null;
+
+    const result = await client
+        .from("tests")
+        .insert({
+            author_id: userId,
+            data: data,
+            created_at: new Date().toISOString(),
+        })
+        .then(() => fetchTests());
+
+    if (result) console.log("good");
+    else console.warn("setNewTestError!");
 }

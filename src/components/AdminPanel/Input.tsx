@@ -7,6 +7,7 @@ type InputProps = {
 export default function Input({ value, placeholder, onChange }: InputProps) {
     return (
         <input
+            name="adminInput"
             type="text"
             placeholder={placeholder}
             value={value}

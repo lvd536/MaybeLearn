@@ -1,5 +1,5 @@
 import { addNewCourse, updateCourseById } from "../../../utils/course";
-import { Button, Input, LessonTitle, ModuleTitle } from "./";
+import { Button, Input, LessonTitle, ModuleTitle } from "../";
 import {
     getCourseTemplate,
     getCurrentModule,
@@ -30,7 +30,7 @@ export default function CourseCreation() {
         e.preventDefault();
         if (isEditState && isEditState.id) {
             updateCourseById(coursesTemplate, isEditState.id);
-        } else if (!isEditState) {
+        } else if (!isEditState.id) {
             addNewCourse(coursesTemplate);
         }
     }
@@ -191,7 +191,7 @@ export default function CourseCreation() {
                     type="submit"
                     className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
                 >
-                    {isEditState ? "Edit" : "Create"} course
+                    {isEditState.id ? "Edit" : "Create"} course
                 </button>
             </form>
         </>

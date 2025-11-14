@@ -8,5 +8,6 @@ export { type default as IFormattedQuestion } from "./IFormattedQuestion";
 export { type default as ICompletedItem } from "./ICompletedItem";
 export { type default as IEditForm } from "./IEditForm";
 export { type default as ICourseData } from "./ICourseData";
+export { type default as ITestData } from "./ITestData";
 export { type default as IAdminInfo } from "./IAdminInfo";
 export { type default as IAPIError } from "./IAPIError";

@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { getCourseId } from "../../stores/Catalog/Creation/useCourseCreationStore";
+import { getTestId } from "../../stores/Catalog/Creation/useTestCreationStore";
 
 type Pages = "info" | "course" | "test";
 
@@ -16,13 +17,16 @@ export default function AdminPanel() {
     const [currentPage, setCurrentPage] = useState<Pages>("info");
     const profile = useAuthStore((state) => state.profile);
     const courseId = getCourseId();
+    const testId = getTestId();
     const navigate = useNavigate();
     const handleClick = (page: Pages) => {
         setCurrentPage(page);
     };
     if (profile?.role !== "admin" || !profile) navigate("profile");
     useEffect(() => {
-        if (courseId !== 0) setCurrentPage("course");
+        if (courseId !== null) setCurrentPage("course");
+        else if (testId !== null) setCurrentPage("test");
+        else setCurrentPage("info");
     }, []);
     return (
         <>

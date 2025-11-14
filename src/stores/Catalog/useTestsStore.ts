@@ -4,6 +4,7 @@ import type { ITest } from "../../types";
 
 interface ITestsStore {
     tests: ITest[];
+    getTestById: (id: number) => ITest | undefined;
     getTests: () => ITest[];
     fetchTests: () => Promise<ITest[] | undefined>;
     getTest: (id: number) => ITest | undefined;
@@ -12,8 +13,13 @@ interface ITestsStore {
     deleteTest: (id: number) => void;
 }
 
-const coursesStore = create<ITestsStore>((set, get) => ({
+const testsStore = create<ITestsStore>((set, get) => ({
     tests: [],
+
+    getTestById: (id: number) => {
+        const test = get().tests.find((test: ITest) => test.id === id);
+        return test;
+    },
 
     getTests: () => {
         get().fetchTests();
@@ -72,10 +78,11 @@ const coursesStore = create<ITestsStore>((set, get) => ({
     },
 }));
 
-export const getTests = () => coursesStore.getState().getTests();
-export const getTestsStable = () => coursesStore((s: ITestsStore) => s.tests);
-export const fetchTests = () => coursesStore.getState().fetchTests();
-export const addTest = (test: ITest) => coursesStore.getState().addTest(test);
-export const getTest = (id: number) => coursesStore.getState().getTest(id);
-export const deleteTest = (id: number) =>
-    coursesStore.getState().deleteTest(id);
+export const getTests = () => testsStore.getState().getTests();
+export const getTestsStable = () => testsStore((s: ITestsStore) => s.tests);
+export const fetchTests = () => testsStore.getState().fetchTests();
+export const addTest = (test: ITest) => testsStore.getState().addTest(test);
+export const getTest = (id: number) => testsStore.getState().getTest(id);
+export const deleteTest = (id: number) => testsStore.getState().deleteTest(id);
+export const getTestById = (id: number) =>
+    testsStore.getState().getTestById(id);
