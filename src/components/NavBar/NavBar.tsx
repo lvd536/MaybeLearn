@@ -3,6 +3,7 @@ import Logo from "../../assets/Logo";
 import { Burger } from "../../assets";
 import { useState } from "react";
 import NavItems from "./NavItems";
+import ThemeToggle from "./ThemeToggle";
 
 export default function NavBar() {
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
@@ -11,10 +12,13 @@ export default function NavBar() {
     return (
         <div className="mb-25">
             <div className="fixed top-0 left-0 px-10 flex items-center justify-between w-screen h-17 border-b border-b-white bg-dark-bg/95 z-100">
-                <NavLink to="/" className="flex items-center gap-4">
-                    <Logo />
-                    <span className="font-bold text-xl">MaybeLearn</span>
-                </NavLink>
+                <div className="flex gap-5">
+                    <NavLink to="/" className="flex items-center gap-4">
+                        <Logo />
+                        <span className="font-bold text-xl">MaybeLearn</span>
+                    </NavLink>
+                    <ThemeToggle />
+                </div>
                 <div className="hidden sm:block">
                     <ul className="flex items-center gap-9">
                         <NavItems
