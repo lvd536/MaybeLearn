@@ -21,7 +21,7 @@ export default function Main() {
                     build your portfolio.
                 </span>
                 <div className="flex gap-2">
-                    {!profile?.display_name && (
+                    {!profile && (
                         <Link
                             to={"/login"}
                             className="flex font-bold w-21 h-10 bg-indigo-500 rounded-xl items-center justify-center"

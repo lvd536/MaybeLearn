@@ -13,19 +13,8 @@ interface State {
     setProfile: (user: IProfileType | null) => void;
 }
 
-const initialProfile: IProfileType = {
-    id: 0,
-    display_name: "",
-    avatar_url: "",
-    bio: "",
-    points: 0,
-    role: "",
-    rank: "",
-    createdAt: "",
-};
-
 export const useAuthStore = create<State>((set) => ({
-    profile: initialProfile,
+    profile: null,
     user: null,
     completedTests: 0,
     completedCourses: 0,

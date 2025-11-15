@@ -6,7 +6,6 @@ interface NavItemsProps {
     h: number;
     firstText: string;
     secondText: string;
-    
 }
 
 export default function NavItems({
@@ -15,7 +14,7 @@ export default function NavItems({
     firstText,
     secondText,
 }: NavItemsProps) {
-    const isUser = useAuthStore((state) => state.user) !== null;
+    const profile = useAuthStore((state) => state.profile);
     return (
         <>
             <NavLink to="/catalog/courses" className={firstText}>
@@ -27,7 +26,7 @@ export default function NavItems({
             <NavLink to="/rating" className={firstText}>
                 Rating
             </NavLink>
-            {isUser ? (
+            {profile ? (
                 <NavLink
                     to={"/profile"}
                     className={`flex w-${w} h-${h} font-bold ${secondText} bg-indigo-500 rounded-xl items-center justify-center`}
