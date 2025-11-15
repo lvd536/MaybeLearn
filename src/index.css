@@ -2,13 +2,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-button-background: #5b508a; /* осветлённый #29214a */
-    --color-card: #c2b7e8; /* осветлённый #998ccf */
-    --color-dark-bg: #2b254b; /* осветлённый #120f24 (фон остаётся тёмно-фиолетовым, но светлее — это основа темы) */
-    --color-light-bg: #f0ebf7; /* осветлённая интерпретация фона — не белый, а очень светлый индиго */
-    --color-catalog-card: #42376d; /* осветлённый #1c1736 */
-    --color-stats: #6a5a9c; /* осветлённый #3b2e6b */
-    --color-theme-toggle-dark: #42376f; /* осветлённый #1c1738 */
+    --color-button-background: #5b508a;
+    --color-card: #c2b7e8;
+    --color-dark-bg: #2b254b;
+    --color-light-bg: #f0ebf7;
+    --color-catalog-card: #42376d;
+    --color-stats: #6a5a9c;
+    --color-theme-toggle-dark: #42376f;
 }
 
 :root {
