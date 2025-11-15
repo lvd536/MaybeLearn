@@ -23,9 +23,6 @@ export default function SignIn() {
                 email: formData.email,
                 password: formData.password,
             })
-            .then(() => {
-                window.location.reload();
-            });
     };
     const profile = useAuthStore((state) => state.profile);
     const navigate = useNavigate();

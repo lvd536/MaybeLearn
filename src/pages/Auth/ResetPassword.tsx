@@ -14,12 +14,12 @@ export default function ResetPassword() {
         alert("Check your email! If email is correct you will see message");
     };
     const profile = useAuthStore((state) => state.profile);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     useEffect(() => {
         if (profile) {
-            navigate('/profile')
+            navigate("/profile");
         }
-    }, [profile, navigate])
+    }, [profile, navigate]);
 
     return (
         <div className="absolute flex flex-col bottom-0 right-0 h-full w-full items-center justify-center gap-15 -z-1">

@@ -29,7 +29,6 @@ export default function SignUp() {
             },
         });
         alert("Confirm your email");
-        window.location.reload();
     };
     const profile = useAuthStore((state) => state.profile);
     const navigate = useNavigate();
