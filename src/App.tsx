@@ -13,6 +13,7 @@ import { Profile } from "./pages/Profile/";
 import { fetchCourses } from "./stores/Catalog/useCoursesStore";
 import { fetchTests } from "./stores/Catalog/useTestsStore";
 import { AdminPanel } from "./pages/AdminPanel/";
+import NotifyList from "./components/Notifications/NotifyList";
 function App() {
     useAuthListener();
     fetchCourses();
@@ -41,6 +42,7 @@ function App() {
                     <Route path={"/admin"} element={<AdminPanel />} />
                 </Routes>
             </div>
+            <NotifyList />
         </BrowserRouter>
     );
 }

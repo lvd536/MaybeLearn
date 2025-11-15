@@ -17,6 +17,7 @@ import {
 import { Button, Input, ModuleTitle, LessonTitle } from "../";
 import { addNewTest, updateTestById } from "../../../utils/test";
 import { getTestById } from "../../../stores/Catalog/useTestsStore";
+import { useNotifyStore } from "../../../stores/useNotifyStore";
 
 export default function TestCreation() {
     const [isEditState, setIsEditState] = useState<{
@@ -26,10 +27,17 @@ export default function TestCreation() {
     const testsTemplate = getTestTemplate();
     const currentQuestion = getCurrentQuestion();
     const testId = getTestId();
+    const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (isEditState && isEditState.id) {
             updateTestById(testsTemplate, isEditState.id);
+            addNotify({
+                id: new Date().getSeconds(),
+                type: "success",
+                description: "Success test creation",
+                title: "Test Creation",
+            });
         } else if (!isEditState.id) {
             addNewTest(testsTemplate);
         }

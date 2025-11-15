@@ -9,6 +9,21 @@
     --color-catalog-card: #42376d;
     --color-stats: #6a5a9c;
     --color-theme-toggle-dark: #42376f;
+    --animate-notify: notify 3s ease-in-out;
+    @keyframes notify {
+        0% {
+            transform: translateX(10vw);
+        }
+        40% {
+            opacity: 1;
+            transform: translateY(0);
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateY(-100vh);
+            opacity: 0;
+        }
+    }
 }
 
 :root {

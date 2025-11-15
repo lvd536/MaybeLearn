@@ -17,6 +17,7 @@ import {
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import { getCourseById } from "../../../stores/Catalog/useCoursesStore";
 import { useEffect, useState } from "react";
+import { useNotifyStore } from "../../../stores/useNotifyStore";
 
 export default function CourseCreation() {
     const [isEditState, setIsEditState] = useState<{
@@ -26,10 +27,17 @@ export default function CourseCreation() {
     const coursesTemplate = getCourseTemplate();
     const currentModule = getCurrentModule();
     const courseId = getCourseId();
+    const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (isEditState && isEditState.id) {
             updateCourseById(coursesTemplate, isEditState.id);
+            addNotify({
+                id: new Date().getSeconds(),
+                type: "success",
+                description: "Success course creation",
+                title: "Course Creation",
+            });
         } else if (!isEditState.id) {
             addNewCourse(coursesTemplate);
         }

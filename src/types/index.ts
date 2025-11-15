@@ -11,3 +11,4 @@ export { type default as ICourseData } from "./ICourseData";
 export { type default as ITestData } from "./ITestData";
 export { type default as IAdminInfo } from "./IAdminInfo";
 export { type default as IAPIError } from "./IAPIError";
+export { type default as INotify } from "./INotify";

@@ -3,13 +3,14 @@ import { client } from "../services/supabase";
 import { createOrUpdateProfile, setNewPassword } from "../utils/profile";
 import { useAuthStore } from "../stores/useAuthStore";
 import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
+import { useNotifyStore } from "../stores/useNotifyStore";
 
 export function useAuthListener() {
     const setUser = useAuthStore((s) => s.setUser);
     const setProfile = useAuthStore((s) => s.setProfile);
     const setCourses = useAuthStore((s) => s.setCompletedCourses);
     const setTests = useAuthStore((s) => s.setCompletedTests);
-
+    const addNotify = useNotifyStore((state) => state.addNotification);
     const handleAuthStateChange = (
         event: AuthChangeEvent,
         session: Session | null
@@ -20,7 +21,16 @@ export function useAuthListener() {
         if (event === "SIGNED_IN" && user) {
             setTimeout(() => {
                 createOrUpdateProfile(user)
-                    .then((profile) => setProfile(profile ?? null))
+                    .then((profile) => {
+                        setProfile(profile ?? null);
+                        addNotify({
+                            id: new Date().getSeconds(),
+                            type: "success",
+                            description:
+                                "Signed In! Setup your profile in profile page!",
+                            title: "Auth Info",
+                        });
+                    })
                     .catch((err) => {
                         console.error("profile upsert failed", err);
                     });
@@ -34,6 +44,12 @@ export function useAuthListener() {
                 });
             });
             setProfile(null);
+            addNotify({
+                id: new Date().getSeconds(),
+                type: "success",
+                description: "Signed Out!",
+                title: "Auth Info",
+            });
         }
 
         if (event == "PASSWORD_RECOVERY") {
@@ -41,8 +57,15 @@ export function useAuthListener() {
                 "What would you like your new password to be?"
             );
             if (newPassword) {
-                if (newPassword.length >= 8) setNewPassword(newPassword);
-                else alert("Min password length = 8");
+                if (newPassword.length >= 8) {
+                    setNewPassword(newPassword);
+                    addNotify({
+                        id: new Date().getSeconds(),
+                        type: "success",
+                        description: "Password Set! Your password updated",
+                        title: "Auth Info",
+                    });
+                } else alert("Min password length = 8");
             } else alert("Password recovery failed. Please try again");
         }
     };
