@@ -1,4 +1,4 @@
-import type { IModule } from "./";
+import type { IModule } from "../..";
 
 export default interface ICourseData {
     title: string;
