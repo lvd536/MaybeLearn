@@ -1,4 +1,4 @@
-export { type default as IProfileType } from "./Others/IProfileType";
+export { type default as IProfileType } from "./Profile/IProfileType";
 export { type default as IRegisterForm } from "./Auth/IRegisterForm";
 export { type default as ISignInForm } from "./Auth/ISignInForm";
 export { type default as ICourse } from "./Catalog/Course/ICourse";
@@ -12,3 +12,4 @@ export { type default as ITestData } from "./Catalog/Test/ITestData";
 export { type default as IAdminInfo } from "./Admin/IAdminInfo";
 export { type default as IAPIError } from "./Others/IAPIError";
 export { type default as INotify } from "./Others/INotify";
+export { type default as IEditProfileForm } from "./Profile/IEditForm";

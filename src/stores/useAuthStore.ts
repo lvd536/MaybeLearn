@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { IProfileType } from "../types";
+import type { IEditProfileForm, IProfileType } from "../types";
 import type { User } from "@supabase/supabase-js";
 
 interface State {
@@ -11,8 +11,8 @@ interface State {
     setCompletedCourses: (completedCourses: number) => void;
     setUser: (u: User | null) => void;
     setProfile: (user: IProfileType | null) => void;
+    updateProfileInfo: (updates: IEditProfileForm) => void;
 }
-
 export const useAuthStore = create<State>((set) => ({
     profile: null,
     user: null,
@@ -26,6 +26,16 @@ export const useAuthStore = create<State>((set) => ({
     setProfile: (profile: IProfileType | null) => {
         set({
             profile: profile,
+        });
+    },
+    updateProfileInfo: (updates: IEditProfileForm) => {
+        const existingProfile = useAuthStore.getState().profile;
+        if (!existingProfile) return;
+        set({
+            profile: {
+                ...existingProfile,
+                ...updates,
+            },
         });
     },
 }));

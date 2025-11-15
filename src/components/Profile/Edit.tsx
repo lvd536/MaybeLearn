@@ -4,18 +4,15 @@ import { useState } from "react";
 import { resetPassword, updateProfile } from "../../utils/profile";
 import Button from "./Button";
 import { useNotifyStore } from "../../stores/useNotifyStore";
-interface IEditForm {
-    display_name: string;
-    bio: string;
-    avatar_url: string;
-}
+import type { IEditProfileForm } from "../../types";
 export default function Edit() {
     const profile = useAuthStore((state) => state.profile);
-    const [formData, setFormData] = useState<IEditForm>({
+    const [formData, setFormData] = useState<IEditProfileForm>({
         display_name: profile?.display_name || "",
         bio: profile?.bio || "",
         avatar_url: profile?.avatar_url || "",
     });
+    const updateProfileInfo = useAuthStore((state) => state.updateProfileInfo);
     const addNotify = useNotifyStore((state) => state.addNotification);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -25,7 +22,7 @@ export default function Edit() {
     };
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-        updateProfile(formData);
+        updateProfile(formData).then(() => updateProfileInfo(formData));
         addNotify({
             id: new Date().getSeconds(),
             type: "success",
