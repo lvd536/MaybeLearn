@@ -4,12 +4,14 @@ import { client } from "../../services/supabase";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components/Auth/";
 import { useAuthStore } from "../../stores/useAuthStore";
+import { useNotifyStore } from "../../stores/useNotifyStore";
 
 export default function SignIn() {
     const [formData, setFormData] = useState<ISignInForm>({
         email: "",
         password: "",
     });
+    const addNotify = useNotifyStore((state) => state.addNotification);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -23,6 +25,17 @@ export default function SignIn() {
                 email: formData.email,
                 password: formData.password,
             })
+            .then((resp) => {
+                if (!resp.error) {
+                    addNotify({
+                        id: new Date().getSeconds(),
+                        type: "success",
+                        description:
+                            "Signed In! Setup your profile in profile page!",
+                        title: "Auth Info",
+                    });
+                }
+            });
     };
     const profile = useAuthStore((state) => state.profile);
     const navigate = useNavigate();

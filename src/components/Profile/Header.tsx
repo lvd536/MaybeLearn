@@ -64,7 +64,7 @@ export default function Header({ onClick }: HeaderProps) {
                                 {profile.bio}
                             </span>
                             <span
-                                className={`flex items-center justify-center font-medium text-sm ${profileColors.bg} rounded-2xl p-0.5 mt-2`}
+                                className={`flex items-center justify-center font-medium text-sm ${profileColors.bg} rounded-2xl py-1 px-2 mt-2`}
                             >
                                 {profile.role}
                             </span>

@@ -23,13 +23,6 @@ export function useAuthListener() {
                 createOrUpdateProfile(user)
                     .then((profile) => {
                         setProfile(profile ?? null);
-                        addNotify({
-                            id: new Date().getSeconds(),
-                            type: "success",
-                            description:
-                                "Signed In! Setup your profile in profile page!",
-                            title: "Auth Info",
-                        });
                     })
                     .catch((err) => {
                         console.error("profile upsert failed", err);

@@ -3,6 +3,7 @@ import { useAuthStore } from "../../stores/useAuthStore";
 import { useState } from "react";
 import { resetPassword, updateProfile } from "../../utils/profile";
 import Button from "./Button";
+import { useNotifyStore } from "../../stores/useNotifyStore";
 interface IEditForm {
     display_name: string;
     bio: string;
@@ -15,6 +16,7 @@ export default function Edit() {
         bio: profile?.bio || "",
         avatar_url: profile?.avatar_url || "",
     });
+    const addNotify = useNotifyStore((state) => state.addNotification);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -24,6 +26,12 @@ export default function Edit() {
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         updateProfile(formData);
+        addNotify({
+            id: new Date().getSeconds(),
+            type: "success",
+            description: "Your profile data updated!",
+            title: "Profile",
+        });
     };
     const handlePasswordChange = () => {
         resetPassword();
@@ -80,16 +88,11 @@ export default function Edit() {
                         value={formData.avatar_url}
                     />
                 </div>
-                <Button
-                    type="button"
-                    onClick={handlePasswordChange}
-                >
+                <Button type="button" onClick={handlePasswordChange}>
                     Reset Password
                 </Button>
                 <div className="flex gap-5 items-center justify-between mt-10">
-                    <Button type="submit">
-                        Save
-                    </Button>
+                    <Button type="submit">Save</Button>
                     <Link
                         to={"/"}
                         className=" flex items-center justify-center bg-button-background p-2 rounded-sm w-50"

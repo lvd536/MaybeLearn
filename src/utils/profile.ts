@@ -51,8 +51,6 @@ export async function updateProfile(profile: IEditForm) {
         })
         .eq("id", userId);
     if (profile.display_name) {
-        const user = await client.auth.getUser();
-        if (!user) return;
         await client.auth.updateUser({
             data: {
                 username: profile.display_name,
@@ -65,14 +63,12 @@ export async function updateProfile(profile: IEditForm) {
             })
             .eq("id", userId);
     }
-    if (profile.bio) {
-        await client
-            .from("profiles")
-            .update({
-                bio: profile.bio,
-            })
-            .eq("id", userId);
-    }
+    await client
+        .from("profiles")
+        .update({
+            bio: profile.bio,
+        })
+        .eq("id", userId);
 }
 
 export async function resetPassword(email?: string) {
