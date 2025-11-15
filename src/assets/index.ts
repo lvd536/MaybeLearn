@@ -8,3 +8,5 @@ export { default as Logout } from "./Logout";
 export { default as ProfileImage } from "./ProfileImage.png";
 export { default as Burger } from "./Burger";
 export { default as Pencil } from "./Pencil";
+export { default as Error } from "./Error";
+export { default as Warning } from "./Warning";
