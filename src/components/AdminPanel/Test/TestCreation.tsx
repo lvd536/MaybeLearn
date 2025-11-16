@@ -121,15 +121,6 @@ export default function TestCreation({ testId }: ITestCreationProps) {
                         }}
                     />
                 </div>
-                {/* <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={testsTemplate.image}
-                    onChange={(e) => {
-                        setCourseInfo("image", e.target.value);
-                    }}
-                    required
-                /> */}
                 <div className="grid grid-cols-2 gap-8 w-full">
                     {testsTemplate.questions.map((question, questionIndex) => (
                         <div
