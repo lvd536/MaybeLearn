@@ -1,3 +1,5 @@
+import type IQuestion from "./IQuestion";
+
 export default interface ITest {
     id: number;
     author_id: number;
@@ -6,15 +8,7 @@ export default interface ITest {
         description: string;
         level: string;
         points: number;
-        questions: {
-            question: string;
-            task: string;
-            answers: {
-                answer: string;
-                is_correct: boolean;
-            }[];
-            isCode: boolean;
-        }[];
+        questions: IQuestion[];
     };
     created_at: string;
 }

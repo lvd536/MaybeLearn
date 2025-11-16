@@ -1,12 +1,8 @@
-import { setCourseInfo } from "../../../stores/Catalog/Creation/useCourseCreationStore";
+import { setTestInfo } from "../../../stores/Catalog/Creation/useTestCreationStore";
 import type { IMainInfo } from "../../../types";
 import Input from "../Input";
 
-export default function MainInfo({
-    title,
-    level,
-    description,
-}: IMainInfo) {
+export default function MainInfo({ title, level, description }: IMainInfo) {
     return (
         <div className="flex flex-col gap-2 mb-5">
             <h1>Main Info</h1>
@@ -14,21 +10,21 @@ export default function MainInfo({
                 placeholder="Title"
                 value={title}
                 onChange={(e) => {
-                    setCourseInfo("title", e.target.value);
+                    setTestInfo("title", e.target.value);
                 }}
             />
             <Input
                 placeholder="Level"
                 value={level}
                 onChange={(e) => {
-                    setCourseInfo("level", e.target.value);
+                    setTestInfo("level", e.target.value);
                 }}
             />
             <Input
                 placeholder="Description"
                 value={description}
                 onChange={(e) => {
-                    setCourseInfo("description", e.target.value);
+                    setTestInfo("description", e.target.value);
                 }}
             />
         </div>
