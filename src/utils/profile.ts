@@ -98,13 +98,14 @@ export async function setNewPassword(password: string) {
 export async function getProfileCredits(id: number) {
     const { data, error } = await client
         .from("profiles")
-        .select("*")
+        .select("display_name, avatar_url, role")
         .eq("id", id)
         .maybeSingle();
     if (error) {
         console.error("There was an error fetching the profile data:", error);
         return null;
     }
+    if (!data) return null
     const profileCredits: { name: string; avatar: string; role: string } = {
         name: data.display_name,
         avatar: data.avatar_url,

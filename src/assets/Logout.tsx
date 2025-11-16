@@ -1,4 +1,4 @@
-export default function logout() {
+export default function Logout() {
     return (
         <svg
             width="25"
