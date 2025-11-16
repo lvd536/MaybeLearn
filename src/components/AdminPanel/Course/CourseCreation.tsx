@@ -6,7 +6,7 @@ import {
     resetCourseTemplate,
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import { getCourseById } from "../../../stores/Catalog/useCoursesStore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNotifyStore } from "../../../stores/useNotifyStore";
 import CourseControls from "./CourseControls";
 import MainInfo from "./MainInfo";
@@ -22,6 +22,7 @@ export default function CourseCreation({ courseId }: ICourseCreationProps) {
     const [originalCourseId, setOriginalCourseId] = useState<number | null>(
         null
     );
+    const initialCourseIdRef = useRef<number | null>(courseId);
     const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -44,11 +45,12 @@ export default function CourseCreation({ courseId }: ICourseCreationProps) {
         }
     }
     useEffect(() => {
-        if (courseId !== null) {
-            const course = getCourseById(courseId);
-            if (course) {
-                setOriginalCourseId(courseId);
-                setCourseTemplate(course.data);
+        const currentCourseId = initialCourseIdRef.current;
+        if (currentCourseId) {
+            const test = getCourseById(currentCourseId);
+            if (test) {
+                setOriginalCourseId(currentCourseId);
+                setCourseTemplate(test.data);
             }
         } else {
             resetCourseTemplate();

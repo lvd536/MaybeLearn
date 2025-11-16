@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
     getCurrentQuestion,
     getTestTemplate,
@@ -18,6 +18,7 @@ interface ITestCreationProps {
 
 export default function TestCreation({ testId }: ITestCreationProps) {
     const [originalTestId, setOriginalTestId] = useState<number | null>(null);
+    const initialTestIdRef = useRef<number | null>(testId);
     const testsTemplate = getTestTemplate();
     const currentQuestion = getCurrentQuestion();
     const addNotify = useNotifyStore((state) => state.addNotification);
@@ -41,11 +42,13 @@ export default function TestCreation({ testId }: ITestCreationProps) {
             });
         }
     }
+
     useEffect(() => {
-        if (testId !== null) {
-            const test = getTestById(testId);
+        const currentTestId = initialTestIdRef.current;
+        if (currentTestId) {
+            const test = getTestById(currentTestId);
             if (test) {
-                setOriginalTestId(testId);
+                setOriginalTestId(currentTestId);
                 setTestTemplate(test.data);
             }
         } else {
