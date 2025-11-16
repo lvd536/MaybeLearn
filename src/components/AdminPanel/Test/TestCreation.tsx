@@ -3,7 +3,6 @@ import {
     addAnswer,
     addQuestion,
     getCurrentQuestion,
-    getTestId,
     getTestTemplate,
     removeAnswer,
     removeQuestion,
@@ -19,45 +18,44 @@ import { addNewTest, updateTestById } from "../../../utils/test";
 import { getTestById } from "../../../stores/Catalog/useTestsStore";
 import { useNotifyStore } from "../../../stores/useNotifyStore";
 
-export default function TestCreation() {
-    const [isEditState, setIsEditState] = useState<{
-        id: number | null;
-        isEdit: boolean;
-    }>({ id: null, isEdit: false });
+interface ITestCreationProps {
+    testId: number | null;
+}
+
+export default function TestCreation({ testId }: ITestCreationProps) {
+    const [originalTestId, setOriginalTestId] = useState<number | null>(null);
     const testsTemplate = getTestTemplate();
     const currentQuestion = getCurrentQuestion();
-    const testId = getTestId();
     const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (isEditState && isEditState.id) {
-            updateTestById(testsTemplate, isEditState.id);
+        if (originalTestId) {
+            updateTestById(testsTemplate, originalTestId);
+            addNotify({
+                id: new Date().getSeconds(),
+                type: "success",
+                description: `Edit test with id ${originalTestId} success`,
+                title: "Test Creation",
+            });
+        } else if (!originalTestId) {
+            addNewTest(testsTemplate);
             addNotify({
                 id: new Date().getSeconds(),
                 type: "success",
                 description: "Success test creation",
                 title: "Test Creation",
             });
-        } else if (!isEditState.id) {
-            addNewTest(testsTemplate);
         }
     }
     useEffect(() => {
         if (testId !== null) {
             const test = getTestById(testId);
             if (test) {
+                setOriginalTestId(testId);
                 setTestTemplate(test.data);
-                setIsEditState({
-                    id: testId,
-                    isEdit: true,
-                });
             }
         } else {
             resetTestTemplate();
-            setIsEditState({
-                id: null,
-                isEdit: false,
-            });
         }
     }, []);
     return (
@@ -246,7 +244,7 @@ export default function TestCreation() {
                     type="submit"
                     className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
                 >
-                    {isEditState.id ? "Edit" : "Create"} test
+                    {originalTestId ? "Edit" : "Create"} test
                 </button>
             </form>
         </>

@@ -75,6 +75,5 @@ export async function addNewCourse(data: ICourseData) {
         })
         .then(() => fetchCourses());
 
-    if (result) console.log("good");
-    else console.warn("setNewCourseError!");
+    if (!result) console.warn("setNewCourseError!");
 }

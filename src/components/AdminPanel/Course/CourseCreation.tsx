@@ -11,7 +11,6 @@ import {
     setLessonInfo,
     setModuleInfo,
     setCurrentModule,
-    getCourseId,
     setCourseTemplate,
     resetCourseTemplate,
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
@@ -19,45 +18,46 @@ import { getCourseById } from "../../../stores/Catalog/useCoursesStore";
 import { useEffect, useState } from "react";
 import { useNotifyStore } from "../../../stores/useNotifyStore";
 
-export default function CourseCreation() {
-    const [isEditState, setIsEditState] = useState<{
-        id: number | null;
-        isEdit: boolean;
-    }>({ id: null, isEdit: false });
+interface ICourseCreationProps {
+    courseId: number | null;
+}
+
+export default function CourseCreation({ courseId }: ICourseCreationProps) {
     const coursesTemplate = getCourseTemplate();
     const currentModule = getCurrentModule();
-    const courseId = getCourseId();
+    const [originalCourseId, setOriginalCourseId] = useState<number | null>(
+        null
+    );
     const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (isEditState && isEditState.id) {
-            updateCourseById(coursesTemplate, isEditState.id);
+        if (originalCourseId) {
+            updateCourseById(coursesTemplate, originalCourseId);
+            addNotify({
+                id: new Date().getSeconds(),
+                type: "success",
+                description: `Edit course with id ${originalCourseId} success`,
+                title: "Course Creation",
+            });
+        } else if (!originalCourseId) {
+            addNewCourse(coursesTemplate);
             addNotify({
                 id: new Date().getSeconds(),
                 type: "success",
                 description: "Success course creation",
                 title: "Course Creation",
             });
-        } else if (!isEditState.id) {
-            addNewCourse(coursesTemplate);
         }
     }
     useEffect(() => {
         if (courseId !== null) {
             const course = getCourseById(courseId);
             if (course) {
+                setOriginalCourseId(courseId);
                 setCourseTemplate(course.data);
-                setIsEditState({
-                    id: courseId,
-                    isEdit: true,
-                });
             }
         } else {
             resetCourseTemplate();
-            setIsEditState({
-                id: null,
-                isEdit: false,
-            });
         }
     }, []);
     return (
@@ -199,7 +199,7 @@ export default function CourseCreation() {
                     type="submit"
                     className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
                 >
-                    {isEditState.id ? "Edit" : "Create"} course
+                    {originalCourseId ? "Edit" : "Create"} course
                 </button>
             </form>
         </>

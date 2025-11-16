@@ -58,8 +58,10 @@ export default function AdminPanel() {
                     Admin Site: {currentPage}
                 </span>
                 {currentPage === "info" && <Info />}
-                {currentPage === "course" && <CourseCreation />}
-                {currentPage === "test" && <TestCreation />}
+                {currentPage === "course" && (
+                    <CourseCreation courseId={courseId} />
+                )}
+                {currentPage === "test" && <TestCreation testId={testId} />}
             </div>
         </div>
     );
