@@ -51,6 +51,7 @@ export default function Question({ questionIndex, question }: IQuestionProps) {
                     answerIndex={answerIndex}
                     questionIndex={questionIndex}
                     question={question}
+                    key={answerIndex}
                 />
             ))}
         </div>

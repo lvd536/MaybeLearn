@@ -76,6 +76,7 @@ export default function TestCreation({ testId }: ITestCreationProps) {
                         <Question
                             question={question}
                             questionIndex={questionIndex}
+                            key={questionIndex}
                         />
                     ))}
                 </div>

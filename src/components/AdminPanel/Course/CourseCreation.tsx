@@ -74,7 +74,11 @@ export default function CourseCreation({ courseId }: ICourseCreationProps) {
                 />
                 <div className="grid grid-cols-2 gap-8 w-full">
                     {coursesTemplate.modules.map((module, moduleIndex) => (
-                        <Module module={module} moduleIndex={moduleIndex} />
+                        <Module
+                            module={module}
+                            moduleIndex={moduleIndex}
+                            key={moduleIndex}
+                        />
                     ))}
                 </div>
                 <button

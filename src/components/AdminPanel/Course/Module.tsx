@@ -28,6 +28,7 @@ export default function Module({ moduleIndex, module }: IModuleProps) {
                     lessonIndex={lessonIndex}
                     module={module}
                     moduleIndex={moduleIndex}
+                    key={lessonIndex}
                 />
             ))}
         </div>
