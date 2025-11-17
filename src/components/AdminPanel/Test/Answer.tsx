@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { setAnswerInfo } from "../../../stores/Catalog/Creation/useTestCreationStore";
 import type { IQuestion } from "../../../types";
 import Input from "../Input";
@@ -9,11 +10,7 @@ interface IAnswerProps {
     question: IQuestion;
 }
 
-export default function Answer({
-    questionIndex,
-    answerIndex,
-    question,
-}: IAnswerProps) {
+function Answer({ questionIndex, answerIndex, question }: IAnswerProps) {
     return (
         <div key={answerIndex} className="flex flex-col gap-2">
             <LessonTitle>Answer {answerIndex + 1}</LessonTitle>
@@ -49,3 +46,5 @@ export default function Answer({
         </div>
     );
 }
+
+export default memo(Answer);

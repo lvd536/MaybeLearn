@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
     getCurrentQuestion,
     getTestTemplate,
@@ -20,6 +20,17 @@ export default function TestCreation({ testId }: ITestCreationProps) {
     const [originalTestId, setOriginalTestId] = useState<number | null>(null);
     const initialTestIdRef = useRef<number | null>(testId);
     const testsTemplate = getTestTemplate();
+    const questions = useMemo(
+        () =>
+            testsTemplate.questions.map((question, questionIndex) => (
+                <Question
+                    question={question}
+                    questionIndex={questionIndex}
+                    key={questionIndex}
+                />
+            )),
+        [testsTemplate.questions]
+    );
     const currentQuestion = getCurrentQuestion();
     const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -71,15 +82,7 @@ export default function TestCreation({ testId }: ITestCreationProps) {
                     level={testsTemplate.level}
                     title={testsTemplate.title}
                 />
-                <div className="grid grid-cols-2 gap-8 w-full">
-                    {testsTemplate.questions.map((question, questionIndex) => (
-                        <Question
-                            question={question}
-                            questionIndex={questionIndex}
-                            key={questionIndex}
-                        />
-                    ))}
-                </div>
+                <div className="grid grid-cols-2 gap-8 w-full">{questions}</div>
                 <button
                     type="submit"
                     className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"

@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { setQuestionInfo } from "../../../stores/Catalog/Creation/useTestCreationStore";
 import type { IQuestion } from "../../../types";
 import Input from "../Input";
@@ -9,7 +10,19 @@ interface IQuestionProps {
     question: IQuestion;
 }
 
-export default function Question({ questionIndex, question }: IQuestionProps) {
+function Question({ questionIndex, question }: IQuestionProps) {
+    const answers = useMemo(
+        () =>
+            question.answers.map((_, index) => (
+                <Answer
+                    answerIndex={index}
+                    questionIndex={questionIndex}
+                    question={question}
+                    key={index}
+                />
+            )),
+        [question, questionIndex]
+    );
     return (
         <div
             key={questionIndex}
@@ -46,14 +59,9 @@ export default function Question({ questionIndex, question }: IQuestionProps) {
                     }}
                 />
             </div>
-            {question.answers.map((_answer, answerIndex) => (
-                <Answer
-                    answerIndex={answerIndex}
-                    questionIndex={questionIndex}
-                    question={question}
-                    key={answerIndex}
-                />
-            ))}
+            {answers}
         </div>
     );
 }
+
+export default memo(Question);
