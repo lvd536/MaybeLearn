@@ -13,11 +13,11 @@ interface IQuestionProps {
 function Question({ questionIndex, question }: IQuestionProps) {
     const answers = useMemo(
         () =>
-            question.answers.map((_, index) => (
+            question.answers.map((answer, index) => (
                 <Answer
                     answerIndex={index}
                     questionIndex={questionIndex}
-                    question={question}
+                    answer={answer}
                     key={index}
                 />
             )),

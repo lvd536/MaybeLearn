@@ -1,22 +1,21 @@
 import { memo } from "react";
 import { setAnswerInfo } from "../../../stores/Catalog/Creation/useTestCreationStore";
-import type { IQuestion } from "../../../types";
 import Input from "../Input";
 import LessonTitle from "../LessonTitle";
 
 interface IAnswerProps {
     questionIndex: number;
     answerIndex: number;
-    question: IQuestion;
+    answer: { answer: string; is_correct: boolean };
 }
 
-function Answer({ questionIndex, answerIndex, question }: IAnswerProps) {
+function Answer({ questionIndex, answerIndex, answer }: IAnswerProps) {
     return (
         <div key={answerIndex} className="flex flex-col gap-2">
             <LessonTitle>Answer {answerIndex + 1}</LessonTitle>
             <Input
                 placeholder="Answer"
-                value={question.answers[answerIndex].answer}
+                value={answer.answer}
                 onChange={(e) => {
                     setAnswerInfo(
                         questionIndex,
@@ -31,7 +30,7 @@ function Answer({ questionIndex, answerIndex, question }: IAnswerProps) {
                 <input
                     name="isCorrect"
                     type="checkbox"
-                    checked={question.answers[answerIndex].is_correct}
+                    checked={answer.is_correct}
                     className="accent-gray-500 w-5 h-5"
                     onChange={(e) => {
                         setAnswerInfo(
