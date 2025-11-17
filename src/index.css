@@ -9,6 +9,7 @@
     --color-catalog-card: #42376d;
     --color-stats: #6a5a9c;
     --color-theme-toggle-dark: #42376f;
+    --shadow-card: 2px 2px 15px 4px rgba(66, 55, 109, 0.2);
     --animate-notify: notify 3s ease-in-out;
     @keyframes notify {
         0% {
