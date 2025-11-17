@@ -1,25 +1,24 @@
+import { memo } from "react";
 import { setLessonInfo } from "../../../stores/Catalog/Creation/useCourseCreationStore";
-import type { IModule } from "../../../types";
 import Input from "../Input";
 import LessonTitle from "../LessonTitle";
 
 interface ILessonProps {
     moduleIndex: number;
     lessonIndex: number;
-    module: IModule;
+    lesson: {
+        title: string;
+        content: string;
+    };
 }
 
-export default function Lesson({
-    moduleIndex,
-    lessonIndex,
-    module,
-}: ILessonProps) {
+function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
     return (
         <div key={lessonIndex} className="flex flex-col gap-2">
             <LessonTitle>Lesson {lessonIndex + 1}</LessonTitle>
             <Input
                 placeholder="Lesson Title"
-                value={module.lessons[lessonIndex].title}
+                value={lesson.title}
                 onChange={(e) => {
                     setLessonInfo(
                         moduleIndex,
@@ -31,7 +30,7 @@ export default function Lesson({
             />
             <Input
                 placeholder="Lesson Content"
-                value={module.lessons[lessonIndex].content}
+                value={lesson.content}
                 onChange={(e) => {
                     setLessonInfo(
                         moduleIndex,
@@ -44,3 +43,5 @@ export default function Lesson({
         </div>
     );
 }
+
+export default memo(Lesson);

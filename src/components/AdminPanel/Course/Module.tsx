@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { setModuleInfo } from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import type { IModule } from "../../../types";
 import Input from "../Input";
@@ -9,7 +10,19 @@ interface IModuleProps {
     module: IModule;
 }
 
-export default function Module({ moduleIndex, module }: IModuleProps) {
+function Module({ moduleIndex, module }: IModuleProps) {
+    const lessons = useMemo(
+        () =>
+            module.lessons.map((lesson, lessonIndex) => (
+                <Lesson
+                    lessonIndex={lessonIndex}
+                    lesson={lesson}
+                    moduleIndex={moduleIndex}
+                    key={lessonIndex}
+                />
+            )),
+        [module.lessons, moduleIndex]
+    );
     return (
         <div
             key={moduleIndex}
@@ -23,14 +36,9 @@ export default function Module({ moduleIndex, module }: IModuleProps) {
                     setModuleInfo(moduleIndex, "title", e.target.value);
                 }}
             />
-            {module.lessons.map((_, lessonIndex) => (
-                <Lesson
-                    lessonIndex={lessonIndex}
-                    module={module}
-                    moduleIndex={moduleIndex}
-                    key={lessonIndex}
-                />
-            ))}
+            {lessons}
         </div>
     );
 }
+
+export default memo(Module);

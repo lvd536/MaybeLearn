@@ -21,7 +21,7 @@ function Question({ questionIndex, question }: IQuestionProps) {
                     key={index}
                 />
             )),
-        [question, questionIndex]
+        [question.answers, questionIndex]
     );
     return (
         <div

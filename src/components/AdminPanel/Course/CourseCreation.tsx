@@ -6,7 +6,7 @@ import {
     resetCourseTemplate,
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import { getCourseById } from "../../../stores/Catalog/useCoursesStore";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNotifyStore } from "../../../stores/useNotifyStore";
 import CourseControls from "./CourseControls";
 import MainInfo from "./MainInfo";
@@ -18,6 +18,17 @@ interface ICourseCreationProps {
 
 export default function CourseCreation({ courseId }: ICourseCreationProps) {
     const coursesTemplate = getCourseTemplate();
+    const modules = useMemo(
+        () =>
+            coursesTemplate.modules.map((module, moduleIndex) => (
+                <Module
+                    module={module}
+                    moduleIndex={moduleIndex}
+                    key={moduleIndex}
+                />
+            )),
+        [coursesTemplate.modules]
+    );
     const currentModule = getCurrentModule();
     const [originalCourseId, setOriginalCourseId] = useState<number | null>(
         null
@@ -72,15 +83,7 @@ export default function CourseCreation({ courseId }: ICourseCreationProps) {
                     level={coursesTemplate.level}
                     title={coursesTemplate.title}
                 />
-                <div className="grid grid-cols-2 gap-8 w-full">
-                    {coursesTemplate.modules.map((module, moduleIndex) => (
-                        <Module
-                            module={module}
-                            moduleIndex={moduleIndex}
-                            key={moduleIndex}
-                        />
-                    ))}
-                </div>
+                <div className="grid grid-cols-2 gap-8 w-full">{modules}</div>
                 <button
                     type="submit"
                     className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
