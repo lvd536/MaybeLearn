@@ -12,7 +12,9 @@ interface IAnswerProps {
 function Answer({ questionIndex, answerIndex, answer }: IAnswerProps) {
     return (
         <div key={answerIndex} className="flex flex-col gap-2">
-            <LessonTitle>Answer {answerIndex + 1}</LessonTitle>
+            <LessonTitle>
+                Question {questionIndex + 1} {"=>"} Answer {answerIndex + 1}
+            </LessonTitle>
             <Input
                 placeholder="Answer"
                 value={answer.answer}

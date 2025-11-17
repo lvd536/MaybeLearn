@@ -15,7 +15,9 @@ interface ILessonProps {
 function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
     return (
         <div key={lessonIndex} className="flex flex-col gap-2">
-            <LessonTitle>Lesson {lessonIndex + 1}</LessonTitle>
+            <LessonTitle>
+                Module {moduleIndex + 1} {"=>"} Lesson {lessonIndex + 1}
+            </LessonTitle>
             <Input
                 placeholder="Lesson Title"
                 value={lesson.title}
