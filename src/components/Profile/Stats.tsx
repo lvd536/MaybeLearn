@@ -7,7 +7,7 @@ export default function Stats() {
     const points = useAuthStore((state) => state.profile?.points);
     return (
         <div className="flex flex-col gap-3">
-            <span className="font-bold text-2xl">Stats</span>
+            <span className="font-bold text-xl">Stats</span>
             <ul className="flex gap-2 items-center justify-between">
                 <StatsCard name="Tests Completed" value={completedTest} />
                 <StatsCard name="Courses Completed" value={completedCourses} />
