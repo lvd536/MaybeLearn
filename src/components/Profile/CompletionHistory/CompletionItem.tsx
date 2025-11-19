@@ -10,7 +10,7 @@ interface ICompletionProps {
 export default function CompletionItem({ item }: ICompletionProps) {
     return (
         <div
-            className="flex items-center justify-between bg-catalog-card rounded-sm p-3 shadow-completion-card"
+            className="flex items-center justify-between bg-catalog-card rounded-sm p-3 shadow-completion-card transition-p duration-300 hover:p-4"
             key={item.item.id}
         >
             <div className="flex flex-col gap-2">
