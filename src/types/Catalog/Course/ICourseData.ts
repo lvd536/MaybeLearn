@@ -5,4 +5,5 @@ export default interface ICourseData {
     description: string;
     level: string;
     modules: IModule[];
+    image: string;
 }

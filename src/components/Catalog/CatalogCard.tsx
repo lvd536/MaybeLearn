@@ -46,7 +46,7 @@ export default function CatalogCard({
         }
         getUserProfileCredits();
     }, [item.author_id]);
-
+    console.log(item);
     return (
         <li
             className={`flex items-center justify-between transition-bg duration-500 ${
@@ -117,10 +117,10 @@ export default function CatalogCard({
                 )}
             </div>
             <img
-                src={CatalogCardImage}
+                src={item.data.image || CatalogCardImage}
                 alt=""
                 loading="lazy"
-                className="hidden sm:flex"
+                className="hidden sm:flex rounded-xl w-[309px] h-[165px] object-cover"
             />
         </li>
     );

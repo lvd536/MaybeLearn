@@ -1,14 +1,8 @@
-import type IQuestion from "./IQuestion";
+import type ITestData from "./ITestData";
 
 export default interface ITest {
     id: number;
     author_id: number;
-    data: {
-        title: string;
-        description: string;
-        level: string;
-        points: number;
-        questions: IQuestion[];
-    };
+    data: ITestData;
     created_at: string;
 }
