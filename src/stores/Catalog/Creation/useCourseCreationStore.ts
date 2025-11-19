@@ -28,7 +28,7 @@ const initialTemplate: ICourseData = {
     title: "",
     level: "",
     description: "",
-    // image: "",
+    image: "",
     modules: [
         {
             title: "",

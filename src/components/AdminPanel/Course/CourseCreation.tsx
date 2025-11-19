@@ -82,6 +82,7 @@ export default function CourseCreation({ courseId }: ICourseCreationProps) {
                     description={coursesTemplate.description}
                     level={coursesTemplate.level}
                     title={coursesTemplate.title}
+                    image={coursesTemplate.image}
                 />
                 <div className="grid grid-cols-2 gap-8 w-full">{modules}</div>
                 <button

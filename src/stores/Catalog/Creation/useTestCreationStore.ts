@@ -33,7 +33,7 @@ const initialTemplate: ITestData = {
     level: "",
     points: 100,
     description: "",
-    // image: "",
+    image: "",
     questions: [
         {
             question: "",

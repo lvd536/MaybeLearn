@@ -6,6 +6,7 @@ export default function MainInfo({
     title,
     level,
     description,
+    image,
 }: IMainInfo) {
     return (
         <div className="flex flex-col gap-2 mb-5">
@@ -29,6 +30,13 @@ export default function MainInfo({
                 value={description}
                 onChange={(e) => {
                     setCourseInfo("description", e.target.value);
+                }}
+            />
+            <Input
+                placeholder="Image"
+                value={image}
+                onChange={(e) => {
+                    setCourseInfo("image", e.target.value);
                 }}
             />
         </div>
