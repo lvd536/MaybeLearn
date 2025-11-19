@@ -38,7 +38,7 @@ export default function CompletionSection({
                 .filter((c) => c !== undefined);
             setItems(itemHistory);
         })();
-    }, []);
+    }, [type]);
     return (
         <>
             <h1 className="font-bold text-xl my-5">
