@@ -41,7 +41,7 @@ export default function CompletionSection({
     }, [type]);
     return (
         <>
-            {items.length > 10 ? (
+            {items.length > 0 ? (
                 <>
                     <h1 className="font-bold text-xl my-5">
                         {type.charAt(0).toUpperCase() + type.slice(1)}{" "}
