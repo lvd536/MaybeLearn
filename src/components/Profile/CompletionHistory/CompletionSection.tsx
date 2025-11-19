@@ -41,18 +41,22 @@ export default function CompletionSection({
     }, [type]);
     return (
         <>
-            <h1 className="font-bold text-xl my-5">
-                {type.charAt(0).toUpperCase() + type.slice(1)} Completion
-                History
-            </h1>
-            {items ? (
-                <div className="grid grid-cols-2 flex-col gap-5">
-                    {items.map((item) => (
-                        <CompletionItem key={item.item.id} item={item} />
-                    ))}
-                </div>
+            {items.length > 10 ? (
+                <>
+                    <h1 className="font-bold text-xl my-5">
+                        {type.charAt(0).toUpperCase() + type.slice(1)}{" "}
+                        Completion History
+                    </h1>
+                    <div className="grid grid-cols-2 flex-col gap-5">
+                        {items.map((item) => (
+                            <CompletionItem key={item.item.id} item={item} />
+                        ))}
+                    </div>
+                </>
             ) : (
-                `You haven't completed any ${type}s yet.`
+                <p className="font-bold text-xl my-10">
+                    You haven't completed any {type}s yet.
+                </p>
             )}
         </>
     );
