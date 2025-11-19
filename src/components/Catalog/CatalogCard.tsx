@@ -120,7 +120,7 @@ export default function CatalogCard({
                 src={item.data.image || CatalogCardImage}
                 alt=""
                 loading="lazy"
-                className="hidden sm:flex rounded-xl w-[309px] h-[165px] object-cover"
+                className="hidden sm:flex rounded-xl w-[309px] h-[165px] object-cover transition-shadow duration-300 hover:shadow-catalog-card"
             />
         </li>
     );
