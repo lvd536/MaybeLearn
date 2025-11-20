@@ -3,5 +3,6 @@ export default interface IModule {
     lessons: {
         title: string;
         content: string;
+        media: string | null;
     }[];
 }

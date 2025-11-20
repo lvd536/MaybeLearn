@@ -5,9 +5,10 @@ import {
 } from "../../../components/Catalog/";
 import { useEffect, useState } from "react";
 import { getCourse } from "../../../stores/Catalog/useCoursesStore";
-import { Check, Congrats } from "../../../assets/";
+import { Congrats } from "../../../assets/";
 import { Link } from "react-router-dom";
 import { sendCourseCompletionData } from "../../../utils/course";
+import NavItem from "../../../components/Catalog/PageComponents/Course/NavItem";
 
 export default function CoursePage() {
     const activeCourseId = parseInt(localStorage.getItem("courseId") ?? "1");
@@ -40,36 +41,16 @@ export default function CoursePage() {
                 <div className="flex justify-between gap-10">
                     <div className="flex flex-col w-1/6 gap-4">
                         {courseData.data.modules.map((module, index) => (
-                            <div className="flex gap-2" key={index}>
-                                <button
-                                    className={`flex w-100 items-start justify-between font-medium text-sm p-2 transition-all duration-600 rounded-xl ${
-                                        finishedTitles.includes(module.title)
-                                            ? "bg-green-300/50"
-                                            : activeModule === module.title
-                                            ? "bg-button-background"
-                                            : "bg-button-background/30"
-                                    }`}
-                                    onClick={() => {
-                                        if (
-                                            !finishedTitles.includes(
-                                                module.title
-                                            )
-                                        ) {
-                                            setActiveModule(module.title);
-                                        }
-                                    }}
-                                    key={index}
-                                >
-                                    {module.title}
-                                </button>
-                                <button
-                                    onClick={() =>
-                                        setNewFinishedTitles(module.title)
-                                    }
-                                >
-                                    <Check />
-                                </button>
-                            </div>
+                            <NavItem
+                                title={module.title}
+                                index={index}
+                                isActive={activeModule === module.title}
+                                isFinished={finishedTitles.includes(
+                                    module.title
+                                )}
+                                setNewFinishedTitles={setNewFinishedTitles}
+                                setActiveModule={setActiveModule}
+                            />
                         ))}
                         <button
                             className="font-medium bg-button-background rounded-xs mt-5 p-2"
