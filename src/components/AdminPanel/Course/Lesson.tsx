@@ -1,7 +1,11 @@
 import { memo } from "react";
-import { setLessonInfo } from "../../../stores/Catalog/Creation/useCourseCreationStore";
+import {
+    setLessonInfo,
+    setMediaInfo,
+} from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import Input from "../Input";
 import LessonTitle from "../LessonTitle";
+import type { IMedia } from "../../../types";
 
 interface ILessonProps {
     moduleIndex: number;
@@ -9,6 +13,7 @@ interface ILessonProps {
     lesson: {
         title: string;
         content: string;
+        media: IMedia;
     };
 }
 
@@ -38,6 +43,35 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
                         moduleIndex,
                         lessonIndex,
                         "content",
+                        e.target.value
+                    );
+                }}
+            />
+            <select
+                name="adminType"
+                id="adminInput"
+                className="ring-1 ring-indigo-500 p-2 rounded-sm bg-button-background"
+                value={lesson.media.type}
+                onChange={(e) => {
+                    setMediaInfo(
+                        moduleIndex,
+                        lessonIndex,
+                        "type",
+                        e.target.value
+                    );
+                }}
+            >
+                <option value="video">Video</option>
+                <option value="photo">Photo</option>
+            </select>
+            <Input
+                placeholder="Media Url"
+                value={lesson.media.url}
+                onChange={(e) => {
+                    setMediaInfo(
+                        moduleIndex,
+                        lessonIndex,
+                        "url",
                         e.target.value
                     );
                 }}

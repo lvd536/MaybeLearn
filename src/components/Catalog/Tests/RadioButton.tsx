@@ -10,7 +10,7 @@ export default function RadioButton({
     handleClick,
 }: RadioButtonProps) {
     return (
-        <div className="question flex gap-2" key={index}>
+        <div className="flex gap-2" key={index}>
             <input
                 type="radio"
                 name={`question`}

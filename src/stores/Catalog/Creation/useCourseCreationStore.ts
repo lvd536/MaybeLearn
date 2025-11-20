@@ -19,6 +19,12 @@ interface ICourseCreationStore {
         value: string
     ) => void;
     setModuleInfo: (moduleIndex: number, name: string, value: string) => void;
+    setMediaInfo: (
+        moduleIndex: number,
+        lessonIndex: number,
+        name: string,
+        value: string
+    ) => void;
     addLesson: () => void;
     removeLesson: () => void;
     setCourseId: (id: number) => void;
@@ -36,6 +42,10 @@ const initialTemplate: ICourseData = {
                 {
                     title: "",
                     content: "",
+                    media: {
+                        type: "video",
+                        url: "",
+                    },
                 },
             ],
         },
@@ -70,6 +80,10 @@ const courseCreationStore = create<ICourseCreationStore>((set, get) => ({
                             {
                                 title: "",
                                 content: "",
+                                media: {
+                                    type: "video",
+                                    url: "",
+                                },
                             },
                         ],
                     },
@@ -134,6 +148,39 @@ const courseCreationStore = create<ICourseCreationStore>((set, get) => ({
             },
         });
     },
+    setMediaInfo: (
+        moduleIndex: number,
+        lessonIndex: number,
+        name: string,
+        value: string
+    ) => {
+        set({
+            courseTemplate: {
+                ...get().courseTemplate,
+                modules: get().courseTemplate.modules.map((module, index) =>
+                    index === moduleIndex
+                        ? {
+                              ...module,
+                              lessons: module.lessons.map((lesson, index) =>
+                                  index === lessonIndex
+                                      ? {
+                                            ...lesson,
+                                            media: {
+                                                type:
+                                                    lesson.media?.type ||
+                                                    "video",
+                                                url: lesson.media?.url || "",
+                                                [name]: value || "",
+                                            },
+                                        }
+                                      : lesson
+                              ),
+                          }
+                        : module
+                ),
+            },
+        });
+    },
     addLesson: () => {
         set({
             courseTemplate: {
@@ -147,6 +194,10 @@ const courseCreationStore = create<ICourseCreationStore>((set, get) => ({
                                   {
                                       title: "",
                                       content: "",
+                                      media: {
+                                          type: "video",
+                                          url: "",
+                                      },
                                   },
                               ],
                           }
@@ -220,3 +271,12 @@ export const addLesson = () => courseCreationStore.getState().addLesson();
 export const removeLesson = () => courseCreationStore.getState().removeLesson();
 export const resetCourseTemplate = () =>
     courseCreationStore.getState().resetCourseTemplate();
+export const setMediaInfo = (
+    moduleIndex: number,
+    lessonIndex: number,
+    name: string,
+    value: string
+) =>
+    courseCreationStore
+        .getState()
+        .setMediaInfo(moduleIndex, lessonIndex, name, value);
