@@ -105,11 +105,25 @@ export async function getProfileCredits(id: number) {
         console.error("There was an error fetching the profile data:", error);
         return null;
     }
-    if (!data) return null
+    if (!data) return null;
     const profileCredits: { name: string; avatar: string; role: string } = {
         name: data.display_name,
         avatar: data.avatar_url,
         role: data.role,
     };
     return profileCredits;
+}
+
+export async function getUserProfilesWithLimit(limit: number) {
+    const { data, error } = await client
+        .from("profiles")
+        .select("*")
+        .order("points", { ascending: false })
+        .limit(limit);
+
+    if (error) {
+        console.error("There was an error fetching the profiles data:", error);
+    }
+
+    return data;
 }

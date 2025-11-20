@@ -6,5 +6,5 @@ export default interface IProfileType {
     points: number,
     role: string,
     rank: string,
-    createdAt?: string
+    created_at?: string
 }

@@ -23,19 +23,19 @@ export default function Header({ onClick }: HeaderProps) {
     const profileColors = {
         text:
             profile?.role === "moderator"
-                ? "text-yellow-400"
+                ? "text-blue-400"
                 : profile?.role === "admin"
                 ? "text-red-500"
-                : "bg-green-400",
+                : "text-green-400",
         bg:
             profile?.role === "moderator"
-                ? "text-yellow-400"
+                ? "bg-blue-400"
                 : profile?.role === "admin"
                 ? "bg-red-500"
                 : "bg-green-400",
         textShadow:
             profile?.role === "moderator"
-                ? "text-shadow-yellow-400"
+                ? "text-shadow-blue-400"
                 : profile?.role === "admin"
                 ? "text-shadow-red-500"
                 : "text-shadow-green-400",
@@ -58,7 +58,8 @@ export default function Header({ onClick }: HeaderProps) {
                                 {profile.display_name}
                             </span>
                             <span className="font-normal text-base text-card">
-                                {profile.createdAt}
+                                {profile.created_at &&
+                                    new Date(profile.created_at).toDateString()}
                             </span>
                             <span className="font-normal text-base text-card">
                                 {profile.bio}
