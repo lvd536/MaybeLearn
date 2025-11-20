@@ -5,10 +5,10 @@ import {
 } from "../../../components/Catalog/";
 import { useEffect, useState } from "react";
 import { getCourse } from "../../../stores/Catalog/useCoursesStore";
-import { Congrats } from "../../../assets/";
-import { Link } from "react-router-dom";
 import { sendCourseCompletionData } from "../../../utils/course";
 import NavItem from "../../../components/Catalog/PageComponents/Course/NavItem";
+import CongratsPage from "../../../components/Catalog/PageComponents/Course/CongratsPage";
+import Media from "../../../components/Catalog/PageComponents/Course/Media";
 
 export default function CoursePage() {
     const activeCourseId = parseInt(localStorage.getItem("courseId") ?? "1");
@@ -70,30 +70,13 @@ export default function CoursePage() {
                                         {lesson.title}
                                     </ParagraphTitle>
                                     <Text>{lesson.content}</Text>
+                                    <Media media={lesson.media} />
                                 </div>
                             ))}
                     </div>
                 </div>
             ) : courseData && isCompleted ? (
-                <div className="flex flex-col gap-5 justify-start items-center h-screen">
-                    <h1 className="text-2xl font-bold">Congratulations!</h1>
-                    <span className="text-xl font-medium">
-                        Course {courseData.data.title} is completed
-                    </span>
-                    <span>You earn fixed 100 points!</span>
-                    <img
-                        src={Congrats}
-                        alt="congratulations image"
-                        className="max-w-100"
-                        loading="lazy"
-                    />
-                    <Link
-                        to={"/"}
-                        className="flex items-center justify-center text-xl font-medium rounded-xl bg-button-background py-2 px-10"
-                    >
-                        Home Page
-                    </Link>
-                </div>
+                <CongratsPage title={courseData.data.title} />
             ) : (
                 "Loading course..."
             )}

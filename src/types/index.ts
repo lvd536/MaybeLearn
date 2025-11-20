@@ -15,3 +15,4 @@ export { type default as IAdminInfo } from "./Admin/IAdminInfo";
 export { type default as IAPIError } from "./Others/IAPIError";
 export { type default as INotify } from "./Others/INotify";
 export { type default as IEditProfileForm } from "./Profile/IEditForm";
+export { type default as IMedia } from "./Catalog/Course/IMedia";
