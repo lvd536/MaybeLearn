@@ -1,14 +1,10 @@
-import {
-    Text,
-    ParagraphTitle,
-    ModuleTitle,
-} from "../../../components/Catalog/";
+import { Text, ModuleTitle } from "../../../components/Catalog/";
 import { useEffect, useState } from "react";
 import { getCourse } from "../../../stores/Catalog/useCoursesStore";
 import { sendCourseCompletionData } from "../../../utils/course";
 import NavItem from "../../../components/Catalog/PageComponents/Course/NavItem";
 import CongratsPage from "../../../components/Catalog/PageComponents/Course/CongratsPage";
-import Media from "../../../components/Catalog/PageComponents/Course/Media";
+import Lesson from "../../../components/Catalog/PageComponents/Course/Lesson";
 
 export default function CoursePage() {
     const activeCourseId = parseInt(localStorage.getItem("courseId") ?? "1");
@@ -65,13 +61,11 @@ export default function CoursePage() {
                         {courseData.data.modules
                             .find((module) => module.title === activeModule)
                             ?.lessons.map((lesson, index) => (
-                                <div key={index}>
-                                    <ParagraphTitle>
-                                        {lesson.title}
-                                    </ParagraphTitle>
-                                    <Text>{lesson.content}</Text>
-                                    <Media media={lesson.media} />
-                                </div>
+                                <Lesson
+                                    index={index}
+                                    lesson={lesson}
+                                    key={index}
+                                />
                             ))}
                     </div>
                 </div>
