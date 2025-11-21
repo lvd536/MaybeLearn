@@ -7,7 +7,7 @@ import { getCourseCompletionData } from "../../utils/course";
 type Catalog = {
     title: string;
     description: string;
-    redirectTo: string;
+    redirectTo: "course" | "test";
     items: ICourse[] | ITest[];
 };
 export default function Catalog({
