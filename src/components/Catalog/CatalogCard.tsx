@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { CatalogCardImage } from "../../assets/";
+import { CatalogCardImage, Trash } from "../../assets/";
 import { useEffect, useState } from "react";
 import { getProfileCredits } from "../../utils/profile";
 import type { ICourse, ITest } from "../../types";
@@ -7,11 +7,13 @@ import Pencil from "../../assets/Pencil";
 import { setCourseId } from "../../stores/Catalog/Creation/useCourseCreationStore";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { setTestId } from "../../stores/Catalog/Creation/useTestCreationStore";
+import { deleteCourse } from "../../stores/Catalog/useCoursesStore";
+import { deleteTest } from "../../stores/Catalog/useTestsStore";
 
 type CatalogCardProps = {
     item: ICourse | ITest;
     isCompleted: boolean;
-    redirectTo: string;
+    redirectTo: "test" | "course";
 };
 
 export default function CatalogCard({
@@ -36,6 +38,17 @@ export default function CatalogCard({
         if (redirectTo === "test") {
             setTestId(item.id);
             navigate("/admin");
+        }
+    };
+
+    const handleRemove = () => {
+        const confirmed = confirm(
+            `Are you sure you want to delete ${redirectTo}?`
+        );
+
+        if (confirmed) {
+            if (redirectTo === "course") deleteCourse(item.id);
+            else deleteTest(item.id);
         }
     };
 
@@ -76,9 +89,14 @@ export default function CatalogCard({
                             </div>
                         )}
                         {isAdmin && (
-                            <button onClick={handleEdit}>
-                                <Pencil />
-                            </button>
+                            <div className="flex ml-2 gap-2">
+                                <button onClick={handleEdit}>
+                                    <Pencil />
+                                </button>
+                                <button onClick={handleRemove}>
+                                    <Trash />
+                                </button>
+                            </div>
                         )}
                     </span>
                     <span className="font-normal text-sm text-card">
