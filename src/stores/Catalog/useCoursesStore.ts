@@ -5,7 +5,7 @@ import type { ICourse } from "../../types";
 interface ICoursesStore {
     courses: ICourse[];
     getCourses: () => ICourse[];
-    getCourseById: (id: number) => ICourse| undefined;
+    getCourseById: (id: number) => ICourse | undefined;
     fetchCourses: () => Promise<ICourse[] | undefined>;
     getCourse: (id: number) => ICourse | undefined;
     addCourse: (course: ICourse) => void;
