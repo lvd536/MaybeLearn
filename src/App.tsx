@@ -39,8 +39,11 @@ function App() {
                         element={<CoursesCatalog />}
                     />
                     <Route path={"/catalog/tests"} element={<TestsCatalog />} />
-                    <Route path={"/catalog/test"} element={<TestPage />} />
-                    <Route path={"/catalog/course"} element={<CoursePage />} />
+                    <Route path={"/catalog/test/:id"} element={<TestPage />} />
+                    <Route
+                        path={"/catalog/course/:id"}
+                        element={<CoursePage />}
+                    />
                     <Route path={"/admin"} element={<AdminPanel />} />
                 </Routes>
             </div>

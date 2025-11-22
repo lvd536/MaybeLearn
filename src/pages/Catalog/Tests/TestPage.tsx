@@ -10,15 +10,15 @@ import type { IFormattedQuestion } from "../../../types";
 import { RadioButton, NavItem } from "../../../components/Catalog";
 import { sendTestCompletionData } from "../../../utils/test";
 import { Congrats } from "../../../assets/";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function TestPage() {
     const [question, setQuestion] = useState<number>(0);
     const [isCorrectAnswer, setIsCorrectAnswer] = useState<boolean>(false);
     const [questions, setQuestions] = useState<IFormattedQuestion[]>([]);
     const [isCompleted, setIsCompleted] = useState<boolean>(false);
-    const activeTestId = parseInt(localStorage.getItem("testId") ?? "1");
-    const currentItem = getTest(activeTestId);
+    const { id } = useParams();
+    const currentItem = getTest(parseInt(id || "1"));
 
     useEffect(() => {
         if (currentItem) {

@@ -19,11 +19,8 @@ export default function StartButton({
                 </span>
             ) : (
                 <Link
-                    to={`/catalog/${redirectTo}`}
+                    to={`/catalog/${redirectTo}/${itemId}`}
                     className="bg-button-background py-2 px-3 rounded-xl"
-                    onClick={() => {
-                        localStorage.setItem(`${redirectTo}Id`, itemId);
-                    }}
                 >
                     Start
                 </Link>

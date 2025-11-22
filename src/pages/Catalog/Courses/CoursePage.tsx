@@ -5,10 +5,11 @@ import { sendCourseCompletionData } from "../../../utils/course";
 import NavItem from "../../../components/Catalog/PageComponents/Course/NavItem";
 import CongratsPage from "../../../components/Catalog/PageComponents/Course/CongratsPage";
 import Lesson from "../../../components/Catalog/PageComponents/Course/Lesson";
+import { useParams } from "react-router-dom";
 
 export default function CoursePage() {
-    const activeCourseId = parseInt(localStorage.getItem("courseId") ?? "1");
-    const courseData = getCourse(activeCourseId);
+    const {id} = useParams();
+    const courseData = getCourse(parseInt(id || "1"));
 
     const [activeModule, setActiveModule] = useState<string | undefined>(
         courseData?.data.modules[0].title
