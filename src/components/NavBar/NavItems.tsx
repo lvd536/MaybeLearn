@@ -31,7 +31,7 @@ export default function NavItems({
             {profile ? (
                 <NavLink
                     to={"/profile"}
-                    className={`flex w-${w} h-${h} font-bold ${secondText} bg-indigo-500 rounded-xl items-center justify-center`}
+                    className={`flex w-${w} h-${h} font-bold ${secondText} bg-indigo-500 rounded-xl items-center justify-center p-2`}
                 >
                     Profile
                 </NavLink>
