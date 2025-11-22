@@ -60,7 +60,6 @@ export default function CatalogCard({
         }
         getUserProfileCredits();
     }, [item.author_id]);
-    console.log(item);
     return (
         <li
             className={`flex items-center justify-between transition-bg duration-500 ${

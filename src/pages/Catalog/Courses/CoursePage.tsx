@@ -47,6 +47,7 @@ export default function CoursePage() {
                                 )}
                                 setNewFinishedTitles={setNewFinishedTitles}
                                 setActiveModule={setActiveModule}
+                                key={index}
                             />
                         ))}
                         <button
