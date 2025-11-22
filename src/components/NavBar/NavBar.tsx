@@ -3,7 +3,6 @@ import Logo from "../../assets/Logo";
 import { Burger } from "../../assets";
 import { useState } from "react";
 import NavItems from "./NavItems";
-import ThemeToggle from "./ThemeToggle";
 
 export default function NavBar() {
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
@@ -17,7 +16,6 @@ export default function NavBar() {
                         <Logo />
                         <span className="font-bold text-xl">MaybeLearn</span>
                     </NavLink>
-                    <ThemeToggle />
                 </div>
                 <div className="hidden sm:block">
                     <ul className="flex items-center gap-9">

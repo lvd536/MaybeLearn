@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavItemsProps {
     w: number;
@@ -17,6 +18,7 @@ export default function NavItems({
     const profile = useAuthStore((state) => state.profile);
     return (
         <>
+            <ThemeToggle />
             <NavLink to="/catalog/courses" className={firstText}>
                 Courses
             </NavLink>
