@@ -74,7 +74,7 @@ export default function CourseCreation() {
                 <div className="grid grid-cols-2 gap-8 w-full">{modules}</div>
                 <button
                     type="submit"
-                    className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
+                    className="text-xs sm:text-base p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
                 >
                     {courseId ? "Edit" : "Create"} course
                 </button>

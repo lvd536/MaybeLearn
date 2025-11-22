@@ -29,13 +29,15 @@ function Answer({ questionIndex, answerIndex, answer }: IAnswerProps) {
                 }}
             />
             <div className="flex items-center justify-between gap-2 ring-1 ring-indigo-500 p-2 rounded-sm">
-                <label htmlFor="isCorrect">Correct answer?</label>
+                <label htmlFor="isCorrect" className="text-xs sm:text-base">
+                    Correct answer?
+                </label>
                 <input
                     id={`question${questionIndex}IsCorrect${answerIndex}`}
                     name="isCorrect"
                     type="checkbox"
                     checked={answer.is_correct}
-                    className="accent-gray-500 w-5 h-5"
+                    className="accent-gray-500 sm:w-5 sm:h-5"
                     onChange={(e) => {
                         setAnswerInfo(
                             questionIndex,

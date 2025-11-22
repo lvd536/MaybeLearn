@@ -60,9 +60,7 @@ export default function TestCreation() {
     }, [testId]);
     return (
         <>
-            <TestControls
-                questionsLength={testsTemplate.questions.length}
-            />
+            <TestControls questionsLength={testsTemplate.questions.length} />
             <form
                 action=""
                 className="flex flex-col gap-2 items-center justify-center bg-black/25 p-2 rounded-sm w-full"
@@ -78,7 +76,7 @@ export default function TestCreation() {
                 <div className="grid grid-cols-2 gap-8 w-full">{questions}</div>
                 <button
                     type="submit"
-                    className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
+                    className="p-2 text-xs sm:text-base bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
                 >
                     {testId ? "Edit" : "Create"} test
                 </button>

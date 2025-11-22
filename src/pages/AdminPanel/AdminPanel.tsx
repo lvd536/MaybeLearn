@@ -14,9 +14,9 @@ export default function AdminPanel() {
     };
     if (profile?.role !== "admin" || !profile) navigate("/profile");
     return (
-        <div className="flex">
-            <nav>
-                <ul className="flex flex-col gap-5">
+        <div className="sm:flex">
+            <nav className="flex flex-col gap-5 p-2">
+                <ul className="flex sm:flex-col justify-center gap-2 sm:gap-5">
                     <NavItem
                         isActive={entityName === undefined}
                         onClick={() => handleClick("")}
@@ -35,11 +35,11 @@ export default function AdminPanel() {
                     >
                         Create Test
                     </NavItem>
-                    <DevInfo />
                 </ul>
+                <DevInfo />
             </nav>
-            <div className="flex flex-col gap-2 items-center justify-start bg-button-background w-full mx-20 min-h-150 rounded-sm p-2">
-                <span className="flex items-center justify-center bg-black/20 rounded-sm max-w-50 p-2">
+            <div className="flex flex-col gap-2 items-center justify-start bg-button-background w-full sm:mx-20 min-h-150 rounded-sm p-2">
+                <span className="flex items-center text-xs sm:text-base justify-center bg-black/20 rounded-sm max-w-50 p-2">
                     Admin Site: {entityName}
                 </span>
                 <Outlet />

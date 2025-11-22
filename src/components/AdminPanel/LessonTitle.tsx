@@ -3,5 +3,7 @@ type LessonTitleProps = {
 };
 
 export default function LessonTitle({ children }: LessonTitleProps) {
-    return <h3 className="self-center mt-5">{children}</h3>;
+    return (
+        <h3 className="text-xs sm:text-base self-center mt-5">{children}</h3>
+    );
 }

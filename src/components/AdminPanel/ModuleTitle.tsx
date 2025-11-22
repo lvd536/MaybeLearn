@@ -3,5 +3,9 @@ type ModuleTitleProps = {
 };
 
 export default function ModuleTitle({ children }: ModuleTitleProps) {
-    return <h3 className="text-lg self-center mt-2 mb-1">{children}</h3>;
+    return (
+        <h3 className="text-base sm:text-lg self-center mt-2 mb-1">
+            {children}
+        </h3>
+    );
 }
