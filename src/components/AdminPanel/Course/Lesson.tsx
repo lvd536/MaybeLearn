@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import {
     setLessonInfo,
     setMediaInfo,
@@ -13,11 +13,31 @@ interface ILessonProps {
     lesson: {
         title: string;
         content: string;
-        media: IMedia;
+        media: IMedia | undefined;
     };
 }
 
 function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
+    const [haveMedia, setHaveMedia] = useState<boolean>(
+        lesson.media !== undefined
+    );
+
+    useEffect(() => {
+        setHaveMedia(lesson.media !== undefined);
+    }, [lesson.media]);
+
+    const handleIsMediaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked && lesson.media === undefined) {
+            lesson.media = {
+                type: "video",
+                url: "",
+            };
+            setHaveMedia(true);
+        } else {
+            lesson.media = undefined;
+            setHaveMedia(false);
+        }
+    };
     return (
         <div key={lessonIndex} className="flex flex-col gap-2">
             <LessonTitle>
@@ -47,35 +67,49 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
                     );
                 }}
             />
-            <select
-                name="adminType"
-                id="adminInput"
-                className="ring-1 ring-indigo-500 p-2 rounded-sm bg-button-background"
-                value={lesson.media.type}
-                onChange={(e) => {
-                    setMediaInfo(
-                        moduleIndex,
-                        lessonIndex,
-                        "type",
-                        e.target.value
-                    );
-                }}
-            >
-                <option value="video">Video</option>
-                <option value="photo">Photo</option>
-            </select>
-            <Input
-                placeholder="Media Url"
-                value={lesson.media.url}
-                onChange={(e) => {
-                    setMediaInfo(
-                        moduleIndex,
-                        lessonIndex,
-                        "url",
-                        e.target.value
-                    );
-                }}
-            />
+            <div className="flex gap-2">
+                <input
+                    type="checkbox"
+                    name="adminInput"
+                    id="adminIsMedia"
+                    checked={haveMedia}
+                    onChange={(e) => handleIsMediaChange(e)}
+                />
+                <label htmlFor="adminIsMedia">Have Media</label>
+            </div>
+            {haveMedia && lesson.media && (
+                <>
+                    <select
+                        name="adminType"
+                        id="adminInput"
+                        className="ring-1 ring-indigo-500 p-2 rounded-sm bg-button-background"
+                        value={lesson.media.type}
+                        onChange={(e) => {
+                            setMediaInfo(
+                                moduleIndex,
+                                lessonIndex,
+                                "type",
+                                e.target.value
+                            );
+                        }}
+                    >
+                        <option value="video">Video</option>
+                        <option value="photo">Photo</option>
+                    </select>
+                    <Input
+                        placeholder="Media Url"
+                        value={lesson.media.url}
+                        onChange={(e) => {
+                            setMediaInfo(
+                                moduleIndex,
+                                lessonIndex,
+                                "url",
+                                e.target.value
+                            );
+                        }}
+                    />
+                </>
+            )}
         </div>
     );
 }

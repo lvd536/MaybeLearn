@@ -1,7 +1,7 @@
 import type { IMedia } from "../../../../types";
 
 interface IMediaProps {
-    media: IMedia | null;
+    media: IMedia | undefined;
 }
 
 export default function Media({ media }: IMediaProps) {

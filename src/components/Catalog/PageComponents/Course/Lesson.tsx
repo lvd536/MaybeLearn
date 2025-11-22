@@ -6,7 +6,7 @@ interface ILessonProps {
     lesson: {
         title: string;
         content: string;
-        media: IMedia | null;
+        media: IMedia | undefined;
     };
     index: number;
 }
