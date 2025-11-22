@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from "react";
 import {
-    getCurrentQuestion,
     getTestTemplate,
     resetTestTemplate,
     setTestTemplate,
@@ -27,7 +26,6 @@ export default function TestCreation() {
             )),
         [testsTemplate.questions]
     );
-    const currentQuestion = getCurrentQuestion();
     const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -63,7 +61,6 @@ export default function TestCreation() {
     return (
         <>
             <TestControls
-                currentQuestion={currentQuestion}
                 questionsLength={testsTemplate.questions.length}
             />
             <form

@@ -2,7 +2,6 @@ import { create } from "zustand";
 import type { ITestData } from "../../../types";
 
 interface ITestCreationStore {
-    testId: number | null;
     testTemplate: ITestData;
     setTestTemplate: (data: ITestData) => void;
     currentQuestion: number;
@@ -25,7 +24,6 @@ interface ITestCreationStore {
     ) => void;
     addAnswer: () => void;
     removeAnswer: () => void;
-    setTestId: (id: number) => void;
 }
 
 const initialTemplate: ITestData = {
@@ -54,17 +52,15 @@ const initialTemplate: ITestData = {
 };
 
 const testCreationStore = create<ITestCreationStore>((set, get) => ({
-    testId: null,
     testTemplate: initialTemplate,
     currentQuestion: 0,
     resetTestTemplate: () => {
         set({
             testTemplate: initialTemplate,
-            testId: null,
         });
     },
     setTestTemplate: (data: ITestData) => {
-        set({ testTemplate: data, testId: null });
+        set({ testTemplate: data });
     },
     setCurrentQuestion: (number: number) => {
         set({ currentQuestion: number });
@@ -195,11 +191,6 @@ const testCreationStore = create<ITestCreationStore>((set, get) => ({
             },
         });
     },
-    setTestId: (id: number) => {
-        set({
-            testId: id,
-        });
-    },
 }));
 
 export const getTestTemplate = () =>
@@ -208,10 +199,6 @@ export const getCurrentQuestion = () =>
     testCreationStore((s: ITestCreationStore) => s.currentQuestion);
 export const setCurrentQuestion = (number: number) =>
     testCreationStore.getState().setCurrentQuestion(number);
-export const setTestId = (id: number) =>
-    testCreationStore.getState().setTestId(id);
-export const getTestId = () =>
-    testCreationStore((s: ITestCreationStore) => s.testId);
 
 export const addQuestion = () => testCreationStore.getState().addQuestion();
 export const removeQuestion = () =>

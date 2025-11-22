@@ -4,18 +4,18 @@ import {
     setCurrentModule,
     addModule,
     addLesson,
+    getCurrentModule,
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import Button from "../Button";
 
 interface ICourseControlsProps {
     modulesLength: number;
-    currentModule: number;
 }
 
 export default function CourseControls({
     modulesLength,
-    currentModule,
 }: ICourseControlsProps) {
+    const currentModule = getCurrentModule();
     return (
         <div className="flex items-center justify-center gap-5 my-3">
             <div className="flex flex-col gap-2 items-center">

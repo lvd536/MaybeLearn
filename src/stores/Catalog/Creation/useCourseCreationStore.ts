@@ -2,7 +2,6 @@ import { create } from "zustand";
 import type { ICourseData } from "../../../types";
 
 interface ICourseCreationStore {
-    courseId: number | null;
     courseTemplate: ICourseData;
     setCourseTemplate: (data: ICourseData) => void;
     currentModule: number;
@@ -27,7 +26,6 @@ interface ICourseCreationStore {
     ) => void;
     addLesson: () => void;
     removeLesson: () => void;
-    setCourseId: (id: number) => void;
 }
 
 const initialTemplate: ICourseData = {
@@ -53,17 +51,15 @@ const initialTemplate: ICourseData = {
 };
 
 const courseCreationStore = create<ICourseCreationStore>((set, get) => ({
-    courseId: 0,
     courseTemplate: initialTemplate,
     currentModule: 0,
     resetCourseTemplate: () => {
         set({
             courseTemplate: initialTemplate,
-            courseId: null,
         });
     },
     setCourseTemplate: (data: ICourseData) => {
-        set({ courseTemplate: data, courseId: null });
+        set({ courseTemplate: data });
     },
     setCurrentModule: (number: number) => {
         set({ currentModule: number });
@@ -229,11 +225,6 @@ const courseCreationStore = create<ICourseCreationStore>((set, get) => ({
             },
         });
     },
-    setCourseId: (id: number) => {
-        set({
-            courseId: id,
-        });
-    },
 }));
 
 export const getCourseTemplate = () =>
@@ -242,11 +233,6 @@ export const getCurrentModule = () =>
     courseCreationStore((s: ICourseCreationStore) => s.currentModule);
 export const setCurrentModule = (number: number) =>
     courseCreationStore.getState().setCurrentModule(number);
-export const setCourseId = (id: number) =>
-    courseCreationStore.getState().setCourseId(id);
-export const getCourseId = () =>
-    courseCreationStore((s: ICourseCreationStore) => s.courseId);
-
 export const addModule = () => courseCreationStore.getState().addModule();
 export const removeModule = () => courseCreationStore.getState().removeModule();
 export const setCourseInfo = (name: string, value: string) =>

@@ -1,7 +1,6 @@
 import { addNewCourse, updateCourseById } from "../../../utils/course";
 import {
     getCourseTemplate,
-    getCurrentModule,
     setCourseTemplate,
     resetCourseTemplate,
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
@@ -27,7 +26,6 @@ export default function CourseCreation() {
             )),
         [coursesTemplate.modules]
     );
-    const currentModule = getCurrentModule();
     const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -61,10 +59,7 @@ export default function CourseCreation() {
     }, [courseId]);
     return (
         <>
-            <CourseControls
-                currentModule={currentModule}
-                modulesLength={coursesTemplate.modules.length}
-            />
+            <CourseControls modulesLength={coursesTemplate.modules.length} />
             <form
                 action=""
                 className="flex flex-col gap-2 items-center justify-center bg-black/25 p-2 rounded-sm w-full"

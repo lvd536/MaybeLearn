@@ -4,18 +4,16 @@ import {
     setCurrentQuestion,
     addQuestion,
     addAnswer,
+    getCurrentQuestion,
 } from "../../../stores/Catalog/Creation/useTestCreationStore";
 import Button from "../Button";
 
 interface ITestControlsProps {
-    currentQuestion: number;
     questionsLength: number;
 }
 
-export default function TestControls({
-    currentQuestion,
-    questionsLength,
-}: ITestControlsProps) {
+export default function TestControls({ questionsLength }: ITestControlsProps) {
+    const currentQuestion = getCurrentQuestion();
     return (
         <div className="flex items-center justify-center gap-5 my-3">
             <div className="flex flex-col gap-2 items-center">
