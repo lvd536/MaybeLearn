@@ -17,6 +17,7 @@ export default function Input({
 }: InputProps) {
     return (
         <input
+            id={`${name}Input`}
             type={type}
             name={name}
             placeholder={placeholder}

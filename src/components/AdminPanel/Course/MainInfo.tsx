@@ -12,6 +12,7 @@ export default function MainInfo({
         <div className="flex flex-col gap-2 mb-5">
             <h1>Main Info</h1>
             <Input
+                id={`mainInfoTitle`}
                 placeholder="Title"
                 value={title}
                 onChange={(e) => {
@@ -19,6 +20,7 @@ export default function MainInfo({
                 }}
             />
             <Input
+                id={`mainInfoLevel`}
                 placeholder="Level"
                 value={level}
                 onChange={(e) => {
@@ -26,6 +28,7 @@ export default function MainInfo({
                 }}
             />
             <Input
+                id={`mainInfoDescription`}
                 placeholder="Description"
                 value={description}
                 onChange={(e) => {
@@ -33,6 +36,7 @@ export default function MainInfo({
                 }}
             />
             <Input
+                id={`mainInfoImage`}
                 placeholder="Image"
                 value={image}
                 required={false}

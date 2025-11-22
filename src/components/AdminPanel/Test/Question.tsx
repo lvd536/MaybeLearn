@@ -30,6 +30,7 @@ function Question({ questionIndex, question }: IQuestionProps) {
         >
             <ModuleTitle>Question {questionIndex + 1}</ModuleTitle>
             <Input
+                id={`question${questionIndex}Task`}
                 placeholder="Question"
                 value={question.question}
                 onChange={(e) => {
@@ -37,6 +38,7 @@ function Question({ questionIndex, question }: IQuestionProps) {
                 }}
             />
             <Input
+                id={`question${questionIndex}Task`}
                 placeholder="Task"
                 value={question.task}
                 onChange={(e) => {
@@ -46,6 +48,7 @@ function Question({ questionIndex, question }: IQuestionProps) {
             <div className="flex items-center justify-between gap-2 ring-1 ring-indigo-500 p-2 rounded-sm">
                 <label htmlFor="isCorrect">Task contains code?</label>
                 <input
+                    id={`question${questionIndex}TaskIsCode`}
                     name="isCorrect"
                     type="checkbox"
                     checked={question.isCode}

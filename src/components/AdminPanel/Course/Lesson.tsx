@@ -44,6 +44,7 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
                 Module {moduleIndex + 1} {"=>"} Lesson {lessonIndex + 1}
             </LessonTitle>
             <Input
+                id={`title${lessonIndex}`}
                 placeholder="Lesson Title"
                 value={lesson.title}
                 onChange={(e) => {
@@ -56,6 +57,7 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
                 }}
             />
             <Input
+                id={`content${lessonIndex}`}
                 placeholder="Lesson Content"
                 value={lesson.content}
                 onChange={(e) => {
@@ -98,6 +100,7 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
                         <option value="photo">Photo</option>
                     </select>
                     <Input
+                        id={`url${lessonIndex}`}
                         placeholder="Media Url"
                         value={lesson.media.url}
                         onChange={(e) => {

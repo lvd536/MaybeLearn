@@ -16,6 +16,7 @@ function Answer({ questionIndex, answerIndex, answer }: IAnswerProps) {
                 Question {questionIndex + 1} {"=>"} Answer {answerIndex + 1}
             </LessonTitle>
             <Input
+                id={`question${questionIndex}Answer${answerIndex}`}
                 placeholder="Answer"
                 value={answer.answer}
                 onChange={(e) => {
@@ -30,6 +31,7 @@ function Answer({ questionIndex, answerIndex, answer }: IAnswerProps) {
             <div className="flex items-center justify-between gap-2 ring-1 ring-indigo-500 p-2 rounded-sm">
                 <label htmlFor="isCorrect">Correct answer?</label>
                 <input
+                    id={`question${questionIndex}IsCorrect${answerIndex}`}
                     name="isCorrect"
                     type="checkbox"
                     checked={answer.is_correct}

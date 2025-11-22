@@ -30,6 +30,7 @@ function Module({ moduleIndex, module }: IModuleProps) {
         >
             <ModuleTitle>Module {moduleIndex + 1}</ModuleTitle>
             <Input
+                id={`moduleTitle${moduleIndex}`}
                 placeholder="Module Title"
                 value={module.title}
                 onChange={(e) => {

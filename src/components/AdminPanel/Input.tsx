@@ -2,6 +2,7 @@ type InputProps = {
     placeholder: string;
     value: string;
     required?: boolean;
+    id?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -10,6 +11,7 @@ export default function Input({
     placeholder,
     onChange,
     required,
+    id,
 }: InputProps) {
     return (
         <input
@@ -20,6 +22,7 @@ export default function Input({
             onChange={onChange}
             className="ring-1 ring-indigo-500 p-2 rounded-sm"
             required={required}
+            id={id}
         />
     );
 }
