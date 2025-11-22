@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { HomeCode } from "../../../assets/";
+import { HomePeople } from "../../../assets/";
 import { useAuthStore } from "../../../stores/useAuthStore";
 export default function Main() {
     const profile = useAuthStore((state) => state.profile);
     return (
         <div className="flex items-center gap-6 justify-between">
             <img
-                src={HomeCode}
+                src={HomePeople}
                 alt=""
                 className="rounded-xl w-50 self-start sm:w-100"
                 loading="lazy"
