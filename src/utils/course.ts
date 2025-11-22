@@ -1,5 +1,6 @@
 import { client } from "../services/supabase";
 import { fetchCourses } from "../stores/Catalog/useCoursesStore";
+import { useAuthStore } from "../stores/useAuthStore";
 import type { ICourseData } from "../types";
 import { setProfilePoints } from "./profile";
 
@@ -28,12 +29,12 @@ export async function sendCourseCompletionData(
         .select()
         .single();
 
-    setProfilePoints(points);
-
     if (error) {
         console.error("sendCourseCompletionData error", error);
         throw error;
     }
+    setProfilePoints(points);
+    useAuthStore.getState().increaseCoursesCompletion(1);
     return data;
 }
 

@@ -9,9 +9,12 @@ interface State {
     completedCourses: number;
     setCompletedTests: (completedTests: number) => void;
     setCompletedCourses: (completedCourses: number) => void;
+    increaseTestsCompletion: (value: number) => void;
+    increaseCoursesCompletion: (value: number) => void;
     setUser: (u: User | null) => void;
     setProfile: (user: IProfileType | null) => void;
     updateProfileInfo: (updates: IEditProfileForm) => void;
+    increaseProfilePoints: (value: number) => void;
 }
 export const useAuthStore = create<State>((set) => ({
     profile: null,
@@ -36,6 +39,28 @@ export const useAuthStore = create<State>((set) => ({
                 ...existingProfile,
                 ...updates,
             },
+        });
+    },
+    increaseProfilePoints: (value: number) => {
+        const existingProfile = useAuthStore.getState().profile;
+        if (!existingProfile) return;
+        set({
+            profile: {
+                ...existingProfile,
+                points: existingProfile.points + value,
+            },
+        });
+    },
+    increaseTestsCompletion: (value: number) => {
+        const testsCount = useAuthStore.getState().completedTests;
+        set({
+            completedTests: testsCount + value,
+        });
+    },
+    increaseCoursesCompletion: (value: number) => {
+        const coursesCount = useAuthStore.getState().completedCourses;
+        set({
+            completedCourses: coursesCount + value,
         });
     },
 }));

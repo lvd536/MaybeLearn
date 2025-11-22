@@ -1,6 +1,7 @@
 import { client } from "../services/supabase";
 import type { User } from "@supabase/supabase-js";
 import type { IEditForm } from "../types";
+import { useAuthStore } from "../stores/useAuthStore";
 
 export async function createOrUpdateProfile(user: User) {
     if (!user?.id) return null;
@@ -37,7 +38,7 @@ export async function setProfilePoints(value: number) {
         console.error("setProfilePoints error:", error);
         return null;
     }
-
+    useAuthStore.getState().increaseProfilePoints(value);
     return data;
 }
 

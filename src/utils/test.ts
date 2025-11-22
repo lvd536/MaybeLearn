@@ -1,5 +1,6 @@
 import { client } from "../services/supabase";
 import { fetchTests } from "../stores/Catalog/useTestsStore";
+import { useAuthStore } from "../stores/useAuthStore";
 import type { ITestData } from "../types";
 import { setProfilePoints } from "./profile";
 
@@ -25,12 +26,12 @@ export async function sendTestCompletionData(testId: number, points: number) {
         .select()
         .single();
 
-    setProfilePoints(points);
-
     if (error) {
         console.error("sendTestCompletionData error", error);
         throw error;
     }
+    setProfilePoints(points);
+    useAuthStore.getState().increaseTestsCompletion(1);
     return data;
 }
 
