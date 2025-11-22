@@ -2,7 +2,13 @@ import { setTestInfo } from "../../../stores/Catalog/Creation/useTestCreationSto
 import type { IMainInfo } from "../../../types";
 import Input from "../Input";
 
-export default function MainInfo({ title, level, description, image }: IMainInfo) {
+export default function MainInfo({
+    title,
+    level,
+    description,
+    image,
+    points,
+}: IMainInfo) {
     return (
         <div className="flex flex-col gap-2 mb-5">
             <h1>Main Info</h1>
@@ -18,6 +24,13 @@ export default function MainInfo({ title, level, description, image }: IMainInfo
                 value={level}
                 onChange={(e) => {
                     setTestInfo("level", e.target.value);
+                }}
+            />
+            <Input
+                placeholder="Points"
+                value={points!.toString()}
+                onChange={(e) => {
+                    setTestInfo("points", e.target.value);
                 }}
             />
             <Input

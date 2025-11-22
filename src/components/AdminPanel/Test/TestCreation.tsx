@@ -82,6 +82,7 @@ export default function TestCreation({ testId }: ITestCreationProps) {
                     level={testsTemplate.level}
                     title={testsTemplate.title}
                     image={testsTemplate.image}
+                    points={testsTemplate.points}
                 />
                 <div className="grid grid-cols-2 gap-8 w-full">{questions}</div>
                 <button
