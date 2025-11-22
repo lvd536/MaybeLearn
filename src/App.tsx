@@ -15,6 +15,7 @@ import { fetchTests } from "./stores/Catalog/useTestsStore";
 import { AdminPanel } from "./pages/AdminPanel/";
 import NotifyList from "./components/Notifications/NotifyList";
 import Rating from "./pages/Rating/Rating";
+import { Info, CourseCreation, TestCreation } from "./components/AdminPanel";
 function App() {
     useAuthListener();
     fetchCourses();
@@ -44,7 +45,13 @@ function App() {
                         path={"/catalog/course/:id"}
                         element={<CoursePage />}
                     />
-                    <Route path={"/admin"} element={<AdminPanel />} />
+                    <Route path="/admin" element={<AdminPanel />}>
+                        <Route index element={<Info />} />
+                        <Route path="course/:id" element={<CourseCreation />} />
+                        <Route path="test/:id" element={<TestCreation />} />
+                        <Route path="course" element={<CourseCreation />} />
+                        <Route path="test" element={<TestCreation />} />
+                    </Route>
                 </Routes>
             </div>
             <NotifyList />

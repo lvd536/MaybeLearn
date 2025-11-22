@@ -43,6 +43,7 @@ export default function MainInfo({
             <Input
                 placeholder="Image"
                 value={image}
+                required={false}
                 onChange={(e) => {
                     setTestInfo("image", e.target.value);
                 }}

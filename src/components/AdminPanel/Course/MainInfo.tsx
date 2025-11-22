@@ -35,6 +35,7 @@ export default function MainInfo({
             <Input
                 placeholder="Image"
                 value={image}
+                required={false}
                 onChange={(e) => {
                     setCourseInfo("image", e.target.value);
                 }}

@@ -67,15 +67,16 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
                     );
                 }}
             />
-            <div className="flex gap-2">
+            <div className="flex items-center justify-between gap-2 ring-1 ring-indigo-500 p-2 rounded-sm">
+                <label htmlFor="adminIsMedia">Have Media</label>
                 <input
                     type="checkbox"
                     name="adminInput"
                     id="adminIsMedia"
                     checked={haveMedia}
+                    className="accent-gray-500 w-5 h-5"
                     onChange={(e) => handleIsMediaChange(e)}
                 />
-                <label htmlFor="adminIsMedia">Have Media</label>
             </div>
             {haveMedia && lesson.media && (
                 <>

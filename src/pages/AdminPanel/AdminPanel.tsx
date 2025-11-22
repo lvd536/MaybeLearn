@@ -1,51 +1,36 @@
-import { useEffect, useState } from "react";
-import {
-    CourseCreation,
-    DevInfo,
-    Info,
-    NavItem,
-    TestCreation,
-} from "../../components/AdminPanel";
-import { useNavigate } from "react-router-dom";
+import { DevInfo, NavItem } from "../../components/AdminPanel";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
-import { getCourseId } from "../../stores/Catalog/Creation/useCourseCreationStore";
-import { getTestId } from "../../stores/Catalog/Creation/useTestCreationStore";
 
-type Pages = "info" | "course" | "test";
+type Pages = "" | "course" | "test";
 
 export default function AdminPanel() {
-    const [currentPage, setCurrentPage] = useState<Pages>("info");
+    const { pathname } = useLocation();
+    const entityName = pathname.split("/")[2];
     const profile = useAuthStore((state) => state.profile);
-    const courseId = getCourseId();
-    const testId = getTestId();
     const navigate = useNavigate();
     const handleClick = (page: Pages) => {
-        setCurrentPage(page);
+        navigate(page);
     };
-    if (profile?.role !== "admin" || !profile) navigate("profile");
-    useEffect(() => {
-        if (courseId !== null) setCurrentPage("course");
-        else if (testId !== null) setCurrentPage("test");
-        else setCurrentPage("info");
-    }, []);
+    if (profile?.role !== "admin" || !profile) navigate("/profile");
     return (
         <div className="flex">
             <nav>
                 <ul className="flex flex-col gap-5">
                     <NavItem
-                        isActive={currentPage === "info"}
-                        onClick={() => handleClick("info")}
+                        isActive={entityName === undefined}
+                        onClick={() => handleClick("")}
                     >
                         Info
                     </NavItem>
                     <NavItem
-                        isActive={currentPage === "course"}
+                        isActive={entityName === "course"}
                         onClick={() => handleClick("course")}
                     >
                         Create Course
                     </NavItem>
                     <NavItem
-                        isActive={currentPage === "test"}
+                        isActive={entityName === "test"}
                         onClick={() => handleClick("test")}
                     >
                         Create Test
@@ -55,13 +40,9 @@ export default function AdminPanel() {
             </nav>
             <div className="flex flex-col gap-2 items-center justify-start bg-button-background w-full mx-20 min-h-150 rounded-sm p-2">
                 <span className="flex items-center justify-center bg-black/20 rounded-sm max-w-50 p-2">
-                    Admin Site: {currentPage}
+                    Admin Site: {entityName}
                 </span>
-                {currentPage === "info" && <Info />}
-                {currentPage === "course" && (
-                    <CourseCreation courseId={courseId} />
-                )}
-                {currentPage === "test" && <TestCreation testId={testId} />}
+                <Outlet />
             </div>
         </div>
     );

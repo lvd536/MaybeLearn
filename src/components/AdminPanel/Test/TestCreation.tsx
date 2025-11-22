@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import {
     getCurrentQuestion,
     getTestTemplate,
@@ -11,14 +11,10 @@ import { useNotifyStore } from "../../../stores/useNotifyStore";
 import TestControls from "./TestControls";
 import MainInfo from "./MainInfo";
 import Question from "./Question";
+import { useParams } from "react-router-dom";
 
-interface ITestCreationProps {
-    testId: number | null;
-}
-
-export default function TestCreation({ testId }: ITestCreationProps) {
-    const [originalTestId, setOriginalTestId] = useState<number | null>(null);
-    const initialTestIdRef = useRef<number | null>(testId);
+export default function TestCreation() {
+    const { id: testId } = useParams();
     const testsTemplate = getTestTemplate();
     const questions = useMemo(
         () =>
@@ -35,15 +31,15 @@ export default function TestCreation({ testId }: ITestCreationProps) {
     const addNotify = useNotifyStore((state) => state.addNotification);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (originalTestId) {
-            updateTestById(testsTemplate, originalTestId);
+        if (testId) {
+            updateTestById(testsTemplate, parseInt(testId));
             addNotify({
                 id: new Date().getSeconds(),
                 type: "success",
-                description: `Edit test with id ${originalTestId} success`,
+                description: `Edit test with id ${testId} success`,
                 title: "Test Creation",
             });
-        } else if (!originalTestId) {
+        } else if (!testId) {
             addNewTest(testsTemplate);
             addNotify({
                 id: new Date().getSeconds(),
@@ -55,17 +51,15 @@ export default function TestCreation({ testId }: ITestCreationProps) {
     }
 
     useEffect(() => {
-        const currentTestId = initialTestIdRef.current;
-        if (currentTestId) {
-            const test = getTestById(currentTestId);
+        if (testId) {
+            const test = getTestById(parseInt(testId));
             if (test) {
-                setOriginalTestId(currentTestId);
                 setTestTemplate(test.data);
             }
         } else {
             resetTestTemplate();
         }
-    }, []);
+    }, [testId]);
     return (
         <>
             <TestControls
@@ -81,7 +75,7 @@ export default function TestCreation({ testId }: ITestCreationProps) {
                     description={testsTemplate.description}
                     level={testsTemplate.level}
                     title={testsTemplate.title}
-                    image={testsTemplate.image}
+                    image={testsTemplate.image || ""}
                     points={testsTemplate.points}
                 />
                 <div className="grid grid-cols-2 gap-8 w-full">{questions}</div>
@@ -89,7 +83,7 @@ export default function TestCreation({ testId }: ITestCreationProps) {
                     type="submit"
                     className="p-2 bg-button-background rounded-sm my-5 shadow-2xs shadow-indigo-500"
                 >
-                    {originalTestId ? "Edit" : "Create"} test
+                    {testId ? "Edit" : "Create"} test
                 </button>
             </form>
         </>

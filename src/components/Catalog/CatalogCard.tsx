@@ -2,9 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProfileCredits } from "../../utils/profile";
 import type { ICourse, ITest } from "../../types";
-import { setCourseId } from "../../stores/Catalog/Creation/useCourseCreationStore";
 import { useAuthStore } from "../../stores/useAuthStore";
-import { setTestId } from "../../stores/Catalog/Creation/useTestCreationStore";
 import { deleteCourse } from "../../stores/Catalog/useCoursesStore";
 import { deleteTest } from "../../stores/Catalog/useTestsStore";
 import MainInfo from "./MainInfo";
@@ -31,16 +29,7 @@ export default function CatalogCard({
     const isAdmin = profile?.role === "admin" || profile?.role === "moderator";
     const navigate = useNavigate();
 
-    const handleEdit = () => {
-        if (redirectTo === "course") {
-            setCourseId(item.id);
-            navigate("/admin");
-        }
-        if (redirectTo === "test") {
-            setTestId(item.id);
-            navigate("/admin");
-        }
-    };
+    const handleEdit = () => navigate(`/admin/${redirectTo}/${item.id}`);
 
     const handleRemove = () => {
         const confirmed = confirm(
