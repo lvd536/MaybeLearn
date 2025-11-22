@@ -10,7 +10,7 @@ export default function Card({ title, description, image }: CardProps) {
             <img
                 src={image}
                 alt=""
-                className="mb-4 w-[301px] h-[169px]"
+                className="mb-4 rounded-xl w-[301px] h-[169px] object-cover transition-shadow duration-300 hover:shadow-catalog-card"
                 loading="lazy"
             />
             <div className="flex flex-col gap-2">

@@ -15,7 +15,7 @@ export default function Tests() {
                             <Card
                                 title={t.data.title}
                                 description={t.data.description}
-                                image={HomeCard}
+                                image={t.data.image || HomeCard}
                                 key={index}
                             />
                         ))}

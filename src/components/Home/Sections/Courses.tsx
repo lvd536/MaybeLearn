@@ -15,7 +15,7 @@ export default function Courses() {
                             <Card
                                 title={c.data.title}
                                 description={c.data.description}
-                                image={HomeCard}
+                                image={c.data.image || HomeCard}
                                 key={index}
                             />
                         ))}
