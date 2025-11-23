@@ -1,6 +1,6 @@
 import { client } from "../services/supabase";
 import type { User } from "@supabase/supabase-js";
-import type { IEditForm } from "../types";
+import type { IEditForm, IProfileType } from "../types";
 import { useAuthStore } from "../stores/useAuthStore";
 
 export async function createOrUpdateProfile(user: User) {
@@ -113,6 +113,19 @@ export async function getProfileCredits(id: number) {
         role: data.role,
     };
     return profileCredits;
+}
+
+export async function getProfileById(id: number): Promise<IProfileType | null> {
+    const { data, error } = await client
+        .from("profiles")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle();
+    if (error) {
+        console.error("There was an error fetching the profile data:", error);
+        return null;
+    }
+    return data;
 }
 
 export async function getUserProfilesWithLimit(limit: number) {
