@@ -20,14 +20,18 @@ export default function MainInfo({
                     setTestInfo("title", e.target.value);
                 }}
             />
-            <Input
-                id={`mainInfoLevel`}
-                placeholder="Level"
+            <select
+                name="adminType"
+                id="adminInput"
+                className="ring-1 ring-indigo-500 p-2 rounded-sm bg-button-background"
                 value={level}
-                onChange={(e) => {
-                    setTestInfo("level", e.target.value);
-                }}
-            />
+                onChange={(e) => setTestInfo("level", e.target.value)}
+                required
+            >
+                <option value="Easy">Easy</option>
+                <option value="Middle">Middle</option>
+                <option value="Hard">Hard</option>
+            </select>
             <Input
                 id={`mainInfoPoints`}
                 placeholder="Points"
