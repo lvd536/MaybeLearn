@@ -1,45 +1,67 @@
+import { useNavigate } from "react-router-dom";
 import { Pencil, Trash } from "../../assets";
-import type { ICourseData, ITestData } from "../../types";
+import { deleteCourse } from "../../stores/Catalog/useCoursesStore";
+import { deleteTest } from "../../stores/Catalog/useTestsStore";
+import type { ICourse, ITest } from "../../types";
+import { useEffect, useState } from "react";
+import { getProfileCredits } from "../../utils/profile";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 interface IMainInfoProps {
-    itemData: ICourseData | ITestData;
-    userCredits:
-        | {
-              name: string;
-              avatar: string;
-              role: string;
-          }
-        | null
-        | undefined;
-    isAdmin: boolean;
+    item: ICourse | ITest;
     isCompleted: boolean;
-    handleEdit: () => void;
-    handleRemove: () => void;
+    redirectTo: "course" | "test";
 }
 
 export default function MainInfo({
-    itemData,
-    userCredits,
-    isAdmin,
+    item,
     isCompleted,
-    handleEdit,
-    handleRemove,
+    redirectTo,
 }: IMainInfoProps) {
+    const [userCredits, setUserCredits] = useState<{
+        name: string;
+        avatar: string;
+        role: string;
+    } | null>();
+    const navigate = useNavigate();
+    const profile = useAuthStore((state) => state.profile);
+    const isAdmin = profile?.role === "admin" || profile?.role === "moderator";
+    const handleEdit = () => navigate(`/admin/${redirectTo}/${item.id}`);
+
+    const handleRemove = () => {
+        const confirmed = confirm(
+            `Are you sure you want to delete ${redirectTo}?`
+        );
+
+        if (confirmed) {
+            if (redirectTo === "course") deleteCourse(item.id);
+            else deleteTest(item.id);
+        }
+    };
+
+    useEffect(() => {
+        async function getUserProfileCredits() {
+            const credits = await getProfileCredits(item.author_id);
+            setUserCredits(credits);
+        }
+        getUserProfileCredits();
+    }, [item.author_id]);
+
     return (
         <div className="flex flex-col justify-between gap-3">
             <span
                 className={`font-normal text-sm ${
-                    itemData.level === "Easy"
+                    item.data.level === "Easy"
                         ? "text-green-400/80"
-                        : itemData.level === "Middle"
+                        : item.data.level === "Middle"
                         ? "text-amber-400/80"
                         : "text-red-500/80"
                 }`}
             >
-                {itemData.level}
+                {item.data.level}
             </span>
             <span className="flex gap-2 items-center font-bold text-base">
-                {itemData.title}
+                {item.data.title}
                 {isCompleted && (
                     <div className="text-[10px] font-normal rounded-xl bg-green-500 p-1">
                         Completed
@@ -57,7 +79,7 @@ export default function MainInfo({
                 )}
             </span>
             <span className="font-normal text-sm text-card">
-                {itemData.description}
+                {item.data.description}
             </span>
             <div className="flex items-center gap-2">
                 {userCredits?.avatar && (
@@ -70,6 +92,12 @@ export default function MainInfo({
                 <span className="font-normal text-sm text-card">
                     {userCredits?.name}
                 </span>
+                <div className="flex items-center gap-2">
+                    <div className="w-1 h-1 bg-indigo-500/50 rounded-full" />
+                    <span className="font-medium text-xs text-white/40">
+                        {new Date(item.created_at).toDateString()}
+                    </span>
+                </div>
             </div>
         </div>
     );

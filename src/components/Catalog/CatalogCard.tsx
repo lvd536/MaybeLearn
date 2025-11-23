@@ -1,10 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getProfileCredits } from "../../utils/profile";
 import type { ICourse, ITest } from "../../types";
-import { useAuthStore } from "../../stores/useAuthStore";
-import { deleteCourse } from "../../stores/Catalog/useCoursesStore";
-import { deleteTest } from "../../stores/Catalog/useTestsStore";
 import MainInfo from "./MainInfo";
 import StartButton from "./StartButton";
 import CatalogImage from "./CatalogImage";
@@ -20,35 +14,6 @@ export default function CatalogCard({
     isCompleted,
     redirectTo,
 }: CatalogCardProps) {
-    const [userCredits, setUserCredits] = useState<{
-        name: string;
-        avatar: string;
-        role: string;
-    } | null>();
-    const profile = useAuthStore((state) => state.profile);
-    const isAdmin = profile?.role === "admin" || profile?.role === "moderator";
-    const navigate = useNavigate();
-
-    const handleEdit = () => navigate(`/admin/${redirectTo}/${item.id}`);
-
-    const handleRemove = () => {
-        const confirmed = confirm(
-            `Are you sure you want to delete ${redirectTo}?`
-        );
-
-        if (confirmed) {
-            if (redirectTo === "course") deleteCourse(item.id);
-            else deleteTest(item.id);
-        }
-    };
-
-    useEffect(() => {
-        async function getUserProfileCredits() {
-            const credits = await getProfileCredits(item.author_id);
-            setUserCredits(credits);
-        }
-        getUserProfileCredits();
-    }, [item.author_id]);
     return (
         <li
             className={`flex items-center justify-between transition-bg duration-500 ${
@@ -59,12 +24,9 @@ export default function CatalogCard({
         >
             <div className="flex flex-col items-baseline justify-between gap-15">
                 <MainInfo
-                    itemData={item.data}
-                    userCredits={userCredits}
+                    item={item}
                     isCompleted={isCompleted}
-                    isAdmin={isAdmin}
-                    handleEdit={handleEdit}
-                    handleRemove={handleRemove}
+                    redirectTo={redirectTo}
                 />
                 <StartButton
                     isCompleted={isCompleted}
