@@ -1,5 +1,5 @@
 export default interface ICompletedItem {
-    createdAt: string;
+    created_at: string;
     id: number;
     test_id?: number;
     lesson_id?: number;

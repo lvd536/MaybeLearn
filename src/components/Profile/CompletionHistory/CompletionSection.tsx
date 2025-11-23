@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
 import { getCourses } from "../../../stores/Catalog/useCoursesStore";
-import type { ICourse, ITest } from "../../../types";
-import { getCourseCompletionData } from "../../../utils/course";
+import type { ICompletedItem, ICourse, ITest } from "../../../types";
 import CompletionItem from "./CompletionItem";
-import { getTestCompletionData } from "../../../utils/test";
 import { getTests } from "../../../stores/Catalog/useTestsStore";
+
+interface ICompletionSectionProps {
+    type: "course" | "test";
+    completedItems: ICompletedItem[];
+}
 
 export default function CompletionSection({
     type,
-}: {
-    type: "course" | "test";
-}) {
+    completedItems,
+}: ICompletionSectionProps) {
     const [items, setItems] = useState<
         { item: ICourse | ITest; completed_at: Date }[]
     >([]);
     useEffect(() => {
         (async () => {
-            const completedItems =
-                type === "course"
-                    ? await getCourseCompletionData()
-                    : await getTestCompletionData();
             const items = type === "course" ? getCourses() : getTests();
+            if (!items || !completedItems) return;
             const itemHistory = items
                 .map((item) => {
                     const element = completedItems?.find(
@@ -38,7 +37,7 @@ export default function CompletionSection({
                 .filter((c) => c !== undefined);
             setItems(itemHistory);
         })();
-    }, [type]);
+    }, [type, completedItems]);
     return (
         <>
             {items.length > 0 ? (

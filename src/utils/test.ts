@@ -1,7 +1,7 @@
 import { client } from "../services/supabase";
 import { fetchTests } from "../stores/Catalog/useTestsStore";
 import { useAuthStore } from "../stores/useAuthStore";
-import type { ITestData } from "../types";
+import type { ICompletedItem, ITestData } from "../types";
 import { setProfilePoints } from "./profile";
 
 export async function sendTestCompletionData(testId: number, points: number) {
@@ -35,7 +35,7 @@ export async function sendTestCompletionData(testId: number, points: number) {
     return data;
 }
 
-export async function getTestCompletionData() {
+export async function getTestCompletionData(): Promise<ICompletedItem[] | null> {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
 

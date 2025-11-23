@@ -1,7 +1,7 @@
 import { client } from "../services/supabase";
 import { fetchCourses } from "../stores/Catalog/useCoursesStore";
 import { useAuthStore } from "../stores/useAuthStore";
-import type { ICourseData } from "../types";
+import type { ICompletedItem, ICourseData } from "../types";
 import { setProfilePoints } from "./profile";
 
 export async function sendCourseCompletionData(
@@ -38,7 +38,7 @@ export async function sendCourseCompletionData(
     return data;
 }
 
-export async function getCourseCompletionData() {
+export async function getCourseCompletionData(): Promise<ICompletedItem[] | null> {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
 
