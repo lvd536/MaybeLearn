@@ -76,7 +76,7 @@ export default function Header({ onClick }: HeaderProps) {
                             {profile.role === "admin" && (
                                 <Link
                                     to={"/admin"}
-                                    className="flex items-center justify-center h-10 w-50 p-2 bg-button-background rounded-sm hover:cursor-pointer"
+                                    className="flex items-center justify-center h-10 sm:w-50 p-2 bg-button-background rounded-sm hover:cursor-pointer"
                                 >
                                     Admin Panel
                                 </Link>

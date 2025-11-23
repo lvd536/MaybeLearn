@@ -46,7 +46,7 @@ export default function CompletionSection({
                         {type.charAt(0).toUpperCase() + type.slice(1)}{" "}
                         Completion History
                     </h1>
-                    <div className="grid grid-cols-2 flex-col gap-5">
+                    <div className="grid sm:grid-cols-2 flex-col gap-5">
                         {items.map((item) => (
                             <CompletionItem key={item.item.id} item={item} />
                         ))}
