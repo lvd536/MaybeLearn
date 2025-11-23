@@ -12,10 +12,10 @@ import { HomePage } from "./pages/Home/";
 import { Profile } from "./pages/Profile/";
 import { fetchCourses } from "./stores/Catalog/useCoursesStore";
 import { fetchTests } from "./stores/Catalog/useTestsStore";
-import { AdminPanel } from "./pages/AdminPanel/";
+import { AdminPanel, CourseCreation, TestCreation } from "./pages/AdminPanel/";
 import NotifyList from "./components/Notifications/NotifyList";
 import Rating from "./pages/Rating/Rating";
-import { Info, CourseCreation, TestCreation } from "./components/AdminPanel";
+import { Info } from "./components/AdminPanel";
 function App() {
     useAuthListener();
     fetchCourses();

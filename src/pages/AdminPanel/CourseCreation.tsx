@@ -1,15 +1,15 @@
-import { addNewCourse, updateCourseById } from "../../../utils/course";
+import { addNewCourse, updateCourseById } from "../../utils/course";
 import {
     getCourseTemplate,
     setCourseTemplate,
     resetCourseTemplate,
-} from "../../../stores/Catalog/Creation/useCourseCreationStore";
-import { getCourseById } from "../../../stores/Catalog/useCoursesStore";
+} from "../../stores/Catalog/Creation/useCourseCreationStore";
+import { getCourseById } from "../../stores/Catalog/useCoursesStore";
 import { useEffect, useMemo } from "react";
-import { useNotifyStore } from "../../../stores/useNotifyStore";
-import CourseControls from "./CourseControls";
-import MainInfo from "./MainInfo";
-import Module from "./Module";
+import { useNotifyStore } from "../../stores/useNotifyStore";
+import CourseControls from "../../components/AdminPanel/Course/CourseControls";
+import MainInfo from "../../components/AdminPanel/Course/MainInfo";
+import Module from "../../components/AdminPanel/Course/Module";
 import { useParams } from "react-router-dom";
 
 export default function CourseCreation() {

@@ -3,13 +3,13 @@ import {
     getTestTemplate,
     resetTestTemplate,
     setTestTemplate,
-} from "../../../stores/Catalog/Creation/useTestCreationStore";
-import { addNewTest, updateTestById } from "../../../utils/test";
-import { getTestById } from "../../../stores/Catalog/useTestsStore";
-import { useNotifyStore } from "../../../stores/useNotifyStore";
-import TestControls from "./TestControls";
-import MainInfo from "./MainInfo";
-import Question from "./Question";
+} from "../../stores/Catalog/Creation/useTestCreationStore";
+import { addNewTest, updateTestById } from "../../utils/test";
+import { getTestById } from "../../stores/Catalog/useTestsStore";
+import { useNotifyStore } from "../../stores/useNotifyStore";
+import TestControls from "../../components/AdminPanel/Test/TestControls";
+import MainInfo from "../../components/AdminPanel/Test/MainInfo";
+import Question from "../../components/AdminPanel/Test/Question";
 import { useParams } from "react-router-dom";
 
 export default function TestCreation() {
