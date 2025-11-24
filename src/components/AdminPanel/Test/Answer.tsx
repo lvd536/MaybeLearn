@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { setAnswerInfo } from "../../../stores/Catalog/Creation/useTestCreationStore";
-import Input from "../Input";
+import TextInput from "../TextInput";
 import LessonTitle from "../LessonTitle";
 
 interface IAnswerProps {
@@ -15,7 +15,7 @@ function Answer({ questionIndex, answerIndex, answer }: IAnswerProps) {
             <LessonTitle>
                 Question {questionIndex + 1} {"=>"} Answer {answerIndex + 1}
             </LessonTitle>
-            <Input
+            <TextInput
                 id={`question${questionIndex}Answer${answerIndex}`}
                 placeholder="Answer"
                 value={answer.answer}

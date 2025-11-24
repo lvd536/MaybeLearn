@@ -1,7 +1,7 @@
 import { memo, useMemo } from "react";
 import { setModuleInfo } from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import type { IModule } from "../../../types";
-import Input from "../Input";
+import TextInput from "../TextInput";
 import ModuleTitle from "../ModuleTitle";
 import Lesson from "./Lesson";
 
@@ -29,7 +29,7 @@ function Module({ moduleIndex, module }: IModuleProps) {
             className="flex flex-col bg-button-background p-5 rounded-sm shadow-2xl shadow-button-background"
         >
             <ModuleTitle>Module {moduleIndex + 1}</ModuleTitle>
-            <Input
+            <TextInput
                 id={`moduleTitle${moduleIndex}`}
                 placeholder="Module Title"
                 value={module.title}

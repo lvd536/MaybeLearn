@@ -1,7 +1,7 @@
 import { memo, useMemo } from "react";
 import { setQuestionInfo } from "../../../stores/Catalog/Creation/useTestCreationStore";
 import type { IQuestion } from "../../../types";
-import Input from "../Input";
+import TextInput from "../TextInput";
 import ModuleTitle from "../ModuleTitle";
 import Answer from "./Answer";
 
@@ -29,7 +29,7 @@ function Question({ questionIndex, question }: IQuestionProps) {
             className="flex flex-col gap-3 bg-button-background p-5 rounded-sm shadow-2xl shadow-button-background"
         >
             <ModuleTitle>Question {questionIndex + 1}</ModuleTitle>
-            <Input
+            <TextInput
                 id={`question${questionIndex}Task`}
                 placeholder="Question"
                 value={question.question}
@@ -37,7 +37,7 @@ function Question({ questionIndex, question }: IQuestionProps) {
                     setQuestionInfo(questionIndex, "question", e.target.value);
                 }}
             />
-            <Input
+            <TextInput
                 id={`question${questionIndex}Task`}
                 placeholder="Task"
                 value={question.task}

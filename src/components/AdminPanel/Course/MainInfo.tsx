@@ -1,6 +1,6 @@
 import { setCourseInfo } from "../../../stores/Catalog/Creation/useCourseCreationStore";
 import type { IMainInfo } from "../../../types";
-import Input from "../Input";
+import TextInput from "../TextInput";
 
 export default function MainInfo({
     title,
@@ -11,7 +11,7 @@ export default function MainInfo({
     return (
         <div className="flex flex-col gap-2 mb-5">
             <h1>Main Info</h1>
-            <Input
+            <TextInput
                 id={`mainInfoTitle`}
                 placeholder="Title"
                 value={title}
@@ -31,7 +31,7 @@ export default function MainInfo({
                 <option value="Middle">Middle</option>
                 <option value="Hard">Hard</option>
             </select>
-            <Input
+            <TextInput
                 id={`mainInfoDescription`}
                 placeholder="Description"
                 value={description}
@@ -39,7 +39,7 @@ export default function MainInfo({
                     setCourseInfo("description", e.target.value);
                 }}
             />
-            <Input
+            <TextInput
                 id={`mainInfoImage`}
                 placeholder="Image"
                 value={image}

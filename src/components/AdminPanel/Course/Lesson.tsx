@@ -3,7 +3,7 @@ import {
     setLessonInfo,
     setMediaInfo,
 } from "../../../stores/Catalog/Creation/useCourseCreationStore";
-import Input from "../Input";
+import TextInput from "../TextInput";
 import LessonTitle from "../LessonTitle";
 import type { IMedia } from "../../../types";
 
@@ -43,7 +43,7 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
             <LessonTitle>
                 Module {moduleIndex + 1} {"=>"} Lesson {lessonIndex + 1}
             </LessonTitle>
-            <Input
+            <TextInput
                 id={`title${lessonIndex}`}
                 placeholder="Lesson Title"
                 value={lesson.title}
@@ -56,7 +56,7 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
                     );
                 }}
             />
-            <Input
+            <TextInput
                 id={`content${lessonIndex}`}
                 placeholder="Lesson Content"
                 value={lesson.content}
@@ -99,7 +99,7 @@ function Lesson({ moduleIndex, lessonIndex, lesson }: ILessonProps) {
                         <option value="video">Video</option>
                         <option value="photo">Photo</option>
                     </select>
-                    <Input
+                    <TextInput
                         id={`url${lessonIndex}`}
                         placeholder="Media Url"
                         value={lesson.media.url}

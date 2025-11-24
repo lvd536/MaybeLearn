@@ -1,20 +1,13 @@
-type InputProps = {
-    placeholder: string;
-    value: string;
-    name?: string;
-    required?: boolean;
-    id?: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import type { IInputProps } from "../../types";
 
-export default function Input({
+export default function TextInput({
     value,
     placeholder,
     onChange,
     required,
     id,
     name,
-}: InputProps) {
+}: IInputProps) {
     return (
         <input
             name={name || "adminInput"}

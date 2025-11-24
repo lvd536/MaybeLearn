@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { IProfileType } from "../../types";
 import { getProfileById, updateProfileById } from "../../utils/profile";
-import { Input } from "../../components/AdminPanel";
 import { useNotifyStore } from "../../stores/useNotifyStore";
+import TextInputs from "../../components/AdminPanel/UserAdmin/Edit/TextInputs";
+import Selections from "../../components/AdminPanel/UserAdmin/Edit/Selections";
 
 export default function UserEdit() {
     const { id: userId } = useParams();
@@ -20,9 +21,7 @@ export default function UserEdit() {
     }, [userId]);
 
     const handleChange = (
-        e:
-            | React.ChangeEvent<HTMLInputElement>
-            | React.ChangeEvent<HTMLSelectElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
         if (formData) {
             setFormData({
@@ -53,80 +52,20 @@ export default function UserEdit() {
                     className="flex flex-col gap-2 justify-center bg-black/25 p-2 rounded-sm w-full"
                     onSubmit={handleSubmit}
                 >
-                    <Input
-                        placeholder="Name"
-                        value={formData.display_name}
-                        required={true}
-                        name="display_name"
-                        onChange={(e) => handleChange(e)}
-                        id="nameInput"
+                    <TextInputs
+                        display_name={formData.display_name}
+                        bio={formData.bio}
+                        avatar_url={formData.avatar_url}
+                        handleChange={handleChange}
                     />
-                    <Input
-                        placeholder="Avatar"
-                        value={formData.avatar_url}
-                        name="avatar_url"
-                        onChange={(e) => handleChange(e)}
-                        id="avatarInput"
-                    />
-                    <Input
-                        placeholder="Bio"
-                        value={formData.bio}
-                        name="bio"
-                        onChange={(e) => handleChange(e)}
-                        id="bioInput"
+                    <Selections
+                        handleChange={handleChange}
+                        rank={formData.rank}
+                        role={formData.role}
                     />
                     <div className="flex gap-2">
                         <label
-                            htmlFor="currentModule"
-                            className="bg-black/20 p-1 sm:p-2 rounded-sm w-15"
-                        >
-                            Role
-                        </label>
-                        <select
-                            name="role"
-                            id="adminInput"
-                            className="ring-1 ring-indigo-500 p-2 rounded-sm bg-button-background w-30 sm:w-50"
-                            value={formData.role}
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                        >
-                            <option value="user">User</option>
-                            <option value="moderator">Moderator</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    <div className="flex gap-2">
-                        <label
-                            htmlFor="currentModule"
-                            className="bg-black/20 p-1 sm:p-2 rounded-sm w-15"
-                        >
-                            Rank
-                        </label>
-                        <select
-                            name="rank"
-                            id="adminInput"
-                            className="ring-1 ring-indigo-500 p-2 rounded-sm bg-button-background w-30 sm:w-50"
-                            value={formData.rank}
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                        >
-                            <option value="newbie">Newbie</option>
-                            <option value="apprentice">Apprentice</option>
-                            <option value="coder">Coder</option>
-                            <option value="practitioner">Practitioner</option>
-                            <option value="master">Master</option>
-                            <option value="optimizer">Optimizer</option>
-                            <option value="architect">Architect</option>
-                            <option value="guru">Guru</option>
-                            <option value="virtuoso">Virtuoso</option>
-                            <option value="legend">Legend</option>
-                        </select>
-                    </div>
-                    <div className="flex gap-2">
-                        <label
-                            htmlFor="currentModule"
+                            htmlFor="userPoints"
                             className="bg-black/20 p-1 sm:p-2 rounded-sm w-15"
                         >
                             Points
@@ -134,7 +73,7 @@ export default function UserEdit() {
                         <input
                             type="number"
                             name="points"
-                            id="currentModule"
+                            id="userPoints"
                             placeholder="points"
                             className="ring-1 ring-indigo-500 p-2 rounded-sm bg-button-background w-30 sm:w-50"
                             value={formData.points}
