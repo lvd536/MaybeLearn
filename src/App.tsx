@@ -12,7 +12,13 @@ import { HomePage } from "./pages/Home/";
 import { Profile } from "./pages/Profile/";
 import { fetchCourses } from "./stores/Catalog/useCoursesStore";
 import { fetchTests } from "./stores/Catalog/useTestsStore";
-import { AdminPanel, CourseCreation, TestCreation } from "./pages/AdminPanel/";
+import {
+    AdminPanel,
+    CourseCreation,
+    TestCreation,
+    UserEdit,
+    UserManagement,
+} from "./pages/AdminPanel/";
 import NotifyList from "./components/Notifications/NotifyList";
 import Rating from "./pages/Rating/Rating";
 import { Info } from "./components/AdminPanel";
@@ -51,6 +57,11 @@ function App() {
                         <Route path="test/:id" element={<TestCreation />} />
                         <Route path="course" element={<CourseCreation />} />
                         <Route path="test" element={<TestCreation />} />
+                        <Route path="management/:page" element={<UserManagement />} />
+                        <Route
+                            path="user/edit/:id"
+                            element={<UserEdit />}
+                        />
                     </Route>
                 </Routes>
             </div>

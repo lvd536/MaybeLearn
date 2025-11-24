@@ -2,7 +2,7 @@ import { DevInfo, NavItem } from "../../components/AdminPanel";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
 
-type Pages = "" | "course" | "test";
+type Pages = "" | "course" | "test" | "management/1";
 
 export default function AdminPanel() {
     const { pathname } = useLocation();
@@ -34,6 +34,12 @@ export default function AdminPanel() {
                         onClick={() => handleClick("test")}
                     >
                         Create Test
+                    </NavItem>
+                    <NavItem
+                        isActive={entityName === "test"}
+                        onClick={() => handleClick("management/1")}
+                    >
+                        Manage Users
                     </NavItem>
                 </ul>
                 <DevInfo />

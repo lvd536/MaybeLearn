@@ -115,7 +115,7 @@ export async function getProfileCredits(id: number) {
     return profileCredits;
 }
 
-export async function getProfileById(id: number): Promise<IProfileType | null> {
+export async function getProfileById(id: string): Promise<IProfileType | null> {
     const { data, error } = await client
         .from("profiles")
         .select("*")
@@ -128,7 +128,13 @@ export async function getProfileById(id: number): Promise<IProfileType | null> {
     return data;
 }
 
-export async function getUserProfilesWithLimit(limit: number) {
+export async function updateProfileById(userId: string, data: IProfileType) {
+    await client.from("profiles").update(data).eq("id", userId);
+}
+
+export async function getUserProfilesWithLimit(
+    limit: number
+): Promise<IProfileType[] | null> {
     const { data, error } = await client
         .from("profiles")
         .select("*")
@@ -137,7 +143,29 @@ export async function getUserProfilesWithLimit(limit: number) {
 
     if (error) {
         console.error("There was an error fetching the profiles data:", error);
+        return null;
     }
 
     return data;
+}
+
+export async function getProfilesInRange(
+    startIndex: number
+): Promise<IProfileType[] | null> {
+    const { data, error } = await client
+        .from("profiles")
+        .select("*")
+        .order("id", { ascending: false })
+        .range(startIndex - 1, startIndex - 1 + 9);
+
+    if (error) {
+        console.error("There was an error fetching the profiles data:", error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function removeProfileById(id: number) {
+    await client.from("profiles").delete().eq("id", id);
 }

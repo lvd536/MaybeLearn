@@ -13,7 +13,7 @@ export default function Rating() {
             if (profiles) {
                 profiles.forEach((profile) => {
                     profile.created_at = new Date(
-                        profile.created_at
+                        profile.created_at as string
                     ).toDateString();
                 });
                 setTopUsers(profiles);

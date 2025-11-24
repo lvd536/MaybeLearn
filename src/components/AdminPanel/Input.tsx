@@ -1,6 +1,7 @@
 type InputProps = {
     placeholder: string;
     value: string;
+    name?: string;
     required?: boolean;
     id?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,10 +13,11 @@ export default function Input({
     onChange,
     required,
     id,
+    name,
 }: InputProps) {
     return (
         <input
-            name="adminInput"
+            name={name || "adminInput"}
             type="text"
             placeholder={placeholder}
             value={value}
