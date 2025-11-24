@@ -36,7 +36,7 @@ export default function AdminPanel() {
                         Create Test
                     </NavItem>
                     <NavItem
-                        isActive={entityName === "test"}
+                        isActive={entityName === "management"}
                         onClick={() => handleClick("management/1")}
                     >
                         Manage Users
@@ -45,8 +45,8 @@ export default function AdminPanel() {
                 <DevInfo />
             </nav>
             <div className="flex flex-col gap-2 items-center justify-start bg-button-background w-full sm:mx-20 min-h-150 rounded-sm p-2">
-                <span className="flex items-center text-xs sm:text-base justify-center bg-black/20 rounded-sm max-w-50 p-2">
-                    Admin Site: {entityName}
+                <span className="flex items-center text-xs justify-center bg-black/20 rounded-sm max-w-50 p-2">
+                    Admin Site: {entityName || "Info"}
                 </span>
                 <Outlet />
             </div>
