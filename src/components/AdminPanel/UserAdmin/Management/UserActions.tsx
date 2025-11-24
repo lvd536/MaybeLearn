@@ -28,7 +28,7 @@ export default function UserActions({
                     <Trash />
                 </button>
             </div>
-            <p className="text-white/15 text-xs">{id}</p>
+            <p className="hidden lg:block text-white/15 text-xs">{id}</p>
         </div>
     );
 }
