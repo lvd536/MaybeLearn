@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProfilesInRange, removeProfileById } from "../../utils/profile";
 import type { IProfileType } from "../../types";
-import { Pencil, Trash } from "../../assets";
+import NavButtons from "../../components/AdminPanel/UserAdmin/Management/NavButtons";
+import UserInfo from "../../components/AdminPanel/UserAdmin/Management/UserInfo";
+import UserActions from "../../components/AdminPanel/UserAdmin/Management/UserActions";
 
 export default function UserManagement() {
     const [users, setUsers] = useState<IProfileType[]>();
@@ -35,84 +37,25 @@ export default function UserManagement() {
                     className="flex w-full m-2 p-2 bg-catalog-card rounded-sm items-center justify-between"
                     key={user.id}
                 >
-                    <div className="flex flex-col gap-2">
-                        <div className="flex items-center gap-2">
-                            <img
-                                src={user.avatar_url}
-                                alt=""
-                                className="w-12 rounded-full"
-                            />
-                            <div className="flex flex-col justify-center items-start">
-                                <p className="font-medium text-sm">
-                                    {user.display_name}
-                                </p>
-                                <p
-                                    className={`flex justify-center text-xs rounded-sm p-0.5 ${
-                                        user.role === "moderator"
-                                            ? "bg-blue-400"
-                                            : user.role === "admin"
-                                            ? "bg-red-500"
-                                            : "bg-green-400"
-                                    }`}
-                                >
-                                    {user.role}
-                                </p>
-                            </div>
-                        </div>
-                        <p className="text-white/15 text-sm">
-                            {new Date(user.created_at as string).toDateString()}
-                        </p>
-                    </div>
-                    <div className="flex flex-col h-full justify-between items-end">
-                        <div className="flex gap-2">
-                            <button
-                                className="flex items-center justify-center bg-button-background p-1 rounded-sm w-6 h-6"
-                                onClick={() =>
-                                    navigate(`/admin/user/edit/${user.id}`)
-                                }
-                            >
-                                <Pencil />
-                            </button>
-                            <button
-                                className="flex items-center justify-center bg-button-background p-1 rounded-sm w-6 h-6"
-                                onClick={() => handleRemove(user.id)}
-                            >
-                                <Trash />
-                            </button>
-                        </div>
-                        <p className="text-white/15 text-xs">{user.id}</p>
-                    </div>
+                    <UserInfo
+                        display_name={user.display_name}
+                        avatar_url={user.avatar_url}
+                        role={user.role}
+                        created_at={user.created_at}
+                    />
+                    <UserActions
+                        handleRemove={() => handleRemove(user.id)}
+                        navigate={navigate}
+                        id={user.id}
+                    />
                 </div>
             ))}
-            <div className="flex gap-2">
-                {parseInt(page || "1") > 1 && (
-                    <button
-                        className="flex justify-center bg-catalog-card rounded-sm p-2 w-20"
-                        onClick={() =>
-                            navigate(
-                                `/admin/management/${parseInt(page || "1") - 1}`
-                            )
-                        }
-                    >
-                        Previous
-                    </button>
-                )}
-                <p className="flex justify-center bg-catalog-card rounded-sm p-2 w-20">
-                    Page {page}
-                </p>
-                {users && users.length > 9 && (
-                    <button
-                        className="flex justify-center bg-catalog-card rounded-sm p-2 w-20"
-                        onClick={() =>
-                            navigate(
-                                `/admin/management/${parseInt(page || "1") + 1}`
-                            )
-                        }
-                    >
-                        Next
-                    </button>
-                )}
-            </div>
+            <NavButtons
+                page={page || "1"}
+                nextButtonActive={(users && users.length > 9) || false}
+                previousButtonActive={parseInt(page || "1") > 1}
+                navigate={navigate}
+            />
         </div>
     );
 }
