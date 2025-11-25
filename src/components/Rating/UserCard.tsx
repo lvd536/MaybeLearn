@@ -40,7 +40,7 @@ export default function UserCard({
 
             <div className="hidden sm:block w-2/12">
                 <p
-                    className={`font-semibold self-start w-fit py-2 sm:px-2 lg:px-6 rounded-full ${colors.bg}`}
+                    className={`flex items-center justify-center w-24 font-semibold self-start py-2 sm:px-2 lg:px-6 rounded-full ${colors.bg}`}
                 >
                     {user.role}
                 </p>
