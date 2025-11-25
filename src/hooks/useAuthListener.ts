@@ -89,8 +89,12 @@ export function useAuthListener() {
     };
 
     useEffect(() => {
+        let mounted = true;
         (async () => {
-            await setUserProfile();
+            if (mounted) {
+                await setUserProfile();
+                mounted = false;
+            }
         })();
 
         const { data } = client.auth.onAuthStateChange((event, session) =>
