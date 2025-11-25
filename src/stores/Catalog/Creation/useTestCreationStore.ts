@@ -29,7 +29,7 @@ interface ITestCreationStore {
 const initialTemplate: ITestData = {
     title: "",
     level: "",
-    points: 100,
+    elo: 100,
     description: "",
     image: "",
     questions: [

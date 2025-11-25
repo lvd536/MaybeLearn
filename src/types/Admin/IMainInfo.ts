@@ -3,5 +3,5 @@ export default interface IMainInfoProps {
     level: string;
     description: string;
     image: string;
-    points?: number;
+    elo?: number;
 }

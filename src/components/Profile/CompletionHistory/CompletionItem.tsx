@@ -32,9 +32,9 @@ export default function CompletionItem({ item }: ICompletionProps) {
             </div>
             <div className="flex flex-col items-end justify-between h-full">
                 <p className="font-medium">
-                    {"points" in item.item.data
-                        ? `${item.item.data.points} Points`
-                        : "100 Points"}
+                    {"elo" in item.item.data
+                        ? `${item.item.data.elo} Elo`
+                        : "100 Elo"}
                 </p>
                 <p className="font-medium text-gray-500/40 text-sm">
                     {item.completed_at.toDateString()}

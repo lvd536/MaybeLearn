@@ -4,7 +4,7 @@ export default interface ITestData {
     title: string;
     description: string;
     level: string;
-    points: number;
+    elo: number;
     questions: IQuestion[];
     image: string;
 }

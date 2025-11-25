@@ -12,7 +12,7 @@ export default function CongratsPage({ title }: ICongratsPageProps) {
             <span className="text-xl font-medium">
                 Course {title} is completed
             </span>
-            <span>You earn fixed 100 points!</span>
+            <span>You earn fixed 100 elo!</span>
             <img
                 src={Congrats}
                 alt="congratulations image"

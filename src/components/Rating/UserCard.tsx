@@ -45,7 +45,7 @@ export default function UserCard({
                     {user.role}
                 </p>
             </div>
-            <p className="flex w-2/12">{user.points} Points</p>
+            <p className="flex w-2/12">{user.elo} Elo</p>
             <p className="hidden sm:inline w-2/12">{user.created_at}</p>
         </li>
     );

@@ -3,7 +3,7 @@ export default interface IProfileType {
     display_name: string,
     avatar_url: string,
     bio: string,
-    points: number,
+    elo: number,
     role: string,
     created_at?: string
 }

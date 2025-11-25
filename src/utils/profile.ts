@@ -25,20 +25,20 @@ export async function createOrUpdateProfile(user: User) {
     return data;
 }
 
-export async function setProfilePoints(value: number) {
+export async function setProfileElo(value: number) {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
 
-    const { data, error } = await client.rpc("increment_points", {
+    const { data, error } = await client.rpc("increment_elo", {
         user_id: userId,
         value_to_add: value,
     });
 
     if (error) {
-        console.error("setProfilePoints error:", error);
+        console.error("setProfileElo error:", error);
         return null;
     }
-    useAuthStore.getState().increaseProfilePoints(value);
+    useAuthStore.getState().increaseProfileElo(value);
     return data;
 }
 
@@ -138,7 +138,7 @@ export async function getUserProfilesWithLimit(
     const { data, error } = await client
         .from("profiles")
         .select("*")
-        .order("points", { ascending: false })
+        .order("elo", { ascending: false })
         .limit(limit);
 
     if (error) {

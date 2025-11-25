@@ -71,7 +71,7 @@ export default function TestCreation() {
                     level={testsTemplate.level}
                     title={testsTemplate.title}
                     image={testsTemplate.image || ""}
-                    points={testsTemplate.points}
+                    elo={testsTemplate.elo}
                 />
                 <div className="grid grid-cols-2 gap-8 w-full">{questions}</div>
                 <button

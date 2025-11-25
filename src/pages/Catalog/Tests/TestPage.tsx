@@ -39,11 +39,11 @@ export default function TestPage() {
             if (isCompleted) {
                 await sendTestCompletionData(
                     currentItem?.id || 1,
-                    currentItem?.data.points || 0
+                    currentItem?.data.elo || 0
                 );
             }
         })();
-    }, [isCompleted, currentItem?.id, currentItem?.data.points]);
+    }, [isCompleted, currentItem?.id, currentItem?.data.elo]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -127,7 +127,7 @@ export default function TestPage() {
                     <span className="text-xl font-medium">
                         Test {currentItem.data.title} is completed
                     </span>
-                    <span>You earn {currentItem.data.points} points!</span>
+                    <span>You earn {currentItem.data.elo} elo!</span>
                     <img
                         src={Congrats}
                         alt="congratulations image"

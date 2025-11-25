@@ -1,11 +1,11 @@
 import { client } from "../services/supabase";
 import { fetchCourses } from "../stores/Catalog/useCoursesStore";
 import type { ICompletedItem, ICourseData } from "../types";
-import { setProfilePoints } from "./profile";
+import { setProfileElo } from "./profile";
 
 export async function sendCourseCompletionData(
     lesson_id: number,
-    points: number
+    elo: number
 ) {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
@@ -32,7 +32,7 @@ export async function sendCourseCompletionData(
         console.error("sendCourseCompletionData error", error);
         throw error;
     }
-    setProfilePoints(points);
+    setProfileElo(elo);
     return data;
 }
 

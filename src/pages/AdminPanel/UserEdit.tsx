@@ -78,18 +78,18 @@ export default function UserEdit() {
                     </div>
                     <div className="flex gap-2">
                         <label
-                            htmlFor="userPoints"
+                            htmlFor="userElo"
                             className="bg-black/20 p-1 sm:p-2 rounded-sm w-15"
                         >
-                            Points
+                            Elo
                         </label>
                         <input
                             type="number"
-                            name="points"
-                            id="userPoints"
-                            placeholder="points"
+                            name="elo"
+                            id="userElo"
+                            placeholder="elo"
                             className="ring-1 ring-indigo-500 p-2 rounded-sm bg-button-background w-30 sm:w-50"
-                            value={formData.points}
+                            value={formData.elo}
                             onChange={(e) => {
                                 if (parseInt(e.target.value) >= 0)
                                     handleChange(e);

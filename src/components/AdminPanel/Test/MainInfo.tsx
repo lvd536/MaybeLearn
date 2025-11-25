@@ -7,7 +7,7 @@ export default function MainInfo({
     level,
     description,
     image,
-    points,
+    elo,
 }: IMainInfo) {
     return (
         <div className="flex flex-col gap-2 mb-5">
@@ -33,11 +33,11 @@ export default function MainInfo({
                 <option value="Hard">Hard</option>
             </select>
             <TextInput
-                id={`mainInfoPoints`}
-                placeholder="Points"
-                value={points!.toString()}
+                id={`mainInfoElo`}
+                placeholder="Elo"
+                value={elo!.toString()}
                 onChange={(e) => {
-                    setTestInfo("points", e.target.value);
+                    setTestInfo("elo", e.target.value);
                 }}
             />
             <TextInput

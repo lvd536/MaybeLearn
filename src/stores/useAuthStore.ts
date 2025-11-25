@@ -8,7 +8,7 @@ interface State {
     setUser: (u: User | null) => void;
     setProfile: (user: IProfileType | null) => void;
     updateProfileInfo: (updates: IEditProfileForm) => void;
-    increaseProfilePoints: (value: number) => void;
+    increaseProfileElo: (value: number) => void;
 }
 export const useAuthStore = create<State>((set) => ({
     profile: null,
@@ -29,13 +29,13 @@ export const useAuthStore = create<State>((set) => ({
             },
         });
     },
-    increaseProfilePoints: (value: number) => {
+    increaseProfileElo: (value: number) => {
         const existingProfile = useAuthStore.getState().profile;
         if (!existingProfile) return;
         set({
             profile: {
                 ...existingProfile,
-                points: existingProfile.points + value,
+                elo: existingProfile.elo + value,
             },
         });
     },

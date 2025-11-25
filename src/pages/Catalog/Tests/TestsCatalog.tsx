@@ -6,7 +6,7 @@ export default function TestsCatalog() {
     return (
         <Catalog
             title="Tests"
-            description="Explore our tests and earn points"
+            description="Explore our tests and earn elo"
             redirectTo="test"
             items={items}
         />

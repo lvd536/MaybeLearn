@@ -1,9 +1,9 @@
 import { client } from "../services/supabase";
 import { fetchTests } from "../stores/Catalog/useTestsStore";
 import type { ICompletedItem, ITestData } from "../types";
-import { setProfilePoints } from "./profile";
+import { setProfileElo } from "./profile";
 
-export async function sendTestCompletionData(testId: number, points: number) {
+export async function sendTestCompletionData(testId: number, elo: number) {
     const userId = (await client.auth.getUser()).data.user?.id;
     if (!userId) return null;
 
@@ -29,7 +29,7 @@ export async function sendTestCompletionData(testId: number, points: number) {
         console.error("sendTestCompletionData error", error);
         throw error;
     }
-    setProfilePoints(points);
+    setProfileElo(elo);
     return data;
 }
 
