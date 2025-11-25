@@ -30,12 +30,8 @@ export function useAuthListener() {
             }, 0);
         }
 
-        if (event === "SIGNED_OUT" || event === "TOKEN_REFRESHED") {
-            [window.localStorage, window.sessionStorage].forEach((storage) => {
-                Object.entries(storage).forEach(([key]) => {
-                    storage.removeItem(key);
-                });
-            });
+        if (event === "SIGNED_OUT") {
+            client.auth.signOut();
             setProfile(null);
             addNotify({
                 id: new Date().getSeconds(),
@@ -47,19 +43,19 @@ export function useAuthListener() {
 
         if (event == "PASSWORD_RECOVERY") {
             const newPassword = prompt(
-                "What would you like your new password to be?"
+                "Enter your new password (min 8 chars):"
             );
-            if (newPassword) {
-                if (newPassword.length >= 8) {
-                    setNewPassword(newPassword);
-                    addNotify({
-                        id: new Date().getSeconds(),
-                        type: "success",
-                        description: "Password Set! Your password updated",
-                        title: "Auth Info",
-                    });
-                } else alert("Min password length = 8");
-            } else alert("Password recovery failed. Please try again");
+            if (newPassword && newPassword.length >= 8) {
+                setNewPassword(newPassword);
+                addNotify({
+                    id: Date.now(),
+                    type: "success",
+                    description: "Password updated successfully",
+                    title: "Auth Info",
+                });
+            } else if (newPassword) {
+                alert("Password is too short (min 8 chars).");
+            }
         }
     };
 
@@ -67,24 +63,30 @@ export function useAuthListener() {
         const { data } = await client.auth.getUser();
         setUser(data?.user ?? null);
         if (data?.user) {
-            const { data: profile } = await client
+            const { data: profile, error: profileError } = await client
                 .from("profiles")
                 .select("*")
                 .eq("id", data.user.id)
                 .single();
-            setProfile(profile ?? null);
 
-            const { data: lessons } = await client
-                .from("read_lessons")
-                .select("id")
-                .eq("user_id", profile.id);
-            setCourses(lessons?.length ?? 0);
+            if (profileError || !profile) {
+                console.error("Profile fetch error:", profileError);
+                setProfile(null);
+                return;
+            }
 
-            const { data: tests } = await client
-                .from("completed_tests")
-                .select("id")
-                .eq("user_id", profile.id);
-            setTests(tests?.length ?? 0);
+            const [lessonsResult, testsResult] = await Promise.all([
+                client
+                    .from("read_lessons")
+                    .select("id", { count: "exact", head: true })
+                    .eq("user_id", profile.id),
+                client
+                    .from("completed_tests")
+                    .select("id", { count: "exact", head: true })
+                    .eq("user_id", profile.id),
+            ]);
+            setCourses(lessonsResult.count ?? 0);
+            setTests(testsResult.count ?? 0);
         }
     };
 
@@ -103,6 +105,7 @@ export function useAuthListener() {
 
         return () => {
             data.subscription.unsubscribe();
+            mounted = false;
         };
     });
 }

@@ -57,11 +57,11 @@ function App() {
                         <Route path="test/:id" element={<TestCreation />} />
                         <Route path="course" element={<CourseCreation />} />
                         <Route path="test" element={<TestCreation />} />
-                        <Route path="management/:page" element={<UserManagement />} />
                         <Route
-                            path="user/edit/:id"
-                            element={<UserEdit />}
+                            path="management/:page"
+                            element={<UserManagement />}
                         />
+                        <Route path="user/edit/:id" element={<UserEdit />} />
                     </Route>
                 </Routes>
             </div>
