@@ -4,7 +4,7 @@ import type { IProfileType } from "../../types";
 import { getProfileById, updateProfileById } from "../../utils/profile";
 import { useNotifyStore } from "../../stores/useNotifyStore";
 import TextInputs from "../../components/AdminPanel/UserAdmin/Edit/TextInputs";
-import Selections from "../../components/AdminPanel/UserAdmin/Edit/Selections";
+import { SelectInput } from "../../components/AdminPanel";
 
 export default function UserEdit() {
     const { id: userId } = useParams();
@@ -58,11 +58,24 @@ export default function UserEdit() {
                         avatar_url={formData.avatar_url}
                         handleChange={handleChange}
                     />
-                    <Selections
-                        handleChange={handleChange}
-                        rank={formData.rank}
-                        role={formData.role}
-                    />
+                    <div className="flex gap-2">
+                        <label
+                            htmlFor="currentModule"
+                            className="bg-black/20 p-1 sm:p-2 rounded-sm w-15"
+                        >
+                            Role
+                        </label>
+                        <SelectInput
+                            name="role"
+                            id="adminInput"
+                            value={formData.role}
+                            onChange={(e) => handleChange(e)}
+                        >
+                            <option value="user">User</option>
+                            <option value="moderator">Moderator</option>
+                            <option value="admin">Admin</option>
+                        </SelectInput>
+                    </div>
                     <div className="flex gap-2">
                         <label
                             htmlFor="userPoints"
