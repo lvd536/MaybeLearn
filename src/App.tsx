@@ -22,6 +22,7 @@ import {
 import NotifyList from "./components/Notifications/NotifyList";
 import Rating from "./pages/Rating/Rating";
 import { Info } from "./components/AdminPanel";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
     useAuthListener();
     fetchCourses();
@@ -38,30 +39,45 @@ function App() {
                         path={"/resetPassword"}
                         element={<ResetPassword />}
                     />
-                    <Route path={"/profile"} element={<Profile />} />
                     <Route path={"/home"} element={<HomePage />} />
-                    <Route path={"/rating"} element={<Rating />} />
-                    <Route
-                        path={"/catalog/courses"}
-                        element={<CoursesCatalog />}
-                    />
-                    <Route path={"/catalog/tests"} element={<TestsCatalog />} />
-                    <Route path={"/catalog/test/:id"} element={<TestPage />} />
-                    <Route
-                        path={"/catalog/course/:id"}
-                        element={<CoursePage />}
-                    />
-                    <Route path="/admin" element={<AdminPanel />}>
-                        <Route index element={<Info />} />
-                        <Route path="course/:id" element={<CourseCreation />} />
-                        <Route path="test/:id" element={<TestCreation />} />
-                        <Route path="course" element={<CourseCreation />} />
-                        <Route path="test" element={<TestCreation />} />
+                    <Route path={"/profile"} element={<Profile />} />
+
+                    <Route element={<ProtectedRoute />}>
+                        <Route path={"/rating"} element={<Rating />} />
                         <Route
-                            path="management/:page"
-                            element={<UserManagement />}
+                            path={"/catalog/courses"}
+                            element={<CoursesCatalog />}
                         />
-                        <Route path="user/edit/:id" element={<UserEdit />} />
+                        <Route
+                            path={"/catalog/tests"}
+                            element={<TestsCatalog />}
+                        />
+                        <Route
+                            path={"/catalog/test/:id"}
+                            element={<TestPage />}
+                        />
+                        <Route
+                            path={"/catalog/course/:id"}
+                            element={<CoursePage />}
+                        />
+                        <Route path="/admin" element={<AdminPanel />}>
+                            <Route index element={<Info />} />
+                            <Route
+                                path="course/:id"
+                                element={<CourseCreation />}
+                            />
+                            <Route path="test/:id" element={<TestCreation />} />
+                            <Route path="course" element={<CourseCreation />} />
+                            <Route path="test" element={<TestCreation />} />
+                            <Route
+                                path="management/:page"
+                                element={<UserManagement />}
+                            />
+                            <Route
+                                path="user/edit/:id"
+                                element={<UserEdit />}
+                            />
+                        </Route>
                     </Route>
                 </Routes>
             </div>
