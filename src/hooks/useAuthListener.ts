@@ -6,10 +6,7 @@ import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 import { useNotifyStore } from "../stores/useNotifyStore";
 
 export function useAuthListener() {
-    const setUser = useAuthStore((s) => s.setUser);
-    const setProfile = useAuthStore((s) => s.setProfile);
-    const setCourses = useAuthStore((s) => s.setCompletedCourses);
-    const setTests = useAuthStore((s) => s.setCompletedTests);
+    const { setUser, setProfile } = useAuthStore();
     const addNotify = useNotifyStore((state) => state.addNotification);
     const handleAuthStateChange = useCallback(
         (event: AuthChangeEvent, session: Session | null) => {
@@ -30,19 +27,6 @@ export function useAuthListener() {
                         setProfile(null);
                         return;
                     }
-
-                    const [lessonsResult, testsResult] = await Promise.all([
-                        client
-                            .from("read_lessons")
-                            .select("id", { count: "exact", head: true })
-                            .eq("user_id", profile.id),
-                        client
-                            .from("completed_tests")
-                            .select("id", { count: "exact", head: true })
-                            .eq("user_id", profile.id),
-                    ]);
-                    setCourses(lessonsResult.count ?? 0);
-                    setTests(testsResult.count ?? 0);
                 }
             };
             if (event === "SIGNED_IN" && user) {
@@ -90,7 +74,7 @@ export function useAuthListener() {
                 }
             }
         },
-        [addNotify, setProfile, setUser, setCourses, setTests]
+        [addNotify, setProfile, setUser]
     );
 
     useEffect(() => {

@@ -1,6 +1,5 @@
 import { client } from "../services/supabase";
 import { fetchCourses } from "../stores/Catalog/useCoursesStore";
-import { useAuthStore } from "../stores/useAuthStore";
 import type { ICompletedItem, ICourseData } from "../types";
 import { setProfilePoints } from "./profile";
 
@@ -34,7 +33,6 @@ export async function sendCourseCompletionData(
         throw error;
     }
     setProfilePoints(points);
-    useAuthStore.getState().increaseCoursesCompletion(1);
     return data;
 }
 
