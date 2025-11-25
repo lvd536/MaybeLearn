@@ -1,5 +1,5 @@
 import { DevInfo, NavItem } from "../../components/AdminPanel";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
 
 type Pages = "" | "course" | "test" | "management/1";
@@ -12,7 +12,7 @@ export default function AdminPanel() {
     const handleClick = (page: Pages) => {
         navigate(page);
     };
-    if (profile?.role !== "admin" || !profile) navigate("/profile");
+    if (profile?.role !== "admin" || !profile) return <Navigate to={"/"} />;
     return (
         <div className="sm:flex">
             <nav className="flex flex-col gap-5 p-2">
