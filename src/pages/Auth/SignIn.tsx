@@ -18,6 +18,18 @@ export default function SignIn() {
             [e.target.name]: e.target.value,
         });
     };
+    const translateError = (errorMessage: string): string => {
+        switch (errorMessage) {
+            case "Invalid login credentials":
+                return "Неверная почта или пароль";
+            case "Email not confirmed":
+                return "Пожалуйста, подтвердите вашу почту";
+            case "User not found":
+                return "Пользователь не найден";
+            default:
+                return errorMessage;
+        }
+    };
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         client.auth
@@ -33,6 +45,14 @@ export default function SignIn() {
                         description:
                             "Signed In! Setup your profile in profile page!",
                         title: "Auth Info",
+                    });
+                }
+                if (resp.error) {
+                    addNotify({
+                        id: new Date().getSeconds(),
+                        type: "error",
+                        description: translateError(resp.error.message),
+                        title: "Auth Error",
                     });
                 }
             });
