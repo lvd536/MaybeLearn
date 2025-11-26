@@ -72,7 +72,7 @@ export default function CoursePage() {
                     </div>
                 </div>
             ) : courseData && isCompleted ? (
-                <CongratsPage title={courseData.data.title} />
+                <CongratsPage title={courseData.data.title} type='course' points={100}/>
             ) : (
                 "Loading course..."
             )}

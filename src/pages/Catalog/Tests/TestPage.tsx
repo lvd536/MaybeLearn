@@ -121,7 +121,11 @@ export default function TestPage() {
                     </div>
                 </div>
             ) : currentItem && isCompleted ? (
-                <CongratsPage title={currentItem.data.title} />
+                <CongratsPage
+                    title={currentItem.data.title}
+                    type="test"
+                    points={currentItem.data.elo}
+                />
             ) : (
                 "Loading test..."
             )}
