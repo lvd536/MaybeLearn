@@ -10,7 +10,7 @@ export default function NavBar() {
 
     return (
         <div className="mb-25">
-            <div className="fixed top-0 left-0 px-10 flex items-center justify-between w-screen h-17 border-b border-b-white bg-dark-bg/95 z-100">
+            <div className="fixed top-0 left-0 px-10 flex items-center justify-between w-screen h-17 border-b border-b-white/20 bg-dark-bg/95 z-100">
                 <div className="flex gap-5">
                     <NavLink to="/" className="flex items-center gap-4">
                         <Logo />
