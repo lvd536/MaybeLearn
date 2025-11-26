@@ -73,11 +73,17 @@ const coursesStore = create<ICoursesStore>((set, get) => ({
 
     deleteCourse: (id: number) => {
         client
-            .from("lessons")
+            .from("read_lessons")
             .delete()
-            .eq("id", id)
+            .eq("lesson_id", id)
             .then(() => {
-                get().fetchCourses();
+                client
+                    .from("lessons")
+                    .delete()
+                    .eq("id", id)
+                    .then(() => {
+                        get().fetchCourses();
+                    });
             });
     },
 }));

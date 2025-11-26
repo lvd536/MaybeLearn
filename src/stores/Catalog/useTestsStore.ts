@@ -69,11 +69,17 @@ const testsStore = create<ITestsStore>((set, get) => ({
 
     deleteTest: (id: number) => {
         client
-            .from("tests")
+            .from("completed_tests")
             .delete()
-            .eq("id", id)
+            .eq("test_id", id)
             .then(() => {
-                get().fetchTests();
+                client
+                    .from("tests")
+                    .delete()
+                    .eq("id", id)
+                    .then(() => {
+                        get().fetchTests();
+                    });
             });
     },
 }));
