@@ -34,10 +34,10 @@ MaybeLearn - это образовательная платформа, созд�
 | id - uuid | display_name - text | avatar_url - text | bio - text | elo - int4 | role - text | created_at - timestamptz |
 | --------- | ------------------- | ----------------- | ---------- | ---------- | ----------- | ------------------------ |
 ### lessons
-| id - int8 | author_id - uuid | data - jsonn | created_at - timestamptz |
+| id - int8 | author_id - uuid | data - jsonb | created_at - timestamptz |
 | --------- | ---------------- | ------------ | ------------------------ |
 ### tests
-| id - int8 | author_id - uuid | data - jsonn | created_at - timestamptz |
+| id - int8 | author_id - uuid | data - jsonb | created_at - timestamptz |
 | --------- | ---------------- | ------------ | ------------------------ |
 
 ## Запуск проекта
