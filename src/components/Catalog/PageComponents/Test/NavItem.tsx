@@ -1,4 +1,4 @@
-import type { IFormattedQuestion } from "../../../types";
+import type { IFormattedQuestion } from "../../../../types";
 
 type NavItemProps = {
     question: IFormattedQuestion;

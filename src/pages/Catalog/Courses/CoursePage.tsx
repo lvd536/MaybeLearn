@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { getCourse } from "../../../stores/Catalog/useCoursesStore";
 import { sendCourseCompletionData } from "../../../utils/course";
 import NavItem from "../../../components/Catalog/PageComponents/Course/NavItem";
-import CongratsPage from "../../../components/Catalog/PageComponents/Course/CongratsPage";
+import CongratsPage from "../../../components/Catalog/PageComponents/CongratsPage";
 import Lesson from "../../../components/Catalog/PageComponents/Course/Lesson";
 import { useParams } from "react-router-dom";
 
 export default function CoursePage() {
-    const {id} = useParams();
+    const { id } = useParams();
     const courseData = getCourse(parseInt(id || "1"));
 
     const [activeModule, setActiveModule] = useState<string | undefined>(

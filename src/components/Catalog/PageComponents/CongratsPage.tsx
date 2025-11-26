@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Congrats } from "../../../../assets";
+import { Congrats } from "../../../assets";
 
 interface ICongratsPageProps {
     title: string;
