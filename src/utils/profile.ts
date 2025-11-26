@@ -38,7 +38,7 @@ export async function setProfileElo(value: number) {
         console.error("setProfileElo error:", error);
         return null;
     }
-    useAuthStore.getState().increaseProfileElo(value);
+    useAuthStore.getState().increaseProfileElo(parseInt(value.toString()));
     return data;
 }
 
