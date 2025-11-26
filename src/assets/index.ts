@@ -11,3 +11,4 @@ export { default as Error } from "./Error";
 export { default as Warning } from "./Warning";
 export { default as Trash } from "./Trash";
 export { default as HomePeople } from "./HomePeople.webp";
+export { default as Trophy } from "./Trophy";
