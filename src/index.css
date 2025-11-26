@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;display=swap");
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -29,13 +30,12 @@
 }
 
 :root {
-    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-family: Sora, system-ui, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
     color-scheme: light dark;
     color: #ffffffde;
-    /* background-color: #faf7fc; */
     background-color: var(--color-dark-bg);
     transition: all 0.3s ease-in-out;
 
