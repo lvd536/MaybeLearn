@@ -13,11 +13,6 @@ export default function Header({ onClick }: HeaderProps) {
     const setProfile = useAuthStore((state) => state.setProfile);
     const logOutHandler = () => {
         client.auth.signOut();
-        // [window.localStorage, window.sessionStorage].forEach((storage) => {
-        //     Object.entries(storage).forEach(([key]) => {
-        //         storage.removeItem(key);
-        //     });
-        // });
         setProfile(null);
     };
     const profileColors = {

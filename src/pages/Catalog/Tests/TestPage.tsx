@@ -9,8 +9,8 @@ import { getTest } from "../../../stores/Catalog/useTestsStore";
 import type { IFormattedQuestion } from "../../../types";
 import { RadioButton, NavItem } from "../../../components/Catalog";
 import { sendTestCompletionData } from "../../../utils/test";
-import { Congrats } from "../../../assets/";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import CongratsPage from "../../../components/Catalog/PageComponents/CongratsPage";
 
 export default function TestPage() {
     const [question, setQuestion] = useState<number>(0);
@@ -62,7 +62,7 @@ export default function TestPage() {
 
     return (
         <>
-            {currentItem && !isCompleted && questions.length > 0 && (
+            {currentItem && !isCompleted && questions.length > 0 ? (
                 <div className="flex justify-between">
                     <div className="flex flex-col gap-4">
                         <ModuleTitle>{currentItem.data.title}</ModuleTitle>
@@ -120,27 +120,10 @@ export default function TestPage() {
                         </form>
                     </div>
                 </div>
-            )}
-            {currentItem && isCompleted && (
-                <div className="flex flex-col gap-5 justify-start items-center h-screen">
-                    <h1 className="text-2xl font-bold">Congratulations!</h1>
-                    <span className="text-xl font-medium">
-                        Test {currentItem.data.title} is completed
-                    </span>
-                    <span>You earn {currentItem.data.elo} elo!</span>
-                    <img
-                        src={Congrats}
-                        alt="congratulations image"
-                        className="max-w-100"
-                        loading="lazy"
-                    />
-                    <Link
-                        to={"/"}
-                        className="flex items-center justify-center text-xl font-medium rounded-xl bg-button-background py-2 px-10"
-                    >
-                        Home Page
-                    </Link>
-                </div>
+            ) : currentItem && isCompleted ? (
+                <CongratsPage title={currentItem.data.title} />
+            ) : (
+                "Loading test..."
             )}
         </>
     );
