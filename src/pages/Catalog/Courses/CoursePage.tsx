@@ -35,8 +35,8 @@ export default function CoursePage() {
     return (
         <>
             {courseData && !isCompleted ? (
-                <div className="flex justify-between gap-10">
-                    <div className="flex flex-col w-1/6 gap-4">
+                <div className="sm:flex justify-between gap-10">
+                    <div className="flex flex-col w-full sm:w-1/6 mb-5 sm:mb-0 gap-4">
                         {courseData.data.modules.map((module, index) => (
                             <NavItem
                                 title={module.title}
@@ -72,7 +72,11 @@ export default function CoursePage() {
                     </div>
                 </div>
             ) : courseData && isCompleted ? (
-                <CongratsPage title={courseData.data.title} type='course' points={100}/>
+                <CongratsPage
+                    title={courseData.data.title}
+                    type="course"
+                    points={100}
+                />
             ) : (
                 "Loading course..."
             )}
